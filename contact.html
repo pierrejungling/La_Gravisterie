@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - La Gravisterie</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="boutique.html">Boutique</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="materiaux.html">Matériaux</a></li>
+                <li><a href="sur-mesure.html">Sur Mesure</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Changer de thème">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-header">
+            <h1>Contactez-nous</h1>
+            <p>Une question ? Un projet ? Nous sommes là pour vous aider</p>
+        </section>
+
+        <section class="contact-content">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-logo">
+                        <img src="assets/images/La%20Gravisterie%20carré_N.svg" alt="Logo La Gravisterie" class="logo-text">
+                    </div>
+                    <div class="founder-info">
+                        <h3>Pierre JUNGLING</h3>
+                        <p class="role">Fondateur</p>
+                    </div>
+                    <div class="contact-details">
+                        <ul class="contact-list">
+                            <li>
+                                <a href="tel:+32472096563" class="contact-link">
+                                    <img src="assets/images/phone-icon.svg" alt="Téléphone">
+                                    <span>+32 472 09 65 63</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:info@gravisterie.be" class="contact-link">
+                                    <img src="assets/images/email-icon.svg" alt="Email">
+                                    <span>info@gravisterie.be</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://instagram.com/la_gravisterie" class="contact-link" target="_blank" rel="noopener">
+                                    <img src="assets/images/instagram-icon.svg" alt="Instagram">
+                                    <span>@la_gravisterie</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://facebook.com/la.gravisterie" class="contact-link" target="_blank" rel="noopener">
+                                    <img src="assets/images/facebook-icon.svg" alt="Facebook">
+                                    <span>@la.gravisterie</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="firstname">Prénom *</label>
+                            <input type="text" id="firstname" name="firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Nom *</label>
+                            <input type="text" id="lastname" name="lastname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone *</label>
+                            <input type="tel" id="phone" name="phone" pattern="[0-9+\s]+" required>
+                        </div>
+                    </div>
+
+                    <div class="address-group">
+                        <h4>Adresse *</h4>
+                        <div class="form-group">
+                            <label for="street">Rue et numéro</label>
+                            <input type="text" id="street" name="street" required>
+                        </div>
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="postal">Code postal</label>
+                                <input type="text" id="postal" name="postal" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Ville</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Pays</label>
+                            <input type="text" id="country" name="country" value="Belgique" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <div class="form-group date-group">
+                        <label for="deadline">Date souhaitée de réalisation</label>
+                        <input type="date" id="deadline" name="deadline" min="<?php echo date('Y-m-d'); ?>">
+                        <span class="field-info">Cette date est à titre indicatif et nous permettra de mieux organiser notre planning. Le délai exact sera confirmé lors de notre échange.</span>
+                    </div>
+
+                    <div class="form-group file-upload">
+                        <label for="attachments">
+                            Pièces jointes (photos, croquis...)
+                            <span class="file-info">Max 5 Mo par fichier - JPG, PNG, PDF</span>
+                        </label>
+                        <input type="file" id="attachments" name="attachments" multiple accept=".jpg,.jpeg,.png,.pdf" class="file-input">
+                        <div class="file-drop-zone">
+                            <img src="assets/images/upload-icon.svg" alt="Upload" class="upload-icon">
+                            <p>Glissez vos fichiers ici ou cliquez pour sélectionner</p>
+                            <p class="selected-files"></p>
+                        </div>
+                    </div>
+
+                    <p class="form-required-notice">* Champs obligatoires</p>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contact-footer">
+            <div class="footer-content">
+                <h3>Pierre JUNGLING</h3>
+                <p class="role">Fondateur</p>
+                
+                <div class="contact-links">
+                    <a href="tel:+32472096563">+32 472 09 65 63</a>
+                    <span class="separator">•</span>
+                    <a href="mailto:info@gravisterie.be">info@gravisterie.be</a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="https://instagram.com/la_gravisterie" class="social-icon" target="_blank" rel="noopener">
+                        <img src="assets/images/instagram-icon.svg" alt="Instagram">
+                    </a>
+                    <a href="https://facebook.com/la.gravisterie" class="social-icon" target="_blank" rel="noopener">
+                        <img src="assets/images/facebook-icon.svg" alt="Facebook">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="contact.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html> 
