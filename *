@@ -1,0 +1,24 @@
+<nav class="nav-container">
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie">
+        </a>
+    </div>
+    <button class="menu-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul class="nav-links">
+        <li class="mobile-logo">
+            <a href="index.html">
+                <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie">
+            </a>
+        </li>
+        <!-- ... liens de navigation ... -->
+        <li class="menu-signature">by Pierre Jungling</li>
+    </ul>
+    <button class="theme-toggle" aria-label="Changer de thème">
+        <!-- ... icônes thème ... -->
+    </button>
+</nav> 

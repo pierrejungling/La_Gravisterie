@@ -289,4 +289,28 @@
         grid-template-columns: 1fr;
         padding: 1rem;
     }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--primary-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        z-index: 90;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
 } 

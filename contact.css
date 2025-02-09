@@ -243,6 +243,39 @@
     .address-group {
         padding: 1rem;
     }
+
+    .contact-details {
+        align-items: center;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .contact-list {
+        align-items: center;
+    }
+
+    .contact-list li {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .contact-link {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .contact-link span {
+        text-align: center;
+    }
+
+    .founder-info {
+        text-align: center;
+    }
+
+    .contact-info {
+        align-items: center;
+        padding: 0;
+    }
 }
 
 label[for]::after {
@@ -536,4 +569,31 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Ajustement pour les icônes de réseaux sociaux dans le footer */
+.social-icons .social-icon img {
+    width: 16px;
+    height: 16px;
+    filter: invert(1);
+}
+
+[data-theme="dark"] .social-icons .social-icon {
+    background-color: var(--text-color);
+}
+
+[data-theme="dark"] .social-icons .social-icon img {
+    filter: invert(0);
+}
+
+.social-icons .social-icon:hover {
+    background-color: var(--accent-color);
+}
+
+[data-theme="dark"] .social-icons .social-icon:hover {
+    background-color: var(--text-color);
+}
+
+[data-theme="dark"] .social-icons .social-icon:hover img {
+    filter: invert(1);
 } 
