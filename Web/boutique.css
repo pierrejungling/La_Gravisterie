@@ -1,0 +1,139 @@
+.shop-header {
+    padding-top: 120px;
+    text-align: center;
+    margin-bottom: 3rem;
+    background-color: var(--secondary-color);
+    padding: 120px 2rem 3rem;
+}
+
+.shop-header h1 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.categories {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 var(--spacing-unit);
+}
+
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-btn.active {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem var(--spacing-unit);
+}
+
+.product-card {
+    background: var(--primary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ajustements pour le mode sombre */
+[data-theme="dark"] .product-card {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+[data-theme="dark"] .product-card:hover {
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+}
+
+.product-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.product-info .price {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.product-info .description {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.custom-order {
+    text-align: center;
+    padding: 4rem var(--spacing-unit);
+    background-color: var(--secondary-color);
+    margin-top: 4rem;
+}
+
+.custom-order h2 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.custom-order p {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .category-filters {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+
+    .category-btn {
+        width: 100%;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+} 
