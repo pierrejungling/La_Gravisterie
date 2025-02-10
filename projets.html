@@ -65,16 +65,15 @@
 
         <section class="project-filters">
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Tous les Projets</button>
-                <button class="filter-btn" data-filter="event">Événements</button>
-                <button class="filter-btn" data-filter="decoration">Décoration</button>
-                <button class="filter-btn" data-filter="business">Entreprises</button>
-                <button class="filter-btn" data-filter="events">Événements</button>
+                <button class="filter-btn" data-category="all">Tous les Projets</button>
+                <button class="filter-btn" data-category="evenements">Événements</button>
+                <button class="filter-btn" data-category="decoration">Décoration</button>
+                <button class="filter-btn" data-category="entreprises">Entreprises</button>
             </div>
         </section>
 
         <section class="projects-grid">
-            <article class="project-card" data-category="decoration">
+            <div class="project-card" data-category="evenements">
                 <div class="project-image">
                     <img src="../assets/images/projects/projet-1.jpg" alt="Décoration murale personnalisée">
                 </div>
@@ -86,7 +85,20 @@
                         <span class="dimension">120 x 80 cm</span>
                     </div>
                 </div>
-            </article>
+            </div>
+            <div class="project-card" data-category="decoration">
+                <div class="project-image">
+                    <img src="../assets/images/projects/projet-1.jpg" alt="Décoration murale personnalisée">
+                </div>
+                <div class="project-info">
+                    <h3>Décoration Murale Personnalisée</h3>
+                    <p>Création d'une carte topographique en bois pour un intérieur moderne</p>
+                    <div class="project-details">
+                        <span class="material">Bois de chêne</span>
+                        <span class="dimension">120 x 80 cm</span>
+                    </div>
+                </div>
+            </div>
             <!-- D'autres projets seront ajoutés ici -->
         </section>
 

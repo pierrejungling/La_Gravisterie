@@ -518,18 +518,25 @@ function displayProjects(category = 'all') {
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     projectsGrid = document.querySelector('.projects-grid');
-    const categoryButtons = document.querySelectorAll('.category-btn');
+    const filterButtons = document.querySelectorAll('.filter-btn');
 
-    categoryButtons.forEach(button => {
+    filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             currentPage = 1;
-            displayProjects(button.dataset.category);
+            const category = button.getAttribute('data-category');
+            displayProjects(category);
         });
     });
 
     displayProjects();
+    
+    // Activer le bouton "Tout" par défaut
+    const allButton = document.querySelector('.filter-btn[data-category="all"]');
+    if (allButton) {
+        allButton.classList.add('active');
+    }
 });
 
 // Ajouter cette fonction au niveau global du fichier
