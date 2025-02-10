@@ -72,6 +72,34 @@ const products = [
         inStock: true
     },
     {
+        id: 'plateau-ardoise',
+        name: 'Plateau en ardoise gravé',
+        price: 'À partir de 25 €',
+        priceDetails: [
+            'Petit format (35 x 20 cm) : 25 €',
+            'Grand format (45 x 30 cm) : 40 €'
+        ],
+        category: 'cuisine',
+        description: 'Parfaits pour sublimer vos tables, ces plateaux en ardoise sont idéaux pour servir vos apéritifs, fromages, ou tout simplement comme élément de décoration unique. Personnalisables avec vos initiales, une phrase inspirante ou un dessin spécial.',
+        dimensions: '35 x 20 cm | 45 x 30 cm',
+        material: 'Ardoise',
+        features: [
+            'Gravure personnalisable',
+            'Support en bambou',
+            'Finition soignée',
+            'Idéal pour fromages et apéritifs',
+            'Deux formats au choix',
+            'Nettoyage facile'
+        ],
+        images: [
+            'assets/images/products/plateau-ardoise-fromage.jpg',
+            'assets/images/products/plateau-ardoise-grandmere.jpg',
+            'assets/images/products/plateau-ardoise-charcuterie.jpg'
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
         id: 'emojis-mains',
         name: 'Gravures "emojis" de mains',
         price: '15 €',
@@ -96,19 +124,41 @@ const products = [
         customizable: true
     },
     {
-        id: 'boules-noel',
-        name: 'Boules de Noël gravées',
+        id: 'boules-noel-simple',
+        name: 'Boules de Noël gravées simples',
         price: '3 €',
-        priceRelief: '10 €',
         category: 'decoration',
-        description: 'Illuminez votre sapin avec nos boules de Noël gravées ! Que vous préfériez des designs élégants en une seule couche ou des motifs en relief travaillés avec soin, nous avons ce qu\'il vous faut.',
+        description: 'Illuminez votre sapin avec nos boules de Noël gravées en une seule couche ! Des designs élégants et raffinés pour une décoration de Noël unique.',
         dimensions: 'Taille standard',
-        material: 'Bois et acrylique',
+        material: 'Bois',
         features: [
-            'Disponible en version simple ou en relief',
+            'Design en une seule couche',
             'Designs variés (rennes, sapins, paysages...)',
             'Personnalisation possible',
             'Finition soignée'
+        ],
+        images: [
+            'assets/images/products/bnoel-10.jpg',
+            'assets/images/products/bnoel-8.jpg',
+            'assets/images/products/bnoel-7.jpg',
+            'assets/images/products/bnoel-9.jpg'
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
+        id: 'boules-noel-relief',
+        name: 'Boules de Noël en relief',
+        price: '10 €',
+        category: 'decoration',
+        description: 'Donnez du relief à votre sapin avec nos boules de Noël travaillées en plusieurs couches ! Ces créations artisanales offrent un effet de profondeur unique à vos décorations de Noël.',
+        dimensions: 'Taille standard',
+        material: 'Bois',
+        features: [
+            'Design en relief multicouche',
+            'Effet de profondeur unique',
+            'Motifs travaillés avec soin',
+            'Finition premium'
         ],
         images: [
             'assets/images/products/bnoel-1.jpg',
@@ -117,13 +167,46 @@ const products = [
             'assets/images/products/bnoel-4.jpg',
             'assets/images/products/bnoel-5.jpg',
             'assets/images/products/bnoel-6.jpg',
-            'assets/images/products/bnoel-7.jpg',
-            'assets/images/products/bnoel-8.jpg',
-            'assets/images/products/bnoel-9.jpg',
-            'assets/images/products/bnoel-10.jpg',
+
         ],
         inStock: true,
         customizable: true
+    },
+    {
+        id: 'sapin-3d',
+        name: 'Sapin de Noël 3D',
+        price: 'À partir de 10 €',
+        priceDetails: [
+            'Petit sapin (15 cm) : 10 €',
+            'Grand sapin (25 cm) : 15 €',
+            'Lot (1 grand + 1 petit) : 20 € au lieu de 25 €'
+        ],
+        category: 'decoration',
+        description: 'Ajoutez une touche d\'élégance à votre déco de Noël avec nos sapins en bois 3D. Disponibles en 5 coloris (lasuré, doré, bois naturel, noir et argenté), nos sapins sont parfaits pour sublimer votre intérieur pendant les fêtes. Que ce soit sur une table, un buffet ou près du sapin principal, ils apporteront une ambiance chaleureuse.',
+        dimensions: '15 cm ou 25 cm de hauteur',
+        material: 'Bois',
+        features: [
+            'Design 3D élégant',
+            'Disponible en 5 coloris',
+            'Base stable incluse',
+            'Montage facile',
+            'Durable et réutilisable',
+            'Deux tailles disponibles'
+        ],
+        images: [
+            'assets/images/products/sapin-1.jpg',
+            'assets/images/products/sapin-2.jpg',
+
+        ],
+        inStock: true,
+        customizable: false,
+        variants: [
+            'Lasuré',
+            'Doré',
+            'Bois naturel',
+            'Noir',
+            'Argenté'
+        ]
     },
     {
         id: 'tortue-geometrique',
@@ -281,6 +364,25 @@ const products = [
         customizable: true
     },
     {
+        id: 'coeur-personnalise',
+        name: 'Cœur avec texte personnalisé',
+        price: '25 €',
+        description: 'Un cœur en bois élégant avec votre message personnalisé gravé. Idéal pour une déclaration d\'amour, un cadeau pour la fête des mères ou simplement pour décorer votre intérieur avec un message qui vous tient à cœur.',
+        characteristics: [
+            'Design en forme de cœur',
+            'Texte entièrement personnalisable',
+            'Gravure de qualité',
+            'Support intégré',
+            'Finition soignée'
+        ],
+        dimensions: '20 x 20 cm',
+        material: 'Bois',
+        images: [
+            'assets/images/products/coeur-maman1.jpg'
+        ],
+        category: 'decoration'
+    },
+    {
         id: 'bouchons-bouteilles',
         name: 'Bouchons de bouteilles gravés',
         price: 'Sur demande',
@@ -363,6 +465,37 @@ const products = [
         inStock: true,
         customizable: true,
         additionalInfo: 'Gravure possible sur vos planches existantes (5€ à 15€ selon la taille du design)'
+    },
+    {
+        id: 'sous-plat-liege',
+        name: 'Sous-plat en liège personnalisé',
+        price: '10 €',
+        priceDetails: [
+            'Lot de 3 sous-plats avec le design de votre choix : 10 €'
+        ],
+        category: 'cuisine',
+        description: 'Protégez votre table avec style grâce à nos sous-plats en liège personnalisables. Vendus par lot de 3, ces sous-plats peuvent être gravés avec votre message, logo ou design préféré. Parfaits pour les plats chauds et idéaux pour les restaurants ou votre cuisine.',
+        dimensions: '19 cm de diamètre',
+        material: 'Liège',
+        features: [
+            'Lot de 3 sous-plats identiques',
+            'Design personnalisable',
+            'Matériau naturel et durable',
+            'Résistant à la chaleur',
+            'Protection efficace de vos surfaces',
+            'Facile à nettoyer'
+        ],
+        images: [
+            'assets/images/products/sous-plat-1.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        examples: [
+            'Message "Attention c\'est chaud !"',
+            'Logo de restaurant',
+            'Design personnalisé',
+            'Pictogramme au choix'
+        ]
     },
     {
         id: 'sous-verres-ardoise',
@@ -739,56 +872,6 @@ const products = [
         inStock: true
     },
     {
-        id: 'saint-valentin',
-        name: 'Collection Saint-Valentin',
-        category: 'cadeaux',
-        description: 'Une collection spéciale pour la Saint-Valentin avec plusieurs options personnalisables.',
-        variants: [
-            {
-                name: 'Carte postale personnalisée',
-                price: '20 €',
-                dimensions: 'Format A5'
-            },
-            {
-                name: 'Souvenir "Notre endroit"',
-                price: '25 €',
-                dimensions: '5 x 10 cm'
-            },
-            {
-                name: 'Logo infini',
-                price: '15 €',
-                dimensions: '15 x 7 cm',
-                options: 'Avec ou sans cœur rouge'
-            },
-            {
-                name: 'Visages entremêlés',
-                price: '20 €',
-                dimensions: '15 x 40 cm'
-            },
-            {
-                name: 'Porte-clefs hexagonal personnalisé',
-                price: '10 €',
-                note: 'Lot de 2'
-            },
-            {
-                name: 'Porte-clefs cœur personnalisé',
-                price: '8 €',
-                note: 'Lot de 2',
-                material: 'Bois naturel - lasure bois foncé - noir'
-            }
-        ],
-        images: [
-            'assets/images/products/saint-valentin-carte.jpg',
-            'assets/images/products/saint-valentin-endroit.jpg',
-            'assets/images/products/saint-valentin-infini.jpg',
-            'assets/images/products/saint-valentin-visages.jpg',
-            'assets/images/products/saint-valentin-portecles-1.jpg',
-            'assets/images/products/saint-valentin-portecles-2.jpg'
-        ],
-        inStock: true,
-        customizable: true
-    },
-    {
         id: 'montagne-triangle',
         name: 'Montagne dans triangle',
         price: '25 €',
@@ -948,7 +1031,135 @@ const products = [
         ],
         image: 'assets/images/products/ecureuil-cercle.jpg',
         inStock: true
-    }
+    },
+    {
+        id: 'carte-postale-st-valentin',
+        name: 'Carte postale personnalisée Saint-Valentin',
+        price: '20 €',
+        category: 'saint-valentin',
+        description: 'Une carte postale format A5 entièrement personnalisable pour déclarer votre amour de manière unique et originale.',
+        dimensions: 'Format A5',
+        material: 'Bois',
+        features: [
+            'Format carte postale',
+            'Texte personnalisable',
+            'Design élégant',
+            'Finition soignée'
+        ],
+        images: [
+            'assets/images/products/carte-st-valentin.jpg'
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
+        id: 'souvenir-endroit',
+        name: 'Souvenir de "Notre endroit"',
+        price: '25 €',
+        category: 'saint-valentin',
+        description: 'Une plaque commémorative personnalisée pour immortaliser un lieu qui vous est cher.',
+        dimensions: '5 x 10 cm',
+        material: 'Bois',
+        features: [
+            'Coordonnées GPS personnalisables',
+            'Nom du lieu personnalisable',
+            'Format compact',
+            'Design minimaliste'
+        ],
+        images: [
+            'assets/images/products/souvenir-endroit.jpg'
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
+        id: 'logo-infini-you-and-me',
+        name: 'Logo infini "You & Me"',
+        price: '15 €',
+        category: 'saint-valentin',
+        description: 'Un symbole d\'amour infini personnalisé avec vos initiales. Disponible avec ou sans cœur rouge.',
+        dimensions: '20 x 7 cm',
+        material: 'Bois',
+        features: [
+            'Design symbole infini',
+            'Option cœur rouge',
+            'Personnalisation des noms',
+            'Finition élégante'
+        ],
+        images: [
+            'assets/images/products/you-and-me.jpg',
+            'assets/images/products/you-and-me2.jpg'
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
+        id: 'visages-entremeles',
+        name: 'Visages entremêlés',
+        price: '20 €',
+        category: 'saint-valentin',
+        description: 'Une création artistique représentant deux visages entremêlés, symbolisant l\'union et l\'amour.',
+        dimensions: '15 x 40 cm',
+        material: 'Bois',
+        features: [
+            'Design artistique',
+            'Gravure détaillée',
+            'Grand format',
+            'Effet visuel unique'
+        ],
+        images: [
+            'assets/images/products/saint-valentin-visages.jpg'
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
+        id: 'porte-clefs-hexagonal',
+        name: 'Porte-clefs hexagonal personnalisé',
+        price: '10 €',
+        category: 'saint-valentin',
+        description: 'Lot de 2 porte-clefs hexagonaux personnalisables, parfaits pour les couples.',
+        dimensions: 'Format porte-clefs',
+        material: 'Bois',
+        features: [
+            'Lot de 2 porte-clefs',
+            'Forme hexagonale',
+            'Personnalisation possible',
+            'Design moderne'
+        ],
+        images: [
+            'assets/images/products/saint-valentin-portecles-1.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        priceLot: '10 € le lot de 2'
+    },
+    {
+        id: 'porte-clefs-coeur',
+        name: 'Porte-clefs cœur personnalisé',
+        price: '8 €',
+        category: 'saint-valentin',
+        description: 'Lot de 2 porte-clefs en forme de cœur, disponibles en bois naturel, lasure bois foncé ou noir.',
+        dimensions: 'Format porte-clefs',
+        material: 'Bois',
+        features: [
+            'Lot de 2 porte-clefs',
+            'Forme cœur',
+            'Trois finitions au choix',
+            'Personnalisation possible'
+        ],
+        images: [
+            'assets/images/products/porte-clefs-coeur-1.jpg',
+            'assets/images/products/porte-clefs-coeur-2.jpg',
+            'assets/images/products/porte-clefs-coeur-3.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        priceLot: '8 € le lot de 2',
+        variants: ['Bois naturel', 'Lasure bois foncé', 'Noir']
+    },
+
+
 ];
 
 // Ajouter ces variables globales au début du fichier
@@ -993,6 +1204,11 @@ function createProductCard(product) {
         <div class="product-info">
             <h3 class="product-title">${title}</h3>
             <p class="product-price">${price.toFixed(2)} €</p>
+            ${product.priceDetails ? `
+                <div class="price-details">
+                    ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                </div>
+            ` : ''}
             <button class="add-to-cart" data-product-id="${product.id}">
                 Ajouter au panier
             </button>
@@ -1065,7 +1281,6 @@ function createProductPopup(product) {
     const popup = document.createElement('div');
     popup.className = 'product-popup';
     
-    // Création du contenu du popup
     const content = `
         <div class="popup-content">
             <button class="close-popup">&times;</button>
@@ -1092,8 +1307,11 @@ function createProductPopup(product) {
             <div class="popup-info">
                 <h2>${product.name}</h2>
                 <p class="popup-price">${product.price}</p>
-                ${product.pricePersonnalisation ? `<p class="popup-price-option">Option personnalisation : ${product.pricePersonnalisation}</p>` : ''}
-                ${product.priceLot ? `<p class="popup-price-option">Prix du lot : ${product.priceLot}</p>` : ''}
+                ${product.priceDetails ? `
+                    <div class="popup-price-details">
+                        ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                    </div>
+                ` : ''}
                 <p class="popup-description">${product.description}</p>
                 <div class="popup-details">
                     <p><strong>Dimensions :</strong> ${product.dimensions}</p>
@@ -1201,6 +1419,11 @@ function handlePopupGallery(popup, product) {
                     <div class="product-info">
                         <h3>${product.name}</h3>
                         <p class="price">${product.price}</p>
+                        ${product.priceDetails ? `
+                            <div class="price-details">
+                                ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                            </div>
+                        ` : ''}
                         <p class="description">${product.description}</p>
                     <div class="product-tags">
                         ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}

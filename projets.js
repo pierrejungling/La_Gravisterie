@@ -234,6 +234,105 @@ const projects = [
         material: 'Bois',
         dimensions: '20 x 40 cm',
         client: 'Collection personnalisable'
+    },
+    {
+        id: 'puzzle-personnalise',
+        name: 'Puzzle personnalisé en bois',
+        category: 'evenements',
+        description: 'Puzzle en bois personnalisable, parfait pour une activité avec les enfants, annoncer un événement spécial ou offrir un cadeau unique. Chaque pièce est soigneusement découpée pour garantir un assemblage parfait.',
+        features: [
+            'Design entièrement personnalisable',
+            'Différentes tailles de pièces disponibles',
+            'Adapté à tous les âges',
+            'Finition soignée',
+            'Boîte de rangement incluse'
+        ],
+        images: [
+            'assets/images/projects/puzzle-1.jpg',
+            'assets/images/projects/puzzle-2.jpg',
+            'assets/images/projects/puzzle-3.jpg'
+        ],
+        material: 'Bois',
+        client: 'Commandes personnalisées'
+    },
+    {
+        id: 'panneau-qr-code',
+        name: 'Panneau QR code Instagram',
+        category: 'commerce',
+        description: 'Panneau en bois avec QR code Instagram intégré et compteur de followers, réalisé pour L\'Annexe Bar. Un moyen élégant de connecter l\'espace physique aux réseaux sociaux.',
+        features: [
+            'QR code gravé avec précision',
+            'Compteur de followers intégré',
+            'Design professionnel',
+            'Support mural inclus',
+            'Finition personnalisée'
+        ],
+        images: [
+            'assets/images/projects/qr-code-1.jpg'
+        ],
+        material: 'Bois',
+        dimensions: '40 x 40 cm',
+        client: 'L\'Annexe Bar'
+    },
+    {
+        id: 'cake-topper-anniversaire',
+        name: 'Cake topper personnalisé',
+        category: 'evenements',
+        description: 'Décoration de gâteau personnalisée pour célébrer 55 ans de mariage. Un design en forme de cœur avec les prénoms des mariés, créant une touche élégante pour cette occasion spéciale.',
+        features: [
+            'Design en forme de cœur',
+            'Prénoms personnalisés',
+            'Support intégré',
+            'Finition dorée disponible',
+            'Taille adaptée aux gâteaux'
+        ],
+        images: [
+            'assets/images/projects/cake-topper-1.jpg',
+            'assets/images/projects/cake-topper-2.jpg'
+        ],
+        material: 'Bois',
+        client: 'Événement privé'
+    },
+    {
+        id: 'trophees-trottiloup',
+        name: 'Trophées Trottiloup 2024',
+        category: 'evenements',
+        description: 'Collection de trophées et porte-clés créés pour la course de trottinettes Trottiloup, organisée par l\'Unité Scoute de Stembert HF10. Un design unique combinant trottinette et récompense sportive.',
+        features: [
+            'Design original en forme de trottinette',
+            'Support stable intégré',
+            'Gravure personnalisée',
+            'Porte-clés assortis',
+            'Différentes finitions disponibles'
+        ],
+        images: [
+            'assets/images/projects/trottiloup-1.jpg',
+            'assets/images/projects/trottiloup-2.jpg',
+            'assets/images/projects/trottiloup-3.jpg',
+            'assets/images/projects/trottiloup-4.jpg',
+            'assets/images/projects/trottiloup-5.jpg'
+        ],
+        material: 'Bois',
+        client: 'Unité Scoute de Stembert HF10'
+    },
+    {
+        id: 'carte-monde-personnalisee',
+        name: 'Carte du monde personnalisée',
+        category: 'decoration',
+        description: 'Carte du monde décorative en liège et bois, personnalisable avec le nom du propriétaire. Parfaite pour marquer vos voyages et créer un souvenir unique de vos aventures.',
+        features: [
+            'Carte du monde détaillée',
+            'Nom personnalisable',
+            'Combinaison bois et liège',
+            'Support mural intégré',
+            'Marqueurs de voyage possibles'
+        ],
+        images: [
+            'assets/images/projects/carte-monde-1.jpg'
+        ],
+        material: 'Bois et liège',
+        dimensions: '60 x 40 cm',
+        client: 'Nicolas'
     }
 ];
 

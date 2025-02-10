@@ -106,6 +106,17 @@
     margin-bottom: 1rem;
 }
 
+.product-info .price-details {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.product-info .price-details p {
+    margin: 0.2rem 0;
+}
+
 .product-info .description {
     margin-bottom: 1.5rem;
     line-height: 1.6;
@@ -363,6 +374,17 @@
     font-size: 1.1rem;
     color: var(--text-color);
     margin-bottom: 0.5rem;
+}
+
+.popup-price-details {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.popup-price-details p {
+    margin: 0.2rem 0;
 }
 
 .popup-description {
