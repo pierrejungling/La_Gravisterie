@@ -180,20 +180,6 @@
     transition: opacity 0.3s ease;
 }
 
-.gallery-nav-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
 .gallery-nav {
     position: absolute;
     top: 50%;
@@ -208,6 +194,7 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
+    opacity: 0;
     transition: all 0.3s ease;
 }
 
@@ -225,32 +212,22 @@
     color: white;
 }
 
-.product-card:hover .gallery-nav-container {
+/* Supprimer cette règle qui cache les flèches */
+.gallery-nav-container {
     opacity: 1;
 }
 
-.gallery-nav:hover {
-    background: var(--accent-color);
-    transform: translateY(-50%) scale(1.1);
+/* Modifier ces règles pour le comportement desktop/mobile */
+@media (hover: hover) {
+    .product-card:hover .gallery-nav {
+        opacity: 1;
+    }
 }
 
-/* Ajustements pour le mode sombre */
-[data-theme="dark"] .gallery-nav {
-    background: rgba(255, 255, 255, 0.7);
-}
-
-[data-theme="dark"] .gallery-nav svg {
-    color: black;
-}
-
-/* Afficher les flèches uniquement au survol de l'image */
-.image-gallery .gallery-nav {
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-}
-
-.image-gallery:hover .gallery-nav {
-    opacity: 1;
+@media (max-width: 768px) {
+    .gallery-nav {
+        opacity: 1 !important;
+    }
 }
 
 /* Animation de transition */

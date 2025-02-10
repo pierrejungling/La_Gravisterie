@@ -462,14 +462,16 @@
     color: white;
 }
 
-/* Afficher les flèches au survol de l'image */
-.project-card:hover .gallery-nav {
-    opacity: 1;
+@media (hover: hover) {
+    .project-card:hover .gallery-nav {
+        opacity: 1;
+    }
 }
 
-.gallery-nav:hover {
-    background: var(--accent-color);
-    transform: translateY(-50%) scale(1.1);
+@media (max-width: 768px) {
+    .gallery-nav {
+        opacity: 1;
+    }
 }
 
 /* Ajustements pour le mode sombre */
@@ -479,4 +481,23 @@
 
 [data-theme="dark"] .gallery-nav svg {
     color: black;
+}
+
+.arrow-left, .arrow-right {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@media (hover: hover) {
+    .slider:hover .arrow-left,
+    .slider:hover .arrow-right {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .arrow-left,
+    .arrow-right {
+        opacity: 1;
+    }
 } 
