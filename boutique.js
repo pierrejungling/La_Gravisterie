@@ -1185,9 +1185,6 @@ const products = [
         ],
         images: [
             'assets/images/products/arches-ensemble.jpg',
-            'assets/images/products/arche-soleil.jpg',
-            'assets/images/products/arche-olivier.jpg',
-            'assets/images/products/arche-lune.jpg'
         ],
         inStock: true,
         customizable: false,
