@@ -1158,8 +1158,165 @@ const products = [
         priceLot: '8 € le lot de 2',
         variants: ['Bois naturel', 'Lasure bois foncé', 'Noir']
     },
-
-
+    {
+        id: 'triptyque-arches',
+        name: 'Triptyque décoratif Arches',
+        price: 'À partir de 20 €',
+        priceDetails: [
+            'À l\'unité : 20 €',
+            'Lot de 3 motifs différents : 50 €'
+        ],
+        category: 'decoration',
+        description: 'Collection de décorations murales modernes en forme d\'arches. Trois designs distincts : un soleil levant aux lignes épurées, une arche avec feuille d\'olivier minimaliste, et un paysage nocturne avec lune. Parfait pour créer un ensemble harmonieux sur vos murs.',
+        dimensions: '20 x 30 cm par pièce',
+        material: 'Bois peint en noir',
+        features: [
+            'Design moderne et épuré',
+            'Trois motifs complémentaires',
+            'Finition noire mate',
+            'Système d\'accroche intégré',
+            'Fabrication artisanale',
+            'Disponible à l\'unité ou en lot'
+        ],
+        variants: [
+            'Soleil levant',
+            'Arche et olivier',
+            'Lune et montagnes'
+        ],
+        images: [
+            'assets/images/products/arches-ensemble.jpg',
+            'assets/images/products/arche-soleil.jpg',
+            'assets/images/products/arche-olivier.jpg',
+            'assets/images/products/arche-lune.jpg'
+        ],
+        inStock: true,
+        customizable: false,
+        details: [
+            'Soleil levant : lignes rayonnantes géométriques',
+            'Arche et olivier : design botanique minimaliste',
+            'Lune et montagnes : paysage nocturne stylisé'
+        ]
+    },
+    {
+        id: 'raton-laveur-geometrique',
+        name: 'Raton laveur géométrique',
+        price: '15 €',
+        category: 'decoration',
+        description: 'Décoration murale représentant un raton laveur en style géométrique. Un design moderne et épuré qui apportera une touche de nature stylisée à votre intérieur.',
+        dimensions: '20 x 15 cm',
+        material: 'Bois peint en noir',
+        features: [
+            'Design géométrique moderne',
+            'Finition noire mate',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/raton-laveur.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'ours-geometrique',
+        name: 'Ours géométrique',
+        price: '20 €',
+        category: 'decoration',
+        description: 'Silhouette d\'ours en style géométrique, parfaite pour une décoration murale contemporaine. Les lignes épurées créent un effet de volume saisissant.',
+        dimensions: '21 x 20 cm',
+        material: 'Bois peint en noir',
+        features: [
+            'Design géométrique complexe',
+            'Finition noire mate',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/ours-geo.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'panda-face',
+        name: 'Panda géométrique',
+        price: '15 €',
+        category: 'decoration',
+        description: 'Portrait frontal de panda en style géométrique minimaliste. Un design adorable qui combine simplicité et caractère.',
+        dimensions: '20 x 17 cm',
+        material: 'Bois peint en noir',
+        features: [
+            'Design frontal minimaliste',
+            'Finition noire mate',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/panda-face.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'chouette-geometrique',
+        name: 'Chouette géométrique',
+        price: '20 €',
+        category: 'decoration',
+        description: 'Chouette en style géométrique, disponible en bois naturel. Un design élégant qui combine sagesse et modernité.',
+        dimensions: '16 x 23 cm',
+        material: 'Bois naturel',
+        features: [
+            'Design géométrique détaillé',
+            'Finition bois naturel',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/chouette-geo.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'koala-geometrique',
+        name: 'Koala géométrique',
+        price: '15 €',
+        category: 'decoration',
+        description: 'Portrait de koala en style géométrique. Un design attendrissant qui apportera douceur et modernité à votre décoration.',
+        dimensions: '20 x 14 cm',
+        material: 'Bois naturel',
+        features: [
+            'Design géométrique doux',
+            'Finition bois naturel',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/koala-geo.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'elephant-geometrique',
+        name: 'Éléphant géométrique',
+        price: '15 €',
+        category: 'decoration',
+        description: 'Éléphant en style géométrique, disponible en finition dorée. Un design majestueux qui allie élégance et modernité.',
+        dimensions: '16 x 13 cm',
+        material: 'Bois peint en doré',
+        features: [
+            'Design géométrique élégant',
+            'Finition dorée',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/elephant-dore.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    }
 ];
 
 // Ajouter ces variables globales au début du fichier
