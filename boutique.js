@@ -387,13 +387,7 @@ const products = [
             'assets/images/products/sous-verres-6.jpg',
             'assets/images/products/sous-verres-7.jpg',
             'assets/images/products/sous-verres-8.jpg',
-            'assets/images/products/sous-verres-9.jpg',
-            'assets/images/products/sous-verres-10.jpg',
-            'assets/images/products/sous-verres-11.jpg',
-            'assets/images/products/sous-verres-12.jpg',
-            'assets/images/products/sous-verres-13.jpg',
-            'assets/images/products/sous-verres-14.jpg',
-            'assets/images/products/sous-verres-15.jpg',
+            'assets/images/products/sous-verres-9.jpg'
         ],
         inStock: true,
         customizable: true
