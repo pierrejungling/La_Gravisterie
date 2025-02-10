@@ -37,7 +37,7 @@ const products = [
     {
         id: 'planche-voiture',
         name: 'Planche gravée personnalisée - Modèle de votre voiture',
-        price: '25 €',
+        price: '20 €',
         category: 'decoration',
         description: 'Sublimez votre passion automobile avec cette planche gravée mettant en valeur une illustration détaillée de votre véhicule, accompagnée du logo et du nom de la marque.',
         dimensions: '40 x 20 cm',
