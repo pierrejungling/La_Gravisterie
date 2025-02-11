@@ -63,7 +63,7 @@ const projects = [
             'assets/images/projects/alpine-3.jpg'
         ],
         material: 'Bois',
-        client: ''
+        client: 'Privé'
     },
     {
         id: 'cadres-maman',
@@ -81,7 +81,7 @@ const projects = [
             'assets/images/projects/maman-2.jpg'
         ],
         material: 'Bois',
-        client: ''
+        client: 'Privé'
     },
     {
         id: 'trophee-velo',
@@ -105,7 +105,7 @@ const projects = [
         id: 'badges-gravures',
         name: 'Gravures & Expérimentations',
         category: 'autres',
-        description: 'Gravures & Expérimentations est un espace dédié aux essais, prototypes et créations spontanées. Chaque pièce est le résultat d’une exploration technique ou d’une inspiration du moment, sans forcément entrer dans une collection définie. Certaines peuvent être uniques, d’autres adaptées sur demande.',
+        description: 'Gravures & Expérimentations est un espace dédié aux essais, prototypes et créations spontanées. Chaque pièce est le résultat d\'une exploration technique ou d\'une inspiration du moment, sans forcément entrer dans une collection définie. Certaines peuvent être uniques, d\'autres adaptées sur demande.',
         features: [
             'Gravures détaillées',
             'Designs variés',
@@ -174,7 +174,7 @@ const projects = [
             'assets/images/projects/palo-cheval.jpg'
         ],
         material: 'Bois',
-        client: ''
+        client: 'Privé'
     },
     {
         id: 'enseigne-oprestige',
@@ -208,7 +208,7 @@ const projects = [
             'assets/images/projects/tigre-geometrique.jpg'
         ],
         material: 'Bois',
-        client: '',
+        client: 'Privé',
         pricing: {
             basic: '15 €',
             whiteBg: '25 €',
@@ -233,7 +233,7 @@ const projects = [
         ],
         material: 'Bois',
         dimensions: '20 x 40 cm',
-        client: 'Collection personnalisable'
+        client: 'Privé'
     },
     {
         id: 'puzzle-personnalise',
@@ -252,7 +252,7 @@ const projects = [
             'assets/images/projects/puzzle-3.jpg'
         ],
         material: 'Bois',
-        client: ''
+        client: 'Privé'
     },
     {
         id: 'panneau-qr-code',
@@ -290,7 +290,7 @@ const projects = [
             'assets/images/projects/cake-topper-2.jpg'
         ],
         material: 'Bois',
-        client: ''
+        client: 'Privé'
     },
     {
         id: 'trophees-trottiloup',
@@ -330,7 +330,32 @@ const projects = [
         ],
         material: 'Bois et liège',
         dimensions: '60 x 40 cm',
-        client: ''
+        client: 'Privé'
+    },
+    {
+        id: 'ardoise-samosa',
+        client: 'Privé',
+        name: '"It\'s Samosa Time"',
+        category: 'perso',
+        description: "Ardoise gravée personnalisée pour la présentation de samosas, combinant élégance et style vintage avec une illustration détaillée.",
+        images: [
+            'assets/images/projects/samosa-1.jpg'
+        ],
+        material: "Ardoise",
+        dimensions: "30 x 30 cm",
+        features: [
+            "Gravure laser de précision",
+            "Finition mate naturelle",
+            "Illustration style vintage",
+            "Texte personnalisé",
+            "Support alimentaire",
+            "Nettoyage facile"
+        ],
+        details: {
+            technique: "Gravure laser sur ardoise",
+            finition: "Naturelle",
+            usage: "Présentation culinaire"
+        }
     }
 ];
 
