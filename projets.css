@@ -287,6 +287,10 @@
     padding: 10px;
     background: var(--secondary-color);
     border-radius: 8px;
+    flex-wrap: wrap;
+    max-height: 180px;
+    overflow-y: auto;
+    align-content: flex-start;
 }
 
 .popup-thumbnail {

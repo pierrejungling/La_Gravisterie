@@ -6,8 +6,8 @@ const INSTAGRAM_API_URL = 'https://graph.instagram.com/me/media';
 const projects = [
     {
         id: 'calendrier-maternelle',
-        name: 'Calendrier pour classe maternelle',
-        category: 'education',
+        name: 'Calendrier perpétuel',
+        category: 'autres',
         description: 'Projet réalisé pour une classe de maternelle en immersion en anglais. Un calendrier interactif permettant aux enfants d\'apprendre les jours, les mois et la météo.',
         features: [
             'Calendrier interactif',
@@ -30,8 +30,8 @@ const projects = [
     },
     {
         id: 'plaque-voiture-gtr',
-        name: 'Plaque Nissan GT-R personnalisée',
-        category: 'automobile',
+        name: 'Plaque Nissan GT-R',
+        category: 'perso',
         description: 'Gravure personnalisée réalisée pour un passionné de Nissan GT-R, représentant la voiture sous trois angles différents.',
         features: [
             'Design personnalisé',
@@ -43,7 +43,7 @@ const projects = [
             'assets/images/projects/gtr-1.jpg'
         ],
         material: 'Bois',
-        client: 'thimigtr_'
+        client: '@thimigtr_'
     },
     {
         id: 'horloge-alpine',
@@ -54,20 +54,21 @@ const projects = [
             'Design Alpine authentique',
             'Horloge fonctionnelle',
             'Porte-clés assortis',
-            'Finition bicolore'
+            'Finition bicolore',
+            'initiales sur les aiguilles'
         ],
         images: [
             'assets/images/projects/alpine-1.jpg',
             'assets/images/projects/alpine-2.jpg',
             'assets/images/projects/alpine-3.jpg'
         ],
-        material: 'Bois et acrylique',
-        client: 'Fan Alpine'
+        material: 'Bois',
+        client: ''
     },
     {
         id: 'cadres-maman',
         name: 'Cadres "Maman, mon héroïne"',
-        category: 'decoration',
+        category: 'perso',
         description: 'Création de cadres personnalisés célébrant le lien mère-enfant, avec illustrations peintes à la main et gravure délicate.',
         features: [
             'Illustrations personnalisées',
@@ -80,7 +81,7 @@ const projects = [
             'assets/images/projects/maman-2.jpg'
         ],
         material: 'Bois',
-        client: 'Commande personnalisée'
+        client: ''
     },
     {
         id: 'trophee-velo',
@@ -98,34 +99,35 @@ const projects = [
             'assets/images/projects/trophee-2.jpg'
         ],
         material: 'Bois',
-        client: 'Unités scouts'
+        client: 'Unité Scoute de Stembert HF010'
     },
     {
         id: 'badges-gravures',
-        name: 'Collection de badges et gravures',
-        category: 'evenements',
-        description: 'Une série de petits projets de gravures incluant une bouteille de rhum vintage, une citrouille décorative, un corbeau mystérieux et des badges de chaussures personnalisés.',
+        name: 'Gravures & Expérimentations',
+        category: 'autres',
+        description: 'Gravures & Expérimentations est un espace dédié aux essais, prototypes et créations spontanées. Chaque pièce est le résultat d’une exploration technique ou d’une inspiration du moment, sans forcément entrer dans une collection définie. Certaines peuvent être uniques, d’autres adaptées sur demande.',
         features: [
             'Gravures détaillées',
             'Designs variés',
-            'Badges personnalisés',
-            'Finition soignée'
         ],
         images: [
             'assets/images/projects/badge-rum.jpg',
             'assets/images/projects/badge-pumpkin.jpg',
             'assets/images/projects/badge-raven.jpg',
             'assets/images/projects/badge-shoe1.jpg',
-            'assets/images/projects/badge-shoe2.jpg'
+            'assets/images/projects/badge-shoe2.jpg',
+            'assets/images/projects/badge-1.jpg',
+            'assets/images/projects/badge-2.jpg',
+            'assets/images/projects/badge-3.jpg',
         ],
         material: 'Bois',
-        client: 'Divers clients'
+        client: 'L\'imagination d\'Akili'
     },
     
     {
         id: 'relais-pommard',
         name: 'Planche de présentation Le Relais de Pommard',
-        category: 'commerce',
+        category: 'entreprises',
         description: 'Planche de présentation élégante réalisée pour l\'hôtel-restaurant Le Relais de Pommard, avec une gravure détaillée de la façade de l\'établissement.',
         features: [
             'Gravure architecturale',
@@ -142,7 +144,7 @@ const projects = [
     {
         id: 'logo-para-commando',
         name: 'Logo Amicale Para-Commando',
-        category: 'militaire',
+        category: 'entreprises',
         description: 'Logo de l\'amicale para-commando régionale de Liège réalisé en deux versions : une gravure sur plaque et une découpe détaillée.',
         features: [
             'Double réalisation',
@@ -160,8 +162,8 @@ const projects = [
     {
         id: 'palo-cheval',
         name: 'Palo le cheval cabré',
-        category: 'decoration',
-        description: 'Gravure personnalisée d\'un cheval cabré dans un médaillon circulaire, réalisée en collaboration avec El Trio Gravure.',
+        category: 'perso',
+        description: 'Gravure personnalisée d\'un cheval cabré dans un médaillon circulaire.',
         features: [
             'Design circulaire',
             'Silhouette dynamique',
@@ -172,12 +174,12 @@ const projects = [
             'assets/images/projects/palo-cheval.jpg'
         ],
         material: 'Bois',
-        client: 'El Trio Gravure'
+        client: ''
     },
     {
         id: 'enseigne-oprestige',
         name: 'Enseigne O\'Prestige Barbershop',
-        category: 'commerce',
+        category: 'entreprises',
         description: 'Enseigne élégante pour le salon de coiffure O\'Prestige Barbershop Spa, combinant un design classique avec des éléments modernes.',
         features: [
             'Design bicolore',
@@ -194,7 +196,7 @@ const projects = [
     {
         id: 'tigre-personnalise',
         name: 'Tigre géométrique personnalisé',
-        category: 'decoration',
+        category: 'perso',
         description: 'Portrait de tigre en style géométrique avec option de personnalisation du nom. Disponible en plusieurs versions : simple, avec fond blanc, ou avec marquage personnalisé.',
         features: [
             'Design géométrique',
@@ -206,21 +208,19 @@ const projects = [
             'assets/images/projects/tigre-geometrique.jpg'
         ],
         material: 'Bois',
-        client: 'Collection personnalisable',
+        client: '',
         pricing: {
             basic: '15 €',
             whiteBg: '25 €',
             custom: '30 €'
         },
         dimensions: {
-            basic: '20cm x 20cm',
-            custom: '24cm x 20cm'
         }
     },
     {
         id: 'loup-prenom',
         name: 'Loup + prénom personnalisé',
-        category: 'decoration',
+        category: 'perso',
         description: 'Silhouette de loup hurlant avec possibilité d\'ajouter un prénom personnalisé. Une décoration unique et personnelle.',
         features: [
             'Design nature',
@@ -238,14 +238,13 @@ const projects = [
     {
         id: 'puzzle-personnalise',
         name: 'Puzzle personnalisé en bois',
-        category: 'evenements',
+        category: 'autres',
         description: 'Puzzle en bois personnalisable, parfait pour une activité avec les enfants, annoncer un événement spécial ou offrir un cadeau unique. Chaque pièce est soigneusement découpée pour garantir un assemblage parfait.',
         features: [
             'Design entièrement personnalisable',
             'Différentes tailles de pièces disponibles',
             'Adapté à tous les âges',
             'Finition soignée',
-            'Boîte de rangement incluse'
         ],
         images: [
             'assets/images/projects/puzzle-1.jpg',
@@ -253,12 +252,12 @@ const projects = [
             'assets/images/projects/puzzle-3.jpg'
         ],
         material: 'Bois',
-        client: 'Commandes personnalisées'
+        client: ''
     },
     {
         id: 'panneau-qr-code',
         name: 'Panneau QR code Instagram',
-        category: 'commerce',
+        category: 'entreprises',
         description: 'Panneau en bois avec QR code Instagram intégré et compteur de followers, réalisé pour L\'Annexe Bar. Un moyen élégant de connecter l\'espace physique aux réseaux sociaux.',
         features: [
             'QR code gravé avec précision',
@@ -291,7 +290,7 @@ const projects = [
             'assets/images/projects/cake-topper-2.jpg'
         ],
         material: 'Bois',
-        client: 'Événement privé'
+        client: ''
     },
     {
         id: 'trophees-trottiloup',
@@ -300,7 +299,6 @@ const projects = [
         description: 'Collection de trophées et porte-clés créés pour la course de trottinettes Trottiloup, organisée par l\'Unité Scoute de Stembert HF10. Un design unique combinant trottinette et récompense sportive.',
         features: [
             'Design original en forme de trottinette',
-            'Support stable intégré',
             'Gravure personnalisée',
             'Porte-clés assortis',
             'Différentes finitions disponibles'
@@ -313,12 +311,12 @@ const projects = [
             'assets/images/projects/trottiloup-5.jpg'
         ],
         material: 'Bois',
-        client: 'Unité Scoute de Stembert HF10'
+        client: 'Unité Scoute de Stembert HF010'
     },
     {
         id: 'carte-monde-personnalisee',
         name: 'Carte du monde personnalisée',
-        category: 'decoration',
+        category: 'autres',
         description: 'Carte du monde décorative en liège et bois, personnalisable avec le nom du propriétaire. Parfaite pour marquer vos voyages et créer un souvenir unique de vos aventures.',
         features: [
             'Carte du monde détaillée',
@@ -332,7 +330,7 @@ const projects = [
         ],
         material: 'Bois et liège',
         dimensions: '60 x 40 cm',
-        client: 'Nicolas'
+        client: ''
     }
 ];
 
