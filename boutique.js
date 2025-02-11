@@ -9,17 +9,17 @@ let cart = [];
 const products = [
     {
         id: 'cadres-paysages',
-        name: 'Cadres paysages gravés',
+        name: 'Cadres paysages',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Transformez votre intérieur avec ces créations uniques qui capturent la magie des grands espaces. Idéals pour une déco inspirante ou un cadeau original.',
-        dimensions: 'Hauteur 40 cm',
-        material: 'Bois et acrylique noir',
+        dimensions: '40 x 30 cm',
+        material: 'Bois',
         features: [
             'Design minimaliste et élégant',
-            'Gravure de précision',
-            'Cadre noir mat',
-            'Plusieurs motifs disponibles'
+            'Découpe laser de précision',
+            'Plusieurs coloris disponibles',
+            'Plusieurs dimensions disponibles',
         ],
         variants: 'Disponible en tailles et couleurs variées pour s\'adapter à votre style.',
         images: [
@@ -38,15 +38,14 @@ const products = [
         id: 'planche-voiture',
         name: 'Planche gravée personnalisée - Modèle de votre voiture',
         price: '20 €',
-        category: 'decoration',
-        description: 'Sublimez votre passion automobile avec cette planche gravée mettant en valeur une illustration détaillée de votre véhicule, accompagnée du logo et du nom de la marque.',
+        category: 'deco-murale',
+        description: 'Sublimez votre passion automobile avec cette planche gravée mettant en valeur une illustration détaillée de votre véhicule, accompagnée du logo et du nom de la marque de celui-ci.',
         dimensions: '40 x 20 cm',
-        material: 'Bois massif',
+        material: 'Bois',
         features: [
-            'Dimensions standard : 40 x 20 cm',
+            'Plusieurs dimensions disponibles',
             'Gravure personnalisée de votre véhicule',
             'Logo et nom de la marque inclus',
-            'Planche en bois massif'
         ],
         variants: 'Disponible dans des dimensions plus grandes ou plus petites sur demande.',
         image: 'assets/images/products/planche-voiture.jpg',
@@ -55,17 +54,16 @@ const products = [
     },
     {
         id: 'planche-boeuf',
-        name: 'Les morceaux du bœuf - Planche à découper gravée',
+        name: 'Planche à découper gravée - Les morceaux du bœuf',
         price: '25 €',
-        category: 'decoration',
+        category: 'accessoires',
         description: 'Cette planche à découper, gravée et illustrant les différentes parties du bœuf, est un outil pratique et esthétique qui trouvera parfaitement sa place dans votre cuisine. Parfaite pour les amateurs de cuisine et les passionnés de gastronomie.',
         dimensions: '45 x 30 cm',
-        material: 'Bois massif',
+        material: 'Bois',
         features: [
             'Gravure détaillée des morceaux de bœuf',
             'Planche en bois massif',
             'Design élégant et pédagogique',
-            'Idéale comme planche de présentation ou décorative'
         ],
         variants: 'La gravure peut être adaptée pour d\'autres animaux comme la volaille, le porc, l\'agneau...',
         image: 'assets/images/products/planche-boeuf.jpg',
@@ -79,7 +77,7 @@ const products = [
             'Petit format (35 x 20 cm) : 25 €',
             'Grand format (45 x 30 cm) : 40 €'
         ],
-        category: 'cuisine',
+        category: 'accessoires',
         description: 'Parfaits pour sublimer vos tables, ces plateaux en ardoise sont idéaux pour servir vos apéritifs, fromages, ou tout simplement comme élément de décoration unique. Personnalisables avec vos initiales, une phrase inspirante ou un dessin spécial.',
         dimensions: '35 x 20 cm | 45 x 30 cm',
         material: 'Ardoise',
@@ -103,15 +101,15 @@ const products = [
         id: 'emojis-mains',
         name: 'Gravures "emojis" de mains',
         price: '15 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Apportez une touche fun et expressive à votre intérieur ou offrez un cadeau unique avec nos gravures d\'emojis de mains.',
         dimensions: '20 x 20 cm',
-        material: 'Bois et acrylique noir',
+        material: 'Bois',
         features: [
             'Design minimaliste et expressif',
-            'Gravure de précision',
+            'Découpe laser de précision',
             'Plusieurs modèles disponibles',
-            'Personnalisable'
+            'Plusieurs dimensions disponible'
         ],
         images: [
             'assets/images/products/emoji-shaka.jpg',
@@ -125,9 +123,9 @@ const products = [
     },
     {
         id: 'boules-noel-simple',
-        name: 'Boules de Noël gravées simples',
+        name: 'Boules de Noël simples',
         price: '3 €',
-        category: 'decoration',
+        category: 'events',
         description: 'Illuminez votre sapin avec nos boules de Noël gravées en une seule couche ! Des designs élégants et raffinés pour une décoration de Noël unique.',
         dimensions: 'Taille standard',
         material: 'Bois',
@@ -135,7 +133,8 @@ const products = [
             'Design en une seule couche',
             'Designs variés (rennes, sapins, paysages...)',
             'Personnalisation possible',
-            'Finition soignée'
+            'Finition soignée',
+            'Prix pour des achats en lots possible',
         ],
         images: [
             'assets/images/products/bnoel-10.jpg',
@@ -150,7 +149,7 @@ const products = [
         id: 'boules-noel-relief',
         name: 'Boules de Noël en relief',
         price: '10 €',
-        category: 'decoration',
+        category: 'events',
         description: 'Donnez du relief à votre sapin avec nos boules de Noël travaillées en plusieurs couches ! Ces créations artisanales offrent un effet de profondeur unique à vos décorations de Noël.',
         dimensions: 'Taille standard',
         material: 'Bois',
@@ -181,15 +180,14 @@ const products = [
             'Grand sapin (25 cm) : 15 €',
             'Lot (1 grand + 1 petit) : 20 € au lieu de 25 €'
         ],
-        category: 'decoration',
-        description: 'Ajoutez une touche d\'élégance à votre déco de Noël avec nos sapins en bois 3D. Disponibles en 5 coloris (lasuré, doré, bois naturel, noir et argenté), nos sapins sont parfaits pour sublimer votre intérieur pendant les fêtes. Que ce soit sur une table, un buffet ou près du sapin principal, ils apporteront une ambiance chaleureuse.',
-        dimensions: '15 cm ou 25 cm de hauteur',
+        category: 'events',
+        description: 'Ajoutez une touche d\'élégance à votre déco de Noël avec nos sapins en bois 3D. Disponibles en 5 coloris (lasuré, doré, bois naturel, noir et argenté), nos sapins sont parfaits pour sublimer votre intérieur pendant les fêtes. Que ce soit sur une table, un buffet ou près du sapin, ils apporteront une ambiance chaleureuse.',
+        dimensions: '15 cm | 25 cm de hauteur',
         material: 'Bois',
         features: [
             'Design 3D élégant',
             'Disponible en 5 coloris',
             'Base stable incluse',
-            'Montage facile',
             'Durable et réutilisable',
             'Deux tailles disponibles'
         ],
@@ -212,14 +210,14 @@ const products = [
         id: 'tortue-geometrique',
         name: 'Tortue géométrique',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Une création unique alliant géométrie et nature, parfaite pour une décoration murale moderne et élégante.',
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
             'Design géométrique original',
-            'Gravure de précision',
-            'Autres dimensions possibles'
+            'Découpe laser de précision',
+            'Plusieurs dimensions disponibles',
         ],
         images: [
             'assets/images/products/tortue-geometrique.jpg',
@@ -233,14 +231,16 @@ const products = [
         name: 'Triptyque géométrique',
         price: '50 €',
         priceUnit: '20 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Ensemble de trois panneaux décoratifs aux motifs géométriques modernes. Un design épuré qui s\'intègre parfaitement dans tout intérieur contemporain.',
-        dimensions: 'Dimensions sur mesure',
+        dimensions: '40 x 23 cm',
         material: 'Bois',
         features: [
             'Lot de 3 panneaux',
             'Design moderne et minimaliste',
-            'Motifs géométriques coordonnés'
+            'Motifs géométriques coordonnés',
+            'Plusieurs coloris disponibles',
+            'Plusieurs dimensions disponibles'
         ],
         images: [
             'assets/images/products/triptyque-1.jpg',
@@ -251,10 +251,11 @@ const products = [
         id: 'plateau-ginkgo',
         name: 'Plateau gravé motif Ginkgo',
         price: '25 €',
-        priceLot: '40 €',
-        category: 'decoration',
+        priceDetails: ['Lot : 40 €',
+            ],
+        category: 'accessoires',
         description: 'Plateau décoratif avec motif de feuilles de Ginkgo finement gravé. Disponible à l\'unité ou en lot de deux.',
-        dimensions: 'Taille personnalisable',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Motif naturel élégant',
@@ -272,8 +273,9 @@ const products = [
         id: 'plateau-petit-dejeuner',
         name: 'Plateau petit-déjeuner personnalisé',
         price: '20 €',
-        priceCustom: '25 €',
-        category: 'decoration',
+        priceDetails: ['Avec design personnalisé : 25 €'
+            ],
+        category: 'accesoires',
         description: 'Plateau de service en bambou avec gravure thématique petit-déjeuner. Option de personnalisation disponible pour un design unique.',
         dimensions: 'Format standard',
         material: 'Bambou',
@@ -289,17 +291,21 @@ const products = [
     },
     {
         id: 'gorille',
-        name: 'Le Gorille - Décoration lumineuse',
-        price: '15 €',
-        priceWithBase: '20 €',
-        category: 'decoration',
-        description: 'Silhouette de gorille élégante, disponible avec ou sans socle gravé. Parfait comme décoration ou veilleuse d\'ambiance.',
+        name: 'Le Gorille',
+        price: 'À partir de 15 €',
+        priceDetails: ['Avec pied gravé personnalisé : 20 €',
+                        'sans pied : 15 €'
+        ],
+        category: 'animaux',
+        description: 'Silhouette de gorille élégante, disponible avec ou sans socle gravé.',
         dimensions: '18 x 15 cm',
-        material: 'Acrylique noir',
+        material: 'Bois',
         features: [
             'Design minimaliste',
             'Option avec socle personnalisé',
-            'Effet d\'ombre projetée'
+            'Effet d\'ombre projetée',
+            'Plusieurs coloris disponibles',
+            'Plusieurs dimensions disponibles',
         ],
         images: [
             'assets/images/products/gorille-1.jpg',
@@ -314,12 +320,13 @@ const products = [
         price: '4 €',
         category: 'accessoires',
         description: 'Porte-clefs en bois gravé représentant le célèbre circuit de Spa-Francorchamps.',
-        dimensions: 'Format porte-clefs',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Design du circuit iconique',
             'Gravure de précision',
-            'Anneau porte-clefs inclus'
+            'Anneau porte-clefs inclus',
+            'Deux variantes disponibles'
         ],
         images: [
             'assets/images/products/porte-clefs-1.jpg',
@@ -331,14 +338,13 @@ const products = [
         id: 'cadre-fete-meres',
         name: 'Cadre Photo Cœur - Fête des Mères',
         price: '20 €',
-        category: 'cadeaux',
+        category: 'events',
         description: 'Cadre photo en forme de cœur, parfait pour la fête des mères. Peut contenir une photo de 10x15cm.',
-        dimensions: '10 x 15 cm',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Design en forme de cœur',
             'Espace photo intégré',
-            'Personnalisation possible',
             'Support intégré'
         ],
         image: 'assets/images/products/cadre-coeur-maman.jpg',
@@ -349,14 +355,14 @@ const products = [
         id: 'cercle-meilleure-maman',
         name: 'Cercle "Meilleure Maman"',
         price: '30 €',
-        category: 'cadeaux',
-        description: 'Décoration circulaire avec texte "Meilleure Maman" et motifs floraux.',
+        category: 'events',
+        description: 'Décoration circulaire avec texte "Meilleure Maman" et bouquet de fleurs séchées.',
         dimensions: '30 x 30 cm',
         material: 'Bois et acrylique',
         features: [
             'Design élégant',
             'Texte personnalisable',
-            'Support mural inclus',
+            'Support inclus',
             'Finitions soignées'
         ],
         image: 'assets/images/products/cercle-maman.jpg',
@@ -380,12 +386,12 @@ const products = [
         images: [
             'assets/images/products/coeur-maman1.jpg'
         ],
-        category: 'decoration'
+        category: 'events'
     },
     {
         id: 'bouchons-bouteilles',
         name: 'Bouchons de bouteilles gravés',
-        price: 'Sur demande',
+        price: '3 €',
         category: 'accessoires',
         description: 'Bouchons de bouteilles gravés et personnalisables, parfaits pour ajouter une touche spéciale à vos bouteilles de spiritueux préférées.',
         dimensions: 'Format standard bouchon',
