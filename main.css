@@ -210,13 +210,11 @@ body {
     color: var(--accent-color);
 }
 
-
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
-
 
 footer {
     padding: 2rem 0;
@@ -422,8 +420,6 @@ footer {
     margin: 0 auto 3rem;
     padding: 0 var(--spacing-unit);
 }
-
-
 
 .step {
     background-color: var(--primary-color);
@@ -689,4 +685,18 @@ footer {
     .nav-links .menu-signature {
         display: block;
     }
+}
+
+.process-preview .btn {
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.process-preview .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
