@@ -38,16 +38,37 @@ body {
     background: var(--primary-color);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    justify-self: start;
+}
+
+.menu-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px;
+}
+
+.theme-toggle {
+    justify-self: end;
+    margin-left: auto;
 }
 
 .nav-container {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0.5rem var(--spacing-unit);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    height: 80px;
+    align-items: center;
+    width: 100%;
 }
 
 .logo {
@@ -539,6 +560,9 @@ footer {
 
 /* Bouton hamburger pour la navigation mobile */
 .menu-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: none;
     flex-direction: column;
     justify-content: space-between;
