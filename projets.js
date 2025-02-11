@@ -388,7 +388,7 @@ function createProjectPopup(project) {
         <div class="popup-content">
             <button class="close-popup">&times;</button>
             <div class="popup-gallery">
-                ${project.images ? `
+                ${project.images && project.images.length > 0 ? `
                     <div class="popup-image-container">
                         <img src="${project.images[0]}" alt="${project.name}" class="popup-main-image">
                         ${project.images.length > 1 ? `
@@ -396,7 +396,10 @@ function createProjectPopup(project) {
                             <button class="popup-nav next">&#10095;</button>
                             <div class="popup-thumbnails">
                                 ${project.images.map((img, index) => `
-                                    <img src="${img}" alt="${project.name}" class="popup-thumbnail ${index === 0 ? 'active' : ''}" data-index="${index}">
+                                    <img src="${img}" 
+                                         alt="${project.name}" 
+                                         class="popup-thumbnail ${index === 0 ? 'active' : ''}" 
+                                         data-index="${index}">
                                 `).join('')}
                             </div>
                         ` : ''}
