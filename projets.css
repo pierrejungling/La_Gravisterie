@@ -649,17 +649,4 @@
 .project-button-container {
     margin-top: auto; /* Pousse le bouton vers le bas */
     padding-top: 1rem; /* Espace au-dessus du bouton */
-}
-
-/* Supprimer ces classes si elles existent */
-.contact-footer,
-.footer-content,
-.social-icons,
-.social-icon,
-.founder,
-.contact-info,
-.contact-links,
-.contact-links a,
-.contact-links .separator {
-    display: none;
 } 

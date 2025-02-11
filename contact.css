@@ -367,18 +367,4 @@ main {
     flex: 1;
 }
 
-/* Supprimer toutes ces sections liées au footer */
-.contact-footer,
-.footer-content,
-.footer-content h3,
-.footer-content .role,
-.contact-links,
-.contact-links a,
-.contact-links .separator,
-.social-icons,
-.social-icon,
-.social-icon img {
-    display: none;
-}
-
 /* Garder le reste du fichier inchangé */ 

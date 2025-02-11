@@ -101,6 +101,7 @@
     padding: 4rem var(--spacing-unit);
     background-color: var(--secondary-color);
     margin-top: 4rem;
+    margin-bottom: 2rem;
 }
 
 .contact-cta h2 {

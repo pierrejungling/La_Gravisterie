@@ -776,15 +776,4 @@
         height: 80px;
         margin: 0;
     }
-}
-
-/* Ajouter à la fin du fichier */
-/* Supprimer ces classes si elles existent */
-.contact-footer,
-.footer-content,
-.social-icons,
-.social-icon,
-.founder,
-.contact-info {
-    display: none;
 } 

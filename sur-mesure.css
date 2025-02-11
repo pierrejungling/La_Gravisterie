@@ -159,6 +159,7 @@
     background-color: var(--secondary-color);
     padding: 4rem var(--spacing-unit);
     margin-top: 4rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
