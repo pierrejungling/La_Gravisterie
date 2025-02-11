@@ -154,105 +154,60 @@
     margin-right: auto;
 }
 
-/* Section Contact */
+/* Mise à jour des styles pour la nouvelle section contact */
 .contact-section {
     background-color: var(--secondary-color);
     padding: 4rem var(--spacing-unit);
     margin-top: 4rem;
+    text-align: center;
 }
 
 .contact-section h2 {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     font-size: 2rem;
     color: var(--accent-color);
 }
 
 .contact-container {
-    max-width: 1000px;
+    max-width: 800px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-}
-
-.contact-info {
     padding: 2rem;
-}
-
-.founder-info {
-    margin-bottom: 2rem;
-}
-
-.founder-info h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.founder-info .role {
-    color: var(--text-color);
-    font-size: 1.2rem;
-}
-
-.contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.contact-link:hover {
-    color: var(--accent-color);
-}
-
-.contact-link img {
-    width: 24px;
-    height: 24px;
-}
-
-/* Formulaire */
-.contact-form {
     background: var(--primary-color);
-    padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
+.contact-description {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--accent-color);
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid var(--border-color);
+.contact-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
     border-radius: 4px;
-    font-family: inherit;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
 }
 
-.form-group textarea {
-    min-height: 150px;
-    resize: vertical;
+.contact-button:hover {
+    background-color: var(--accent-color-hover);
 }
 
-/* Inversion des icônes en mode sombre */
-[data-theme='dark'] .contact-details .contact-icon {
-  filter: invert(1);
+/* Suppression des anciens styles du formulaire qui ne sont plus nécessaires */
+.contact-form,
+.form-group,
+.contact-info,
+.founder-info,
+.contact-details,
+.contact-link {
+    display: none;
 }
 
 @media (max-width: 768px) {

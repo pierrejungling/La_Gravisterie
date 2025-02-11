@@ -363,16 +363,40 @@ function filterProjects(posts) {
 
 // Fonction pour créer une carte projet
 function createProjectCard(project) {
-    const title = project.caption.split('\n')[0];
-
     const card = document.createElement('div');
     card.className = 'project-card';
+    card.dataset.projectId = project.id;
+    
     card.innerHTML = `
-        <img src="${project.media_url}" alt="${title}" class="project-image">
+        <div class="project-image">
+            ${project.images && project.images.length > 1 ? `
+                <div class="image-gallery">
+                    <img src="${project.images[0]}" alt="${project.name}" class="main-image" data-image-index="0">
+                    <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${project.id}', 'next')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            ` : `
+                <img src="${project.images ? project.images[0] : project.image}" alt="${project.name}">
+            `}
+        </div>
         <div class="project-info">
-            <h3 class="project-title">${title}</h3>
-            <p>${project.caption.substring(0, 150)}...</p>
-            <a href="/contact" class="customize-btn">Demander une personnalisation</a>
+            <h3>${project.name}</h3>
+            <p class="description">${project.description}</p>
+            <div class="project-tags">
+                ${project.dimensions ? `<span class="tag">${project.dimensions}</span>` : ''}
+                ${project.material ? `<span class="tag">${project.material}</span>` : ''}
+            </div>
+            <div class="project-button-container">
+                <button class="btn btn-primary" onclick="event.stopPropagation(); openProjectPopup('${project.id}')">En savoir plus</button>
+            </div>
         </div>
     `;
 
@@ -486,6 +510,32 @@ function handlePopupGallery(popup, project) {
     });
 }
 
+// Fonction pour ouvrir le popup d'un projet
+function openProjectPopup(projectId) {
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+
+    const popup = createProjectPopup(project);
+    document.body.appendChild(popup);
+    handlePopupGallery(popup, project);
+
+    // Gestion de la fermeture du popup
+    popup.querySelector('.close-popup').addEventListener('click', () => {
+        popup.remove();
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.remove();
+        }
+    });
+
+    // Gestion du bouton de contact
+    popup.querySelector('.popup-contact').addEventListener('click', () => {
+        window.location.href = 'contact.html';
+    });
+}
+
 // Fonction pour afficher les projets
 function displayProjects(category = 'all') {
     // Supprimer toute pagination existante
@@ -512,39 +562,8 @@ function displayProjects(category = 'all') {
 
     // Afficher les projets
     currentProjects.forEach(project => {
-        const projectCard = `
-            <div class="project-card" data-project-id="${project.id}">
-                <div class="project-image">
-                    ${project.images && project.images.length > 1 ? `
-                        <div class="image-gallery">
-                            <img src="${project.images[0]}" alt="${project.name}" class="main-image" data-image-index="0">
-                            <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                            <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${project.id}', 'next')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </div>
-                    ` : `
-                        <img src="${project.images ? project.images[0] : project.image}" alt="${project.name}">
-                    `}
-                </div>
-                <div class="project-info">
-                    <h3>${project.name}</h3>
-                    <p class="description">${project.description}</p>
-                    <div class="project-tags">
-                        ${project.dimensions ? `<span class="tag">${project.dimensions}</span>` : ''}
-                        ${project.material ? `<span class="tag">${project.material}</span>` : ''}
-                    </div>
-                    <button class="btn btn-primary" onclick="event.stopPropagation()">En savoir plus</button>
-                </div>
-            </div>
-        `;
-        projectsGrid.innerHTML += projectCard;
+        const projectCard = createProjectCard(project);
+        projectsGrid.appendChild(projectCard);
     });
 
     // Ajouter la pagination si nécessaire
@@ -599,20 +618,7 @@ function displayProjects(category = 'all') {
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('click', () => {
             const projectId = card.dataset.projectId;
-            const project = projects.find(p => p.id === projectId);
-            const popup = createProjectPopup(project);
-            document.body.appendChild(popup);
-            handlePopupGallery(popup, project);
-
-            // Gestion de la fermeture du popup
-            popup.querySelector('.close-popup').addEventListener('click', () => {
-                popup.remove();
-            });
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    popup.remove();
-                }
-            });
+            openProjectPopup(projectId);
         });
     });
 }
