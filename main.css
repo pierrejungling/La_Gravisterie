@@ -353,34 +353,34 @@ footer {
         width: 150px;
         height: auto;
     }
-    
+
     .main-logo {
         max-width: 300px;
     }
-    
+
     .hero h1 {
         font-size: 2.5rem;
     }
-    
+
     .tagline {
         font-size: 1.2rem;
     }
-    
+
     .cta-buttons {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .btn {
         width: 100%;
         text-align: center;
     }
-    
+
     .hero-image {
         max-width: 90%;
         padding: 1rem;
     }
-    
+
     .contact-info {
         flex-direction: column;
         gap: 0.5rem;
@@ -394,7 +394,7 @@ footer {
         height: 55px;
         margin-top: 5px;
     }
-    
+
     .nav-container .logo img {
         height: 45px;
     }
@@ -508,7 +508,7 @@ footer {
         max-width: 90%;
         padding: 1rem;
     }
-    
+
     .main-logo {
         max-width: 300px;
     }
@@ -684,4 +684,4 @@ footer {
     .nav-links .menu-signature {
         display: block;
     }
-} 
+}

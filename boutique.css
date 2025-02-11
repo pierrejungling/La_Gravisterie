@@ -93,6 +93,7 @@
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .product-info h3 {
@@ -120,6 +121,12 @@
 .product-info .description {
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    flex: 1;
+}
+
+.product-info .btn {
+    margin-top: auto;
+    width: 100%;
 }
 
 .custom-order {
