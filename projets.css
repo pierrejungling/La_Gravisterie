@@ -83,6 +83,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem var(--spacing-unit);
+    margin-bottom: 2rem;
 }
 
 .project-card {
@@ -175,6 +176,8 @@
     background-color: var(--secondary-color);
     padding: 4rem var(--spacing-unit);
     margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 .start-project-content {
@@ -646,4 +649,17 @@
 .project-button-container {
     margin-top: auto; /* Pousse le bouton vers le bas */
     padding-top: 1rem; /* Espace au-dessus du bouton */
+}
+
+/* Supprimer ces classes si elles existent */
+.contact-footer,
+.footer-content,
+.social-icons,
+.social-icon,
+.founder,
+.contact-info,
+.contact-links,
+.contact-links a,
+.contact-links .separator {
+    display: none;
 } 
