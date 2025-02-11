@@ -119,6 +119,21 @@ main {
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+    display: inline-block;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
 }
 
 .nav-links a:hover {
@@ -126,20 +141,19 @@ main {
     transform: translateY(-2px);
 }
 
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Style spécial pour le lien actif */
 .nav-links a.active {
     color: var(--accent-color);
     font-weight: 700;
-    position: relative;
 }
 
 .nav-links a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
     width: 100%;
-    height: 2px;
-    background-color: var(--accent-color);
+    opacity: 1;
 }
 
 .hero {
@@ -159,6 +173,16 @@ main {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.hero-image:hover {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+
+[data-theme="dark"] .hero-image:hover {
+    filter: drop-shadow(0 8px 16px rgba(255, 255, 255, 0.25));
 }
 
 .main-logo {
@@ -390,6 +414,8 @@ main {
 
 .theme-toggle:hover {
     opacity: 0.8;
+    transform: translateY(-2px);
+
 }
 
 /* Style pour le logo hero */
@@ -777,4 +803,35 @@ footer {
 /* Désactiver l'effet pour les icônes sociales */
 .social-links a.contact-link::after {
     display: none;
+}
+
+/* Modification des styles du logo */
+.logo a {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.logo a:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+}
+
+/* Ajustement pour le mode sombre */
+[data-theme="dark"] .logo a:hover {
+    filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.2));
+}
+
+/* Ajustement du logo mobile pour la même animation */
+.mobile-logo a {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.mobile-logo a:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+}
+
+[data-theme="dark"] .mobile-logo a:hover {
+    filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.2));
 }
