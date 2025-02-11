@@ -13,7 +13,7 @@ const products = [
         price: '25 €',
         category: 'deco-murale',
         description: 'Transformez votre intérieur avec ces créations uniques qui capturent la magie des grands espaces. Idéals pour une déco inspirante ou un cadeau original.',
-        dimensions: '40 x 30 cm',
+        dimensions: '30 x 40 cm',
         material: 'Bois',
         features: [
             'Design minimaliste et élégant',
@@ -233,7 +233,7 @@ const products = [
         priceUnit: '20 €',
         category: 'deco-murale',
         description: 'Ensemble de trois panneaux décoratifs aux motifs géométriques modernes. Un design épuré qui s\'intègre parfaitement dans tout intérieur contemporain.',
-        dimensions: '40 x 23 cm',
+        dimensions: '23 x 40 cm',
         material: 'Bois',
         features: [
             'Lot de 3 panneaux',
@@ -275,7 +275,7 @@ const products = [
         price: '20 €',
         priceDetails: ['Avec design personnalisé : 25 €'
             ],
-        category: 'accesoires',
+        category: 'accessoires',
         description: 'Plateau de service en bambou avec gravure thématique petit-déjeuner. Option de personnalisation disponible pour un design unique.',
         dimensions: 'Format standard',
         material: 'Bambou',
@@ -339,7 +339,7 @@ const products = [
         name: 'Cadre Photo Cœur - Fête des Mères',
         price: '20 €',
         category: 'events',
-        description: 'Cadre photo en forme de cœur, parfait pour la fête des mères. Peut contenir une photo de 10x15cm.',
+        description: 'Cadre photo en forme de cœur, parfait pour la fête des mères. Peut contenir une photo de 10 x 15 cm.',
         dimensions: '',
         material: 'Bois',
         features: [
@@ -393,14 +393,14 @@ const products = [
         name: 'Bouchons de bouteilles gravés',
         price: '3 €',
         category: 'accessoires',
-        description: 'Bouchons de bouteilles gravés et personnalisables, parfaits pour ajouter une touche spéciale à vos bouteilles de spiritueux préférées.',
-        dimensions: 'Format standard bouchon',
+        description: 'Bouchons de bouteilles gravés et personnalisables, parfaits pour ajouter une touche spéciale à vos bouteilles.',
+        dimensions: 'Format standard bouchon vin',
         material: 'Bois',
         features: [
             'Personnalisation sur mesure',
             'Gravures de haute qualité',
             'Parfait pour les cadeaux',
-            'Compatible avec la plupart des bouteilles'
+            'Compatible avec la plupart des bouteilles de vin'
         ],
         image: 'assets/images/products/bouchons-bouteilles.jpg',
         inStock: true,
@@ -409,14 +409,14 @@ const products = [
     {
         id: 'cadre-vin-apero',
         name: 'Cadre "Vin & Apéro"',
-        price: '20 €',
-        priceLot: '50 €',
-        category: 'decoration',
+        price: 'À partir de 20 €',
+        priceDetails: ['Unité : 20 €','Lot : 50 €'],
+        category: 'deco-murale',
         description: 'Ensemble de trois cadres décoratifs sur le thème du vin et de l\'apéro. Design minimaliste et élégant mettant en scène des moments de convivialité.',
         dimensions: '20 x 31 cm',
-        material: 'Bois et acrylique noir',
+        material: 'Bois',
         features: [
-            'Lot de 3 cadres coordonnés',
+            'Lot de 3 cadres',
             'Design minimaliste',
             'Thème vin et apéro',
             'Parfait pour cuisine ou salle à manger'
@@ -434,13 +434,11 @@ const products = [
         price: '15 €',
         category: 'accessoires',
         description: 'Gourde isotherme personnalisable avec votre design gravé. Disponible en plusieurs couleurs.',
-        dimensions: '80cl',
-        material: 'Acier inoxydable',
+        dimensions: '80 cl',
+        material: 'Aluminium',
         features: [
             'Gravure personnalisée',
             'Plusieurs couleurs disponibles',
-            'Double paroi isotherme',
-            'Prix dégressif pour grandes quantités'
         ],
         images: [
             'assets/images/products/gourde-noire.jpg',
@@ -453,7 +451,7 @@ const products = [
         id: 'planches-aperitives',
         name: 'Planches apéritives personnalisées',
         price: 'Sur demande',
-        category: 'cuisine',
+        category: 'accessoires',
         description: 'Planches apéritives gravées personnalisables, parfaites pour servir vos amuse-bouches avec style.',
         dimensions: 'Divers formats disponibles',
         material: 'Bois',
@@ -475,16 +473,16 @@ const products = [
     {
         id: 'sous-plat-liege',
         name: 'Sous-plat en liège personnalisé',
-        price: '10 €',
+        price: 'À partir de 5 €',
         priceDetails: [
-            'Lot de 3 sous-plats avec le design de votre choix : 10 €'
+            'Unité : 5 €',
+            'Lot de 3 sous-plats : 10 €'
         ],
-        category: 'cuisine',
-        description: 'Protégez votre table avec style grâce à nos sous-plats en liège personnalisables. Vendus par lot de 3, ces sous-plats peuvent être gravés avec votre message, logo ou design préféré. Parfaits pour les plats chauds et idéaux pour les restaurants ou votre cuisine.',
+        category: 'accessoires',
+        description: 'Protégez votre table avec style grâce à nos sous-plats en liège personnalisables. Vendu à l\'unité ou par lot de 3, ces sous-plats peuvent être gravés avec votre message, logo ou design préféré. Parfaits pour les plats chauds et idéaux pour les restaurants ou votre cuisine.',
         dimensions: '19 cm de diamètre',
         material: 'Liège',
         features: [
-            'Lot de 3 sous-plats identiques',
             'Design personnalisable',
             'Matériau naturel et durable',
             'Résistant à la chaleur',
@@ -507,7 +505,7 @@ const products = [
         id: 'sous-verres-ardoise',
         name: 'Sous-verres en ardoise personnalisés',
         price: '15 €',
-        category: 'cuisine',
+        category: 'accessoires',
         description: 'Lot de 6 sous-verres en ardoise avec support en bambou. Chaque sous-verre peut être personnalisé avec le design de votre choix.',
         dimensions: '10 cm de diamètre',
         material: 'Ardoise et bambou',
@@ -537,12 +535,11 @@ const products = [
         price: '6 €',
         category: 'accessoires',
         description: 'Brosse à cheveux en bois avec gravure personnalisée sur l\'avant et possibilité de gravure sur la face arrière selon vos désirs.',
-        dimensions: 'Format standard',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Gravure recto-verso possible',
             'Design personnalisable',
-            'Plusieurs motifs disponibles',
             'Finition soignée'
         ],
         images: [
@@ -563,11 +560,12 @@ const products = [
     {
         id: 'lampe-tourbillon',
         name: 'Lampe "Spirale"',
-        price: '45 €',
-        pricePied: '50 €',
-        category: 'decoration',
+        price: 'À partir de 50 €',
+        priceDetails: ['40 cm de haut : 50 € ( + ampoule 10 € )',
+                        '75 cm de haut : 150 € ( + ampoule 25 € )'],
+        category: 'light',
         description: 'Lampe décorative en spirale en bois. Disponible en version suspendue ou sur pied avec douille.',
-        dimensions: 'Sur mesure',
+        dimensions: '40 cm | 75 cm de haut',
         material: 'Bois',
         features: [
             'Design unique',
@@ -586,7 +584,7 @@ const products = [
         id: 'arbre-vie',
         name: 'Arbre de Vie personnalisé',
         price: '60 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Décoration murale personnalisée représentant votre arbre généalogique familial. Personnalisé avec les noms de votre famille.',
         dimensions: '35 x 40 cm',
         material: 'Bois',
@@ -602,13 +600,13 @@ const products = [
     },
     {
         id: 'silhouette-voiture',
-        name: 'Silhouette de voiture personnalisée',
+        name: 'Silhouette de voiture',
         price: '50 €',
-        priceOption: '10 €',
-        category: 'decoration',
-        description: 'Silhouette de voiture gravée, parfaite pour les passionnés d\'automobile. Option plaque d\'identification du modèle disponible.',
+        priceDetails: ['Plaque d\'identification : 10 €'],
+        category: 'deco-murale',
+        description: 'Silhouette de voiture découpées au laser, parfaite pour les passionnés d\'automobile. Option plaque d\'identification du modèle disponible.',
         dimensions: '80 x 22 cm',
-        material: 'Bois ou acrylique',
+        material: 'Bois',
         features: [
             'Design précis',
             'Option plaque d\'identification',
@@ -627,11 +625,12 @@ const products = [
         id: 'cadre-polaroid',
         name: 'Cadre photo "Polaroïd"',
         price: '15 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Cadre photo style Polaroïd personnalisable avec date, lieu et citation de votre choix pour immortaliser vos souvenirs.',
         dimensions: '11 x 14 cm',
         material: 'Bois',
         features: [
+            'Dimension photo 10 x 10 cm ( adaptable si besoin )',
             'Style Polaroïd vintage',
             'Personnalisation complète',
             'Texte et date au choix',
@@ -648,7 +647,7 @@ const products = [
         id: 'mandala-lotus',
         name: 'Mandala Lotus',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Magnifique mandala en forme de lotus avec motifs détaillés et complexes, parfait pour une décoration murale zen.',
         dimensions: '38 x 25 cm',
         material: 'Bois',
@@ -665,9 +664,9 @@ const products = [
         id: 'lotus-simple',
         name: 'Lotus',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Élégante fleur de lotus stylisée, une décoration murale épurée et minimaliste.',
-        dimensions: '390 x 35 cm',
+        dimensions: '39 x 35 cm',
         material: 'Bois',
         features: [
             'Design minimaliste',
@@ -682,7 +681,7 @@ const products = [
         id: 'elephants-geometriques',
         name: 'Famille d\'éléphants',
         price: '20 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Famille d\'éléphants en style géométrique, une décoration murale originale et moderne.',
         dimensions: '38 x 12 cm',
         material: 'Bois',
@@ -698,15 +697,16 @@ const products = [
     {
         id: 'cactus',
         name: 'El Cactus',
-        price: '20 €',
-        pricePied: '25 €',
+        price: 'À partir de 20 €',
+        priceDetails: ['Petit : 15 €',
+                        'Grand : 25 €'],
         category: 'decoration',
-        description: 'Silhouette de cactus élégante, disponible avec ou sans pied gravé personnalisable.',
-        dimensions: '17 x 39 cm',
-        material: 'Bois et acrylique noir',
+        description: 'Silhouette de cactus élégante, disponible en petit ( 20 cm de haut ) ou en grand ( 40 cm de haut ).',
+        dimensions: '20 cm | 40 cm de haut',
+        material: 'Bois',
         features: [
             'Design minimaliste',
-            'Option avec pied personnalisé',
+            'Deux tailles disponibles',
             'Texte gravé possible',
             'Style moderne'
         ],
@@ -721,7 +721,7 @@ const products = [
         id: 'voilier-tempete',
         name: 'Gravure de voiliers dans la tempête',
         price: '60 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Gravure de précision représentant des voiliers dans une mer agitée. Une œuvre détaillée qui capture la puissance des éléments.',
         dimensions: '40 x 23 cm',
         material: 'Bois',
@@ -739,15 +739,13 @@ const products = [
         name: 'The Dodo',
         price: '12 €',
         priceCustom: '15-20 €',
-        category: 'decoration',
-        description: 'Gravure représentant le légendaire Dodo. Possibilité de personnalisation avec un design de votre choix.',
+        category: 'deco-murale',
+        description: 'Gravure représentant le légendaire Dodo.',
         dimensions: '10 x 10 cm',
         material: 'Bois',
         features: [
             'Design historique',
             'Gravure de précision',
-            'Option personnalisable',
-            'Format compact'
         ],
         image: 'assets/images/products/dodo.jpg',
         inStock: true,
@@ -756,12 +754,13 @@ const products = [
     {
         id: 'trio-vegetal',
         name: 'Trio de cadres végétaux',
-        price: '25 €',
-        priceLot: '60 €',
-        category: 'decoration',
+        price: 'À partir de 25 €',
+        priceDetails: ['Unité : 25 €',
+                        'Lot : 50 €'],
+        category: 'deco-murale',
         description: 'Ensemble de trois cadres décoratifs aux motifs végétaux : roseaux, palmier et feuilles exotiques.',
         dimensions: '30 x 40 cm',
-        material: 'Bois et acrylique noir',
+        material: 'Bois',
         features: [
             'Lot de 3 cadres coordonnés',
             'Motifs végétaux',
@@ -779,15 +778,14 @@ const products = [
         id: 'rose-vents',
         name: 'Rose des vents',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Rose des vents décorative, un symbole élégant de navigation et d\'aventure.',
         dimensions: '40 x 40 cm',
-        material: 'Bois et acrylique noir',
+        material: 'Bois',
         features: [
             'Design classique',
             'Points cardinaux',
             'Finition élégante',
-            'Montage mural'
         ],
         image: 'assets/images/products/rose-vents.jpg',
         inStock: true
@@ -796,15 +794,14 @@ const products = [
         id: 'triptyque-arbre',
         name: 'Triptyque Arbre',
         price: '60 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Ensemble de trois panneaux formant un arbre majestueux. Une décoration murale saisissante.',
         dimensions: '100 x 40 cm',
-        material: 'Bois et acrylique noir',
+        material: 'Bois',
         features: [
             'Design en trois parties',
             'Motif arbre détaillé',
             'Effet d\'ensemble',
-            'Installation facile'
         ],
         image: 'assets/images/products/triptyque-arbre.jpg',
         inStock: true
@@ -813,13 +810,13 @@ const products = [
         id: 'voilier-simple',
         name: 'Voilier',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Élégante gravure d\'un voilier, parfaite pour une décoration marine épurée.',
         dimensions: '40 x 35 cm',
         material: 'Bois',
         features: [
             'Design minimaliste',
-            'Gravure de précision',
+            'Découpe laser de précision',
             'Style marin',
             'Finition soignée'
         ],
@@ -830,13 +827,13 @@ const products = [
         id: 'elephant-geometrique',
         name: 'Tête d\'éléphant géométrique',
         price: '25 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Majestueuse tête d\'éléphant en style géométrique, une pièce artistique qui allie modernité et nature.',
         dimensions: '35 x 40 cm',
         material: 'Bois',
         features: [
             'Design géométrique moderne',
-            'Gravure de précision',
+            'Découpe laser de précision',
             'Style contemporain',
             'Effet visuel saisissant'
         ],
@@ -847,14 +844,12 @@ const products = [
         id: 'mesange',
         name: 'Mésange',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Délicate gravure d\'une mésange sur sa branche, parfaite pour apporter une touche de nature à votre intérieur.',
         dimensions: '20 x 15 cm',
         material: 'Bois',
         features: [
             'Design naturaliste',
-            'Gravure détaillée',
-            'Format compact',
             'Idéal pour petits espaces'
         ],
         image: 'assets/images/products/mesange.jpg',
@@ -864,7 +859,7 @@ const products = [
         id: 'coucher-soleil',
         name: 'Coucher de soleil',
         price: '15 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Minimaliste représentation d\'un coucher de soleil sur l\'horizon, une pièce zen et apaisante.',
         dimensions: '20 x 10 cm',
         material: 'Bois',
@@ -881,7 +876,7 @@ const products = [
         id: 'montagne-triangle',
         name: 'Montagne dans triangle',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Design géométrique combinant montagnes et forêt dans un triangle, une pièce moderne et naturelle.',
         dimensions: '30 x 30 cm',
         material: 'Bois',
@@ -898,13 +893,13 @@ const products = [
         id: 'circuit-spa',
         name: 'Tracé du circuit de Spa-Francorchamps',
         price: '15 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Reproduction précise du célèbre circuit de Spa-Francorchamps, parfait pour les passionnés de sport automobile.',
         dimensions: '20 x 15 cm',
         material: 'Bois',
         features: [
             'Tracé fidèle du circuit',
-            'Gravure de précision',
+            'Découpe laser de précision',
             'Design minimaliste',
             'Idéal pour les fans de F1'
         ],
@@ -915,7 +910,7 @@ const products = [
         id: 'montagne-simple',
         name: 'Montagne simplifiée',
         price: '15 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Silhouette épurée de montagne, une décoration murale minimaliste et élégante.',
         dimensions: '17 x 5 cm',
         material: 'Bois',
@@ -932,15 +927,14 @@ const products = [
         id: 'chat-geometrique',
         name: 'Chat géométrique',
         price: '20 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Silhouette de chat en style géométrique, une pièce moderne et élégante.',
         dimensions: '27 x 18 cm',
         material: 'Bois',
         features: [
             'Design géométrique',
             'Style moderne',
-            'Gravure de précision',
-            'Effet visuel saisissant'
+            'Découpe laser de précision',
         ],
         image: 'assets/images/products/chat-geometrique.jpg',
         inStock: true
@@ -949,13 +943,12 @@ const products = [
         id: 'couple-oiseaux',
         name: 'Couple d\'oiseaux',
         price: '10 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Délicat couple d\'oiseaux sur une branche, une décoration romantique et naturelle.',
         dimensions: '10 x 10 cm',
         material: 'Bois',
         features: [
             'Design romantique',
-            'Format compact',
             'Style naturel',
             'Finition soignée'
         ],
@@ -965,35 +958,20 @@ const products = [
     {
         id: 'paysages-encercles',
         name: 'Paysages encerclés',
-        price: '5 €',
-        priceLot: '15 €',
-        category: 'decoration',
+        price: 'À partir de 5 €',
+        priceDetails: ['Unité : 5 €',
+                        'Lot : 12 €'],
+        category: 'deco-murale',
         description: 'Collection de paysages minimalistes encerclés, disponibles à l\'unité ou en lot de 3. Chaque cercle représente un paysage unique : cactus dans le désert, palmier tropical, et village de montagne.',
         dimensions: 'Environ 10 cm de diamètre chacun',
         material: 'Bois',
         features: [
             'Design minimaliste',
-            'Motifs variés',
             'Disponible à l\'unité ou en lot',
             'Format rond'
         ],
         variants: [
-            {
-                name: 'Cactus dans le désert',
-                price: '5 €'
-            },
-            {
-                name: 'Palmier tropical',
-                price: '5 €'
-            },
-            {
-                name: 'Village de montagne',
-                price: '5 €'
-            },
-            {
-                name: 'Lot de 3 paysages',
-                price: '15 €'
-            }
+
         ],
         images: [
             'assets/images/products/paysage-cercle-lot.jpg',
@@ -1008,7 +986,7 @@ const products = [
         id: 'montagne-jour-nuit',
         name: 'Montagne jour et nuit',
         price: '20 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Duo de triangles représentant une montagne de jour et de nuit. Le premier panneau montre un paysage nocturne avec lune et étoiles, le second un paysage diurne avec soleil rayonnant.',
         dimensions: '30 x 20 cm',
         material: 'Bois',
@@ -1025,7 +1003,7 @@ const products = [
         id: 'ecureuil-cercle',
         name: 'Écureuil',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Écureuil dans un cercle, une scène naturelle et poétique avec branches d\'arbre. Parfait pour apporter une touche de nature à votre intérieur.',
         dimensions: '20 x 20 cm',
         material: 'Bois',
@@ -1042,7 +1020,7 @@ const products = [
         id: 'carte-postale-st-valentin',
         name: 'Carte postale personnalisée Saint-Valentin',
         price: '20 €',
-        category: 'saint-valentin',
+        category: 'events',
         description: 'Une carte postale format A5 entièrement personnalisable pour déclarer votre amour de manière unique et originale.',
         dimensions: 'Format A5',
         material: 'Bois',
@@ -1062,10 +1040,10 @@ const products = [
         id: 'souvenir-endroit',
         name: 'Souvenir de "Notre endroit"',
         price: '25 €',
-        category: 'saint-valentin',
+        category: 'events',
         description: 'Une plaque commémorative personnalisée pour immortaliser un lieu qui vous est cher.',
         dimensions: '5 x 10 cm',
-        material: 'Bois',
+        material: 'Bois & aluminium',
         features: [
             'Coordonnées GPS personnalisables',
             'Nom du lieu personnalisable',
@@ -1082,14 +1060,14 @@ const products = [
         id: 'logo-infini-you-and-me',
         name: 'Logo infini "You & Me"',
         price: '15 €',
-        category: 'saint-valentin',
+        category: 'events',
         description: 'Un symbole d\'amour infini personnalisé avec vos initiales. Disponible avec ou sans cœur rouge.',
         dimensions: '20 x 7 cm',
         material: 'Bois',
         features: [
             'Design symbole infini',
             'Option cœur rouge',
-            'Personnalisation des noms',
+            'Personnalisation des noms possible',
             'Finition élégante'
         ],
         images: [
@@ -1103,14 +1081,12 @@ const products = [
         id: 'visages-entremeles',
         name: 'Visages entremêlés',
         price: '20 €',
-        category: 'saint-valentin',
+        category: 'events',
         description: 'Une création artistique représentant deux visages entremêlés, symbolisant l\'union et l\'amour.',
         dimensions: '15 x 40 cm',
         material: 'Bois',
         features: [
             'Design artistique',
-            'Gravure détaillée',
-            'Grand format',
             'Effet visuel unique'
         ],
         images: [
@@ -1123,9 +1099,9 @@ const products = [
         id: 'porte-clefs-hexagonal',
         name: 'Porte-clefs hexagonal personnalisé',
         price: '10 €',
-        category: 'saint-valentin',
+        category: 'events',
         description: 'Lot de 2 porte-clefs hexagonaux personnalisables, parfaits pour les couples.',
-        dimensions: 'Format porte-clefs',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Lot de 2 porte-clefs',
@@ -1144,9 +1120,9 @@ const products = [
         id: 'porte-clefs-coeur',
         name: 'Porte-clefs cœur personnalisé',
         price: '8 €',
-        category: 'saint-valentin',
+        category: 'events',
         description: 'Lot de 2 porte-clefs en forme de cœur, disponibles en bois naturel, lasure bois foncé ou noir.',
-        dimensions: 'Format porte-clefs',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Lot de 2 porte-clefs',
@@ -1169,20 +1145,17 @@ const products = [
         name: 'Triptyque décoratif Arches',
         price: 'À partir de 20 €',
         priceDetails: [
-            'À l\'unité : 20 €',
-            'Lot de 3 motifs différents : 50 €'
+            'Unité : 20 €',
+            'Lot  : 50 €'
         ],
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Collection de décorations murales modernes en forme d\'arches. Trois designs distincts : un soleil levant aux lignes épurées, une arche avec feuille d\'olivier minimaliste, et un paysage nocturne avec lune. Parfait pour créer un ensemble harmonieux sur vos murs.',
         dimensions: '20 x 30 cm par pièce',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
             'Design moderne et épuré',
             'Trois motifs complémentaires',
-            'Finition noire mate',
-            'Système d\'accroche intégré',
             'Fabrication artisanale',
-            'Disponible à l\'unité ou en lot'
         ],
         variants: [
             'Soleil levant',
@@ -1191,9 +1164,6 @@ const products = [
         ],
         images: [
             'assets/images/products/arches-ensemble.jpg',
-            'assets/images/products/arche-soleil.jpg',
-            'assets/images/products/arche-olivier.jpg',
-            'assets/images/products/arche-lune.jpg'
         ],
         inStock: true,
         customizable: false,
@@ -1207,15 +1177,13 @@ const products = [
         id: 'raton-laveur-geometrique',
         name: 'Raton laveur géométrique',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Décoration murale représentant un raton laveur en style géométrique. Un design moderne et épuré qui apportera une touche de nature stylisée à votre intérieur.',
         dimensions: '20 x 15 cm',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
             'Design géométrique moderne',
-            'Finition noire mate',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/raton-laveur.jpg'
@@ -1227,15 +1195,13 @@ const products = [
         id: 'ours-geometrique',
         name: 'Ours géométrique',
         price: '20 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Silhouette d\'ours en style géométrique, parfaite pour une décoration murale contemporaine. Les lignes épurées créent un effet de volume saisissant.',
         dimensions: '21 x 20 cm',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
             'Design géométrique complexe',
-            'Finition noire mate',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/ours-geo.jpg'
@@ -1247,15 +1213,13 @@ const products = [
         id: 'panda-face',
         name: 'Panda géométrique',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Portrait frontal de panda en style géométrique minimaliste. Un design adorable qui combine simplicité et caractère.',
         dimensions: '20 x 17 cm',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
             'Design frontal minimaliste',
-            'Finition noire mate',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/panda-face.jpg'
@@ -1267,15 +1231,14 @@ const products = [
         id: 'chouette-geometrique',
         name: 'Chouette géométrique',
         price: '20 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Chouette en style géométrique, disponible en bois naturel. Un design élégant qui combine sagesse et modernité.',
         dimensions: '16 x 23 cm',
-        material: 'Bois naturel',
+        material: 'Bois',
         features: [
             'Design géométrique détaillé',
             'Finition bois naturel',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/chouette-geo.jpg'
@@ -1287,15 +1250,14 @@ const products = [
         id: 'koala-geometrique',
         name: 'Koala géométrique',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Portrait de koala en style géométrique. Un design attendrissant qui apportera douceur et modernité à votre décoration.',
         dimensions: '20 x 14 cm',
-        material: 'Bois naturel',
+        material: 'Bois',
         features: [
             'Design géométrique doux',
             'Finition bois naturel',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/koala-geo.jpg'
@@ -1307,15 +1269,14 @@ const products = [
         id: 'elephant-geometrique',
         name: 'Éléphant géométrique',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Éléphant en style géométrique, disponible en finition dorée. Un design majestueux qui allie élégance et modernité.',
         dimensions: '16 x 13 cm',
-        material: 'Bois peint en doré',
+        material: 'Bois',
         features: [
             'Design géométrique élégant',
             'Finition dorée',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/elephant-dore.jpg'
@@ -1327,15 +1288,14 @@ const products = [
         id: 'pingouin-geometrique',
         name: 'Pingouin géométrique',
         price: '15 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Décoration murale représentant un pingouin en style géométrique. Les lignes épurées créent un design moderne et attachant, parfait pour une chambre d\'enfant ou un intérieur contemporain.',
         dimensions: '19 x 20 cm',
-        material: 'Bois naturel',
+        material: 'Bois',
         features: [
             'Design géométrique original',
             'Finition bois naturel',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/pingouin-geometrique.jpg'
@@ -1347,16 +1307,15 @@ const products = [
         id: 'montagne-triangle',
         name: 'Montagne géométrique triangulaire',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Décoration murale triangulaire représentant un paysage de montagne avec sapins. Un design géométrique saisissant qui combine nature et modernité.',
         dimensions: '35 x 40 cm',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
             'Design géométrique montagneux',
             'Finition noire mate',
-            'Format triangulaire unique',
-            'Sapins en premier plan',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Format triangulaire',
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/montagne-triangle2.jpg'
@@ -1368,16 +1327,15 @@ const products = [
         id: 'voilier-tropical',
         name: 'Voilier tropical',
         price: '25 €',
-        category: 'decoration',
+        category: 'deco-murale',
         description: 'Scène tropicale circulaire avec voilier, palmiers et soleil couchant. Une décoration qui apporte une ambiance vacances et évasion à votre intérieur.',
         dimensions: '25 x 25 cm',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
-            'Design circulaire complet',
+            'Design circulaire',
             'Scène tropicale détaillée',
             'Finition noire mate',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/voilier-tropical.jpg'
@@ -1389,16 +1347,15 @@ const products = [
         id: 'panda-allonge',
         name: 'Panda allongé géométrique',
         price: '25 €',
-        category: 'decoration',
+        category: 'animaux',
         description: 'Représentation géométrique d\'un panda allongé, combinant style moderne et douceur. Un design original qui apportera une touche de zen à votre décoration.',
         dimensions: '30 x 17 cm',
-        material: 'Bois peint en noir',
+        material: 'Bois',
         features: [
             'Design géométrique unique',
             'Format allongé original',
             'Finition noire mate',
-            'Système d\'accroche intégré',
-            'Autres dimensions possibles selon grille tarifaire'
+            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/panda-allonge.jpg'
