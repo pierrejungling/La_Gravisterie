@@ -696,6 +696,10 @@ footer {
     padding: 10px;
 }
 
+.social-links a.contact-link::after {
+    display: none;
+}
+
 .social-links a:hover {
     transform: translateY(-2px);
     background-color: var(--accent-color);
@@ -758,4 +762,9 @@ footer {
 
 .contact-link:hover::after {
     width: 100%;
+}
+
+/* Désactiver l'effet pour les icônes sociales */
+.social-links a.contact-link::after {
+    display: none;
 }
