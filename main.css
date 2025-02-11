@@ -402,6 +402,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .theme-toggle svg {
@@ -436,6 +437,23 @@ main {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
+}
+.introduction{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.introduction:hover{
+    transform: translateY(-5px);
+}
+[data-theme="dark"] .introduction {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+}
+.step{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.step:hover{
+    transform: translateY(-5px);
 }
 
 /* Ajustement pour mobile */
