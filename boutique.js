@@ -1185,6 +1185,9 @@ const products = [
         ],
         images: [
             'assets/images/products/arches-ensemble.jpg',
+            'assets/images/products/arche-soleil.jpg',
+            'assets/images/products/arche-olivier.jpg',
+            'assets/images/products/arche-lune.jpg'
         ],
         inStock: true,
         customizable: false,
@@ -1310,6 +1313,89 @@ const products = [
         ],
         images: [
             'assets/images/products/elephant-dore.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'pingouin-geometrique',
+        name: 'Pingouin géométrique',
+        price: '15 €',
+        category: 'decoration',
+        description: 'Décoration murale représentant un pingouin en style géométrique. Les lignes épurées créent un design moderne et attachant, parfait pour une chambre d\'enfant ou un intérieur contemporain.',
+        dimensions: '19 x 20 cm',
+        material: 'Bois naturel',
+        features: [
+            'Design géométrique original',
+            'Finition bois naturel',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/pingouin-geometrique.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'montagne-triangle',
+        name: 'Montagne géométrique triangulaire',
+        price: '25 €',
+        category: 'decoration',
+        description: 'Décoration murale triangulaire représentant un paysage de montagne avec sapins. Un design géométrique saisissant qui combine nature et modernité.',
+        dimensions: '35 x 40 cm',
+        material: 'Bois peint en noir',
+        features: [
+            'Design géométrique montagneux',
+            'Finition noire mate',
+            'Format triangulaire unique',
+            'Sapins en premier plan',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/montagne-triangle2.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'voilier-tropical',
+        name: 'Voilier tropical',
+        price: '25 €',
+        category: 'decoration',
+        description: 'Scène tropicale circulaire avec voilier, palmiers et soleil couchant. Une décoration qui apporte une ambiance vacances et évasion à votre intérieur.',
+        dimensions: '25 x 25 cm',
+        material: 'Bois peint en noir',
+        features: [
+            'Design circulaire complet',
+            'Scène tropicale détaillée',
+            'Finition noire mate',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/voilier-tropical.jpg'
+        ],
+        inStock: true,
+        customizable: false
+    },
+    {
+        id: 'panda-allonge',
+        name: 'Panda allongé géométrique',
+        price: '25 €',
+        category: 'decoration',
+        description: 'Représentation géométrique d\'un panda allongé, combinant style moderne et douceur. Un design original qui apportera une touche de zen à votre décoration.',
+        dimensions: '30 x 17 cm',
+        material: 'Bois peint en noir',
+        features: [
+            'Design géométrique unique',
+            'Format allongé original',
+            'Finition noire mate',
+            'Système d\'accroche intégré',
+            'Autres dimensions possibles selon grille tarifaire'
+        ],
+        images: [
+            'assets/images/products/panda-allonge.jpg'
         ],
         inStock: true,
         customizable: false
