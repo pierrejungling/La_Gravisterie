@@ -345,13 +345,26 @@ input[type="date"]:focus {
     height: auto;
 }
 
-/* Ajustement pour mobile */
+/* Style normal pour le logo */
+.contact-logo img {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    filter: invert(0);
+    transition: filter 0.3s ease;
+}
+
+/* Mode nuit */
+[data-theme="dark"] .contact-logo img {
+    filter: invert(1); /* Inverse la couleur en mode nuit */
+}
+
 @media (max-width: 768px) {
     .contact-logo {
         margin-bottom: 2rem;
     }
     
-    .contact-logo .logo-text {
+    .contact-logo img {
         max-width: 200px;
     }
 }
@@ -365,6 +378,34 @@ body {
 
 main {
     flex: 1;
+}
+
+/* Style pour les icônes des coordonnées */
+.contact-info img {
+    width: 24px;
+    height: 24px;
+    filter: invert(0);
+    transition: filter 0.3s ease;
+    position: relative;
+    top: -2px;
+}
+
+/* Mode nuit - inversion des icônes */
+[data-theme="dark"] .contact-info img {
+    filter: invert(1); /* Inverse la couleur en mode nuit */
+}
+
+/* Ajuster l'alignement vertical des icônes avec le texte */
+.contact-info a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+}
+
+.contact-info a:last-child {
+    margin-bottom: 0;
 }
 
 /* Garder le reste du fichier inchangé */ 
