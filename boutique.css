@@ -224,13 +224,25 @@
 }
 
 @media (max-width: 768px) {
-    .category-filters {
-        flex-direction: column;
+    .categories {
+        margin: 0 auto 1rem;
         padding: 0 1rem;
     }
 
+    .category-filters {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1rem 0;
+    }
+
     .category-btn {
-        width: 100%;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        flex: 0 0 auto;
+        text-align: center;
     }
 
     .products-grid {

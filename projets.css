@@ -429,13 +429,26 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .filter-buttons {
-        flex-direction: column;
+    .project-filters {
+        margin: 0 auto 1rem;
         padding: 0 1rem;
     }
 
+    .filter-buttons {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1rem 0;
+    }
+
     .filter-btn {
-        width: 100%;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        flex: 0 0 auto;
+        text-align: center;
+        width: auto; /* Supprime la largeur 100% */
     }
 
     .projects-grid {
