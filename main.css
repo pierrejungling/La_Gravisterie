@@ -280,7 +280,7 @@ main {
 
     .nav-links .mobile-logo {
         display: block;
-        margin: 1rem auto 2rem;
+        margin: 4rem auto 2rem;
     }
 
     .nav-links .mobile-logo img {
@@ -580,9 +580,7 @@ main {
 /* Style pour le logo dans le menu mobile */
 .nav-links .mobile-logo {
     display: none;
-    margin: 2rem auto;
-    width: 200px;
-    height: auto;
+    margin: 4rem auto 2rem;
 }
 
 .nav-links .mobile-logo img {
@@ -597,7 +595,7 @@ main {
 
 @media (max-width: 768px) {
     .nav-links {
-        padding-top: 4rem; /* Espace pour la croix de fermeture */
+        padding-top: 5rem;
     }
 
     .nav-links .mobile-logo {
