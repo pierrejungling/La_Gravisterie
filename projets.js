@@ -395,6 +395,12 @@ function createProjectCard(project) {
             ${project.images && project.images.length > 1 ? `
                 <div class="image-gallery">
                     <img src="${project.images[0]}" alt="${project.name}" class="main-image" data-image-index="0" style="pointer-events: auto;">
+                    <div class="swipe-indicator">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                        Glissez pour voir plus
+                    </div>
                     <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
                         <svg viewBox="0 0 24 24">
                             <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -644,6 +650,12 @@ function displayProjects(category = 'all') {
                              class="main-image" 
                              data-image-index="0"
                              style="pointer-events: auto;">
+                        <div class="swipe-indicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                            Glissez pour voir plus
+                        </div>
                         <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
                             <svg viewBox="0 0 24 24">
                                 <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
