@@ -253,65 +253,63 @@ main {
 
 @media (max-width: 768px) {
     .nav-links {
-        padding: 4rem 2rem 2rem;
-        gap: 1.2rem;
-    }
-
-    .nav-links .mobile-logo {
-        margin: 0 auto 1.5rem;
-        width: 160px;
-    }
-
-    .nav-links a {
-        padding: 0.5rem 0;
-    }
-
-    .menu-signature {
-        padding: 1.5rem 0;
-    }
-
-    .menu-toggle {
-        top: 1.2rem;
-    }
-
-    .nav-links {
-        padding: 6rem 2rem 2rem;
+        padding: 0;
+        height: 100vh;
         display: none;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
         background-color: var(--primary-color);
         flex-direction: column;
-        align-items: center;
         z-index: 90;
-        overflow-y: auto;
     }
 
     .nav-links.active {
         display: flex;
     }
 
-    .menu-signature {
-        margin-top: auto;
-        padding: 2rem 0;
-        font-size: 0.9rem;
-        color: var(--text-color);
-        opacity: 0.7;
+    .nav-links-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 2rem;
+        padding-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .nav-links .mobile-logo {
         display: block;
-        margin: 0 auto 2rem;
-        width: 180px;
-        position: relative;
-        z-index: 91;
+        margin: 6rem auto 2rem;
+        width: 200px;
     }
 
     .nav-links .mobile-logo img {
         width: 100%;
         height: auto;
+    }
+
+    .nav-links li:not(.mobile-logo):not(.menu-signature) {
+        margin: 0.5rem 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .menu-signature {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem 0;
+        background-color: var(--primary-color);
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        border-top: 1px solid var(--border-color);
+        margin: 0;
+        z-index: 91;
     }
 
     .main-logo {
@@ -356,13 +354,6 @@ main {
 
     .nav-container .logo img {
         height: 45px;
-    }
-
-    .menu-toggle {
-        position: fixed;
-        right: 1rem;
-        top: 1.5rem;
-        z-index: 92;
     }
 }
 
@@ -894,33 +885,52 @@ body.menu-open {
 
 @media (max-width: 768px) {
     .nav-links {
-        padding: 6rem 2rem 2rem;
+        padding: 0;
+        height: 100vh;
+        overflow-y: auto;
         display: none;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
         background-color: var(--primary-color);
         flex-direction: column;
-        align-items: center;
         z-index: 90;
-        overflow-y: auto;
+    }
+
+    .nav-links-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0 2rem;
     }
 
     .nav-links .mobile-logo {
         display: block;
-        margin: 0 auto 2rem;
-        margin-top: 400px;
+        margin: 6rem auto 2rem;
         width: 200px;
-        position: relative;
-        z-index: 91;
     }
 
-    .menu-toggle {
+    .nav-links li:not(.mobile-logo):not(.menu-signature) {
+        margin: 0.5rem 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .menu-signature {
         position: fixed;
-        right: 1rem;
-        top: 1.5rem;
-        z-index: 92;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem 0;
+        background-color: var(--primary-color);
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        border-top: 1px solid var(--border-color);
+        margin: 0;
+        z-index: 91;
     }
 }
