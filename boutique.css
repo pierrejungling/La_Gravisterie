@@ -344,7 +344,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    padding: 20px;
+    overflow-y: auto;
 }
 
 .popup-content {
@@ -564,4 +564,16 @@
         margin: 0;
         padding: 1rem;
     }
+}
+
+/* Ajouter ces styles pour le body quand un popup est ouvert */
+body.popup-open {
+    overflow: hidden;
+    padding-right: 15px; /* Pour compenser la barre de défilement */
+}
+
+/* Ajouter ces styles pour le body quand un popup est ouvert */
+body.popup-open {
+    overflow: hidden;
+    padding-right: 15px; /* Pour compenser la barre de défilement */
 } 

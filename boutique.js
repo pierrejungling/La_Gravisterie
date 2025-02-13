@@ -1570,19 +1570,19 @@ function handlePopupGallery(popup, product) {
     });
 }
 
-// Modifier la fonction displayProducts pour ajouter les événements de popup
-    function displayProducts(category = 'all') {
+// Modifier la fonction displayProducts pour ajouter la classe au body
+function displayProducts(category = 'all') {
     // Supprimer toute pagination existante
     const existingPagination = document.querySelector('.pagination');
     if (existingPagination) {
         existingPagination.remove();
     }
 
-        productsGrid.innerHTML = '';
-        
-        const filteredProducts = category === 'all' 
-            ? products 
-            : products.filter(product => product.category === category);
+    productsGrid.innerHTML = '';
+    
+    const filteredProducts = category === 'all' 
+        ? products 
+        : products.filter(product => product.category === category);
 
     // Calculer le nombre total de pages
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
@@ -1596,48 +1596,48 @@ function handlePopupGallery(popup, product) {
 
     // Afficher les produits
     currentProducts.forEach(product => {
-            const productCard = `
-            <div class="product-card" data-product-id="${product.id}">
-                    <div class="product-image">
-                    ${product.images && product.images.length > 1 ? `
-                        <div class="image-gallery">
-                            <img src="${product.images[0]}" alt="${product.name}" class="main-image" data-image-index="0">
-                            <div class="gallery-nav-container">
-                                <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
+        const productCard = `
+        <div class="product-card" data-product-id="${product.id}">
+                <div class="product-image">
+                ${product.images && product.images.length > 1 ? `
+                    <div class="image-gallery">
+                        <img src="${product.images[0]}" alt="${product.name}" class="main-image" data-image-index="0">
+                        <div class="gallery-nav-container">
+                            <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
-                    ` : `
-                        <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
-                    `}
                     </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p class="price">${product.price}</p>
-                        ${product.priceDetails ? `
-                            <div class="price-details">
-                                ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
-                            </div>
-                        ` : ''}
-                        <p class="description">${product.description}</p>
-                    <div class="product-tags">
-                        ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
-                        ${product.material ? `<span class="tag">${product.material}</span>` : ''}
-                    </div>
-                    <button class="btn btn-primary" onclick="event.stopPropagation()">Commander</button>
-                    </div>
+                ` : `
+                    <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
+                `}
                 </div>
-            `;
-            productsGrid.innerHTML += productCard;
-        });
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price}</p>
+                    ${product.priceDetails ? `
+                        <div class="price-details">
+                            ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                        </div>
+                    ` : ''}
+                    <p class="description">${product.description}</p>
+                <div class="product-tags">
+                    ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
+                    ${product.material ? `<span class="tag">${product.material}</span>` : ''}
+                </div>
+                <button class="btn btn-primary" onclick="event.stopPropagation()">Commander</button>
+                </div>
+            </div>
+        `;
+        productsGrid.innerHTML += productCard;
+    });
 
     // Créer la pagination seulement s'il y a plus d'une page
     if (totalPages > 1) {
@@ -1693,16 +1693,20 @@ function handlePopupGallery(popup, product) {
             const productId = card.dataset.productId;
             const product = products.find(p => p.id === productId);
             const popup = createProductPopup(product);
+            document.body.classList.add('popup-open');
             document.body.appendChild(popup);
             handlePopupGallery(popup, product);
 
             // Gestion de la fermeture du popup
-            popup.querySelector('.close-popup').addEventListener('click', () => {
+            const closePopup = () => {
+                document.body.classList.remove('popup-open');
                 popup.remove();
-            });
+            };
+
+            popup.querySelector('.close-popup').addEventListener('click', closePopup);
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) {
-                    popup.remove();
+                    closePopup();
                 }
             });
         });
