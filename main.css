@@ -255,6 +255,7 @@ main {
     .nav-links {
         padding: 0;
         height: 100vh;
+        overflow-y: auto;
         display: none;
         position: fixed;
         top: 0;
@@ -263,31 +264,21 @@ main {
         background-color: var(--primary-color);
         flex-direction: column;
         z-index: 90;
-    }
-
-    .nav-links.active {
-        display: flex;
+        padding-bottom: 4rem;
     }
 
     .nav-links-container {
-        flex: 1;
-        overflow-y: auto;
-        padding: 0 2rem;
-        padding-bottom: 4rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
+        padding: 0 2rem;
     }
 
     .nav-links .mobile-logo {
         display: block;
         margin: 6rem auto 2rem;
         width: 200px;
-    }
-
-    .nav-links .mobile-logo img {
-        width: 100%;
-        height: auto;
     }
 
     .nav-links li:not(.mobile-logo):not(.menu-signature) {
@@ -896,6 +887,7 @@ body.menu-open {
         background-color: var(--primary-color);
         flex-direction: column;
         z-index: 90;
+        padding-bottom: 4rem;
     }
 
     .nav-links-container {
