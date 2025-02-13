@@ -568,6 +568,10 @@
     height: 100%;
     object-fit: cover;
     transition: opacity 0.3s ease;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .gallery-nav {
@@ -681,6 +685,13 @@ body.popup-open {
 /* Masquer les boutons de navigation sur les appareils tactiles */
 @media (hover: none) and (pointer: coarse) {
     .popup-nav {
+        display: none;
+    }
+}
+
+/* Masquer les boutons de navigation sur les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .gallery-nav {
         display: none;
     }
 } 

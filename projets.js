@@ -554,7 +554,7 @@ function handleTouchGallery(popup, project) {
     }, false);
 
     function handleSwipe() {
-        const swipeThreshold = 50; // Distance minimale pour un swipe
+        const swipeThreshold = 50;
         const swipeDistance = touchEndX - touchStartX;
 
         if (Math.abs(swipeDistance) > swipeThreshold) {
@@ -693,6 +693,15 @@ function displayProjects(category = 'all') {
             openProjectPopup(projectId);
         });
     });
+
+    // Ajouter cette fonction pour gérer le swipe sur les cartes
+    document.querySelectorAll('.project-card').forEach(card => {
+        const projectId = card.dataset.projectId;
+        const project = projects.find(p => p.id === projectId);
+        if (project.images && project.images.length > 1) {
+            handleCardTouchGallery(card, project);
+        }
+    });
 }
 
 // Initialisation
@@ -737,4 +746,42 @@ function changeImage(projectId, direction) {
     
     mainImage.src = project.images[newIndex];
     mainImage.dataset.imageIndex = newIndex;
+}
+
+// Ajouter cette fonction pour gérer le swipe sur les cartes
+function handleCardTouchGallery(card, project) {
+    const mainImage = card.querySelector('.main-image');
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
+
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, false);
+
+    mainImage.addEventListener('touchmove', (e) => {
+        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
+    }, false);
+
+    mainImage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe vers la droite (image précédente)
+                currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+            } else {
+                // Swipe vers la gauche (image suivante)
+                currentIndex = (currentIndex + 1) % project.images.length;
+            }
+            mainImage.src = project.images[currentIndex];
+            mainImage.dataset.imageIndex = currentIndex;
+        }
+    }
 } 

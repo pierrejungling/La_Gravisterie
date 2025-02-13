@@ -1626,7 +1626,45 @@ function handleTouchGallery(popup, product) {
     }
 }
 
-// Modifier la fonction displayProducts pour ajouter les événements de popup
+// Ajouter cette fonction pour gérer le swipe sur les cartes
+function handleCardTouchGallery(card, product) {
+    const mainImage = card.querySelector('.main-image');
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
+
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, false);
+
+    mainImage.addEventListener('touchmove', (e) => {
+        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
+    }, false);
+
+    mainImage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe vers la droite (image précédente)
+                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+            } else {
+                // Swipe vers la gauche (image suivante)
+                currentIndex = (currentIndex + 1) % product.images.length;
+            }
+            mainImage.src = product.images[currentIndex];
+            mainImage.dataset.imageIndex = currentIndex;
+        }
+    }
+}
+
+// Modifier la fonction displayProducts pour ajouter le gestionnaire de swipe aux cartes
 function displayProducts(category = 'all') {
     // Supprimer toute pagination existante
     const existingPagination = document.querySelector('.pagination');
@@ -1766,6 +1804,15 @@ function displayProducts(category = 'all') {
                 }
             });
         });
+    });
+
+    // Après avoir créé les cartes, ajouter le gestionnaire de swipe
+    document.querySelectorAll('.product-card').forEach(card => {
+        const productId = card.dataset.productId;
+        const product = products.find(p => p.id === productId);
+        if (product.images && product.images.length > 1) {
+            handleCardTouchGallery(card, product);
+        }
     });
 }
 
