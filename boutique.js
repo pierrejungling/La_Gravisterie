@@ -1488,24 +1488,33 @@ function createProductPopup(product) {
         <div class="popup-content">
             <button class="close-popup">&times;</button>
             <div class="popup-gallery">
-                ${product.images ? `
-                    <div class="popup-image-container">
-                        <img src="${product.images[0]}" alt="${product.name}" class="popup-main-image">
-                        ${product.images.length > 1 ? `
-                            <button class="popup-nav prev">&#10094;</button>
-                            <button class="popup-nav next">&#10095;</button>
-                            <div class="popup-thumbnails">
-                                ${product.images.map((img, index) => `
-                                    <img src="${img}" alt="${product.name}" class="popup-thumbnail ${index === 0 ? 'active' : ''}" data-index="${index}">
-                                `).join('')}
-                            </div>
-                        ` : ''}
+                <div class="popup-image-container">
+                    <img src="${product.images ? product.images[0] : product.image}" 
+                         alt="${product.name}" 
+                         class="popup-main-image">
+                    ${product.images && product.images.length > 1 ? `
+                        <button class="popup-nav prev">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="popup-nav next">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    ` : ''}
+                </div>
+                ${product.images && product.images.length > 1 ? `
+                    <div class="popup-thumbnails">
+                        ${product.images.map((img, index) => `
+                            <img src="${img}" 
+                                 alt="${product.name}" 
+                                 class="popup-thumbnail ${index === 0 ? 'active' : ''}"
+                                 data-index="${index}">
+                        `).join('')}
                     </div>
-                ` : `
-                    <div class="popup-image-container">
-                        <img src="${product.image}" alt="${product.name}" class="popup-main-image">
-                    </div>
-                `}
+                ` : ''}
             </div>
             <div class="popup-info">
                 <h2>${product.name}</h2>
@@ -1517,16 +1526,18 @@ function createProductPopup(product) {
                 ` : ''}
                 <p class="popup-description">${product.description}</p>
                 <div class="popup-details">
-                    <p><strong>Dimensions :</strong> ${product.dimensions}</p>
-                    <p><strong>Matériau :</strong> ${product.material}</p>
+                    ${product.dimensions ? `<p><strong>Dimensions:</strong> ${product.dimensions}</p>` : ''}
+                    ${product.material ? `<p><strong>Matériau:</strong> ${product.material}</p>` : ''}
                 </div>
-                <div class="popup-features">
-                    <h3>Caractéristiques :</h3>
-                    <ul>
-                        ${product.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                </div>
-                <button class="btn btn-primary popup-order">Commander</button>
+                ${product.features ? `
+                    <div class="popup-features">
+                        <h3>Caractéristiques:</h3>
+                        <ul>
+                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+                <button class="btn btn-primary">Commander</button>
             </div>
         </div>
     `;
