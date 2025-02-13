@@ -519,7 +519,7 @@ function handlePopupGallery(popup, project) {
 
     // Gestion des touches clavier
     document.addEventListener('keydown', function(e) {
-        if (popup.parentElement) {
+        if (popup.parentElement) { // Vérifier si le popup est toujours présent
             if (e.key === 'ArrowLeft') {
                 const newIndex = (currentIndex - 1 + project.images.length) % project.images.length;
                 updateImage(newIndex);
@@ -527,7 +527,6 @@ function handlePopupGallery(popup, project) {
                 const newIndex = (currentIndex + 1) % project.images.length;
                 updateImage(newIndex);
             } else if (e.key === 'Escape') {
-                document.body.classList.remove('popup-open');
                 popup.remove();
             }
         }
@@ -540,26 +539,22 @@ function openProjectPopup(projectId) {
     if (!project) return;
 
     const popup = createProjectPopup(project);
-    document.body.classList.add('popup-open');
     document.body.appendChild(popup);
     handlePopupGallery(popup, project);
 
     // Gestion de la fermeture du popup
-    const closePopup = () => {
-        document.body.classList.remove('popup-open');
+    popup.querySelector('.close-popup').addEventListener('click', () => {
         popup.remove();
-    };
+    });
 
-    popup.querySelector('.close-popup').addEventListener('click', closePopup);
     popup.addEventListener('click', (e) => {
         if (e.target === popup) {
-            closePopup();
+            popup.remove();
         }
     });
 
     // Gestion du bouton de contact
     popup.querySelector('.popup-contact').addEventListener('click', () => {
-        closePopup();
         window.location.href = 'contact.html';
     });
 }

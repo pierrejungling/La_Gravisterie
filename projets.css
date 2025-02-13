@@ -215,7 +215,7 @@
     background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1000;
     overflow-y: auto;
     padding: 20px;
@@ -232,8 +232,6 @@
     position: relative;
     padding: 2rem;
     margin: 20px auto;
-    max-height: 90vh;
-    overflow-y: auto;
 }
 
 .popup-gallery {
@@ -666,10 +664,4 @@
 .project-button-container {
     margin-top: auto; /* Pousse le bouton vers le bas */
     padding-top: 1rem; /* Espace au-dessus du bouton */
-}
-
-/* Ajouter ces styles pour le body quand un popup est ouvert */
-body.popup-open {
-    overflow: hidden;
-    padding-right: 15px; /* Pour compenser la barre de défilement */
 } 
