@@ -1403,25 +1403,7 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
-        <div class="product-image">
-            ${product.images && product.images.length > 1 ? `
-                <div class="image-gallery">
-                    <img src="${product.images[0]}" 
-                         alt="${product.name}" 
-                         class="main-image" 
-                         data-image-index="0"
-                         style="pointer-events: auto;">
-                    <div class="swipe-indicator">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                        </svg>
-                        Glissez pour voir plus
-                    </div>
-                </div>
-            ` : `
-                <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
-            `}
-        </div>
+        <img src="${product.media_url}" alt="${title}" class="product-image">
         <div class="product-info">
             <h3 class="product-title">${title}</h3>
             <p class="product-price">${price.toFixed(2)} €</p>
@@ -1682,7 +1664,7 @@ function handleCardTouchGallery(card, product) {
     }
 }
 
-// Modifier la fonction displayProducts pour ajouter le gestionnaire de swipe aux cartes
+// Modifier la fonction displayProducts pour ajouter le gestionnaire de clic sur l'image
 function displayProducts(category = 'all') {
     // Supprimer toute pagination existante
     const existingPagination = document.querySelector('.pagination');
@@ -1710,20 +1692,23 @@ function displayProducts(category = 'all') {
     currentProducts.forEach(product => {
         const productCard = `
         <div class="product-card" data-product-id="${product.id}">
-            <div class="product-image">
+            <div class="product-image" onclick="openProductPopup('${product.id}')">
                 ${product.images && product.images.length > 1 ? `
                     <div class="image-gallery">
                         <img src="${product.images[0]}" 
                              alt="${product.name}" 
                              class="main-image" 
-                             data-image-index="0"
-                             style="pointer-events: auto;">
-                        <div class="swipe-indicator">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                             data-image-index="0">
+                        <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            Glissez pour voir plus
-                        </div>
+                        </button>
+                        <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
                     </div>
                 ` : `
                     <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
