@@ -253,13 +253,13 @@ main {
 
 @media (max-width: 768px) {
     .nav-links {
-        padding: 4rem 2rem 2rem;
-        gap: 1.2rem;
+        padding: 6rem 2rem 2rem;
+        gap: 2rem;
     }
 
     .nav-links .mobile-logo {
-        margin: 0 auto 1.5rem;
-        width: 160px;
+        margin: 0 auto 1rem;
+        width: 180px;
     }
 
     .nav-links a {
