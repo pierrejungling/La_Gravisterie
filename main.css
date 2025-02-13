@@ -911,7 +911,7 @@ body.menu-open {
     .nav-links .mobile-logo {
         display: block;
         margin: 0 auto 2rem;
-       padding-top: 50px;
+       padding-top: 400px;
         width: 200px;
         position: relative;
         z-index: 91;
