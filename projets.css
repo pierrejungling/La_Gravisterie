@@ -215,10 +215,10 @@
     background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     z-index: 1000;
-    overflow-y: auto;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .popup-content {
@@ -664,4 +664,12 @@
 .project-button-container {
     margin-top: auto; /* Pousse le bouton vers le bas */
     padding-top: 1rem; /* Espace au-dessus du bouton */
+}
+
+/* Ajouter cette classe pour le body */
+body.popup-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 } 

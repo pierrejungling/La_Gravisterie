@@ -345,6 +345,7 @@
     align-items: center;
     z-index: 1000;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .popup-content {
@@ -564,4 +565,12 @@
         margin: 0;
         padding: 1rem;
     }
+}
+
+/* Ajouter cette classe pour le body */
+body.popup-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 } 

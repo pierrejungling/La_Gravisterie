@@ -540,16 +540,19 @@ function openProjectPopup(projectId) {
 
     const popup = createProjectPopup(project);
     document.body.appendChild(popup);
+    document.body.classList.add('popup-open');
     handlePopupGallery(popup, project);
 
     // Gestion de la fermeture du popup
     popup.querySelector('.close-popup').addEventListener('click', () => {
         popup.remove();
+        document.body.classList.remove('popup-open');
     });
 
     popup.addEventListener('click', (e) => {
         if (e.target === popup) {
             popup.remove();
+            document.body.classList.remove('popup-open');
         }
     });
 
