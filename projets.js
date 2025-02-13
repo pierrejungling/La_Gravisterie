@@ -394,7 +394,7 @@ function createProjectCard(project) {
         <div class="project-image">
             ${project.images && project.images.length > 1 ? `
                 <div class="image-gallery">
-                    <img src="${project.images[0]}" alt="${project.name}" class="main-image" data-image-index="0">
+                    <img src="${project.images[0]}" alt="${project.name}" class="main-image" data-image-index="0" style="pointer-events: auto;">
                     <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
                         <svg viewBox="0 0 24 24">
                             <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -634,8 +634,44 @@ function displayProjects(category = 'all') {
 
     // Afficher les projets
     currentProjects.forEach(project => {
-        const projectCard = createProjectCard(project);
-        projectsGrid.appendChild(projectCard);
+        const projectCard = `
+        <div class="project-card" data-project-id="${project.id}">
+            <div class="project-image">
+                ${project.images && project.images.length > 1 ? `
+                    <div class="image-gallery">
+                        <img src="${project.images[0]}" 
+                             alt="${project.name}" 
+                             class="main-image" 
+                             data-image-index="0"
+                             style="pointer-events: auto;">
+                        <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${project.id}', 'next')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                ` : `
+                    <img src="${project.images ? project.images[0] : project.image}" alt="${project.name}">
+                `}
+            </div>
+            <div class="project-info">
+                <h3>${project.name}</h3>
+                <p class="description">${project.description}</p>
+                <div class="project-tags">
+                    ${project.dimensions ? `<span class="tag">${project.dimensions}</span>` : ''}
+                    ${project.material ? `<span class="tag">${project.material}</span>` : ''}
+                </div>
+                <div class="project-button-container">
+                    <button class="btn btn-primary" onclick="event.stopPropagation(); openProjectPopup('${project.id}')">En savoir plus</button>
+                </div>
+            </div>
+        </div>`;
+        projectsGrid.innerHTML += projectCard;
     });
 
     // Ajouter la pagination si nécessaire
@@ -686,21 +722,27 @@ function displayProjects(category = 'all') {
         projectsGrid.parentNode.insertBefore(paginationContainer, projectsGrid.nextSibling);
     }
 
-    // Ajouter les événements pour le popup
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const projectId = card.dataset.projectId;
-            openProjectPopup(projectId);
-        });
-    });
-
-    // Ajouter cette fonction pour gérer le swipe sur les cartes
+    // Attacher les gestionnaires d'événements après avoir créé les cartes
     document.querySelectorAll('.project-card').forEach(card => {
         const projectId = card.dataset.projectId;
         const project = projects.find(p => p.id === projectId);
+        
+        // Empêcher la propagation du clic sur l'image
+        const mainImage = card.querySelector('.main-image');
+        if (mainImage) {
+            mainImage.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+
         if (project.images && project.images.length > 1) {
             handleCardTouchGallery(card, project);
         }
+
+        // Ajouter le gestionnaire de clic pour le popup
+        card.addEventListener('click', () => {
+            openProjectPopup(projectId);
+        });
     });
 }
 

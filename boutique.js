@@ -1692,10 +1692,14 @@ function displayProducts(category = 'all') {
     currentProducts.forEach(product => {
         const productCard = `
         <div class="product-card" data-product-id="${product.id}">
-                <div class="product-image">
+            <div class="product-image">
                 ${product.images && product.images.length > 1 ? `
                     <div class="image-gallery">
-                        <img src="${product.images[0]}" alt="${product.name}" class="main-image" data-image-index="0">
+                        <img src="${product.images[0]}" 
+                             alt="${product.name}" 
+                             class="main-image" 
+                             data-image-index="0"
+                             style="pointer-events: auto;">
                         <div class="gallery-nav-container">
                             <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
                                 <svg viewBox="0 0 24 24">
@@ -1712,24 +1716,24 @@ function displayProducts(category = 'all') {
                 ` : `
                     <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
                 `}
-                </div>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <p class="price">${product.price}</p>
-                    ${product.priceDetails ? `
-                        <div class="price-details">
-                            ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
-                        </div>
-                    ` : ''}
-                    <p class="description">${product.description}</p>
-                <div class="product-tags">
-                    ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
-                    ${product.material ? `<span class="tag">${product.material}</span>` : ''}
-                </div>
-                <button class="btn btn-primary" onclick="event.stopPropagation()">Commander</button>
-                </div>
             </div>
-        `;
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="price">${product.price}</p>
+                ${product.priceDetails ? `
+                    <div class="price-details">
+                        ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                    </div>
+                ` : ''}
+                <p class="description">${product.description}</p>
+            <div class="product-tags">
+                ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
+                ${product.material ? `<span class="tag">${product.material}</span>` : ''}
+            </div>
+            <button class="btn btn-primary" onclick="event.stopPropagation()">Commander</button>
+            </div>
+        </div>
+    `;
         productsGrid.innerHTML += productCard;
     });
 
@@ -1781,22 +1785,36 @@ function displayProducts(category = 'all') {
         productsGrid.parentNode.insertBefore(paginationContainer, productsGrid.nextSibling);
     }
 
-    // Ajouter les événements pour le popup
+    // Attacher les gestionnaires d'événements après avoir créé les cartes
     document.querySelectorAll('.product-card').forEach(card => {
+        const productId = card.dataset.productId;
+        const product = products.find(p => p.id === productId);
+        
+        // Empêcher la propagation du clic sur l'image
+        const mainImage = card.querySelector('.main-image');
+        if (mainImage) {
+            mainImage.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+
+        if (product.images && product.images.length > 1) {
+            handleCardTouchGallery(card, product);
+        }
+
+        // Ajouter le gestionnaire de clic pour le popup
         card.addEventListener('click', () => {
-            const productId = card.dataset.productId;
-            const product = products.find(p => p.id === productId);
             const popup = createProductPopup(product);
             document.body.appendChild(popup);
             document.body.classList.add('popup-open');
             handlePopupGallery(popup, product);
             handleTouchGallery(popup, product);
 
-            // Gestion de la fermeture du popup
             popup.querySelector('.close-popup').addEventListener('click', () => {
                 popup.remove();
                 document.body.classList.remove('popup-open');
             });
+
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) {
                     popup.remove();
@@ -1804,15 +1822,6 @@ function displayProducts(category = 'all') {
                 }
             });
         });
-    });
-
-    // Après avoir créé les cartes, ajouter le gestionnaire de swipe
-    document.querySelectorAll('.product-card').forEach(card => {
-        const productId = card.dataset.productId;
-        const product = products.find(p => p.id === productId);
-        if (product.images && product.images.length > 1) {
-            handleCardTouchGallery(card, product);
-        }
     });
 }
 
