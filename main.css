@@ -253,7 +253,7 @@ main {
 
 @media (max-width: 768px) {
     .nav-links {
-        padding: 8rem 2rem 2rem;
+        padding: 6rem 2rem 2rem;
         display: none;
         position: fixed;
         top: 0;
@@ -281,7 +281,7 @@ main {
     .nav-links .mobile-logo {
         display: block;
         margin: 0 auto 2rem;
-        width: 180px;
+        width: 200px;
     }
 
     .nav-links .mobile-logo img {
@@ -331,25 +331,6 @@ main {
 
     .nav-container .logo img {
         height: 45px;
-    }
-
-    .menu-toggle {
-        position: fixed;
-        top: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 91;
-    }
-}
-
-/* Ajustement spécifique pour les appareils avec encoche/poinçon */
-@media (max-width: 768px) and (orientation: portrait) {
-    .nav-links {
-        padding-top: 10rem;
-    }
-
-    .menu-toggle {
-        top: 3rem;
     }
 }
 
