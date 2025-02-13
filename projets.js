@@ -533,6 +533,51 @@ function handlePopupGallery(popup, project) {
     });
 }
 
+// Ajouter cette fonction pour gérer le swipe
+function handleTouchGallery(popup, project) {
+    const mainImage = popup.querySelector('.popup-main-image');
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let currentIndex = 0;
+
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, false);
+
+    mainImage.addEventListener('touchmove', (e) => {
+        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
+    }, false);
+
+    mainImage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        const swipeThreshold = 50; // Distance minimale pour un swipe
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe vers la droite (image précédente)
+                currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+            } else {
+                // Swipe vers la gauche (image suivante)
+                currentIndex = (currentIndex + 1) % project.images.length;
+            }
+            updateImage(currentIndex);
+        }
+    }
+
+    function updateImage(index) {
+        mainImage.src = project.images[index];
+        const thumbnails = popup.querySelectorAll('.popup-thumbnail');
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        thumbnails[index].classList.add('active');
+        currentIndex = index;
+    }
+}
+
 // Fonction pour ouvrir le popup d'un projet
 function openProjectPopup(projectId) {
     const project = projects.find(p => p.id === projectId);
@@ -542,6 +587,7 @@ function openProjectPopup(projectId) {
     document.body.appendChild(popup);
     document.body.classList.add('popup-open');
     handlePopupGallery(popup, project);
+    handleTouchGallery(popup, project);
 
     // Gestion de la fermeture du popup
     popup.querySelector('.close-popup').addEventListener('click', () => {

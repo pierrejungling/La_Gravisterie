@@ -378,6 +378,10 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .popup-thumbnails {
@@ -573,4 +577,11 @@ body.popup-open {
     position: fixed;
     width: 100%;
     height: 100%;
+}
+
+/* Masquer les boutons de navigation sur les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .popup-nav {
+        display: none;
+    }
 } 
