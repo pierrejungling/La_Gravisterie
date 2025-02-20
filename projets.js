@@ -753,4 +753,21 @@ function openProjectPopup(projectId) {
     popup.querySelector('.popup-contact').addEventListener('click', () => {
         window.location.href = 'contact.html';
     });
+}
+
+function initializeProjectSwiper() {
+    const projectSwiper = new Swiper('.project-swiper', {
+        touchRatio: 1,
+        touchAngle: 45,
+        resistance: true,
+        touchStartPreventDefault: false,
+        nested: true,
+        touchMoveStopPropagation: false,
+        passiveListeners: true,
+        on: {
+            touchStart: function(swiper, event) {
+                event.stopPropagation();
+            }
+        }
+    });
 } 

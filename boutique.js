@@ -1701,3 +1701,22 @@ function createProductPopup(product) {
     popup.innerHTML = content;
     return popup;
 }
+
+function initializeProductSwiper() {
+  const productSwiper = new Swiper('.product-swiper', {
+    // ... existing code ...
+    touchRatio: 1,
+    touchAngle: 45,
+    resistance: true,
+    touchStartPreventDefault: false,
+    nested: true,
+    // Ajout de ces paramètres pour améliorer la gestion tactile
+    touchMoveStopPropagation: false,
+    passiveListeners: true,
+    on: {
+      touchStart: function(swiper, event) {
+        event.stopPropagation();
+      }
+    }
+  });
+}
