@@ -1558,36 +1558,66 @@ function changeImage(productId, direction) {
 
 function handleCardTouchGallery(card, product) {
     const mainImage = card.querySelector('.main-image');
-    let startX = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
-    // Utiliser un gestionnaire simple pour les clics/taps
-    mainImage.addEventListener('click', (e) => {
-        e.preventDefault();
-        openProductPopup(product.id);
-    });
-
-    // Ajouter les boutons de navigation tactile
-    const prevButton = card.querySelector('.gallery-nav.prev');
-    const nextButton = card.querySelector('.gallery-nav.next');
-
-    if (prevButton) {
-        prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
-            mainImage.src = product.images[currentIndex];
-            mainImage.dataset.imageIndex = currentIndex;
+    // Ajouter l'indicateur de pagination
+    if (product.images && product.images.length > 1) {
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'pagination-dots';
+        
+        product.images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
+            paginationContainer.appendChild(dot);
         });
+        
+        card.querySelector('.image-gallery').appendChild(paginationContainer);
     }
 
-    if (nextButton) {
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % product.images.length;
+    // Gestionnaire de swipe
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].pageY;
+    }, { passive: true });
+
+    mainImage.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) return;
+
+        const deltaX = e.touches[0].clientX - touchStartX;
+        const deltaY = e.touches[0].pageY - touchStartY;
+
+        // Si le mouvement est plus horizontal que vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    mainImage.addEventListener('touchend', (e) => {
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].pageY - touchStartY;
+
+        // Si c'est un swipe horizontal
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+            } else {
+                currentIndex = (currentIndex + 1) % product.images.length;
+            }
             mainImage.src = product.images[currentIndex];
             mainImage.dataset.imageIndex = currentIndex;
-        });
-    }
+            
+            // Mettre à jour les points de pagination
+            const dots = card.querySelectorAll('.pagination-dots .dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        } else if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+            // Si c'est un tap simple
+            openProductPopup(product.id);
+        }
+    }, { passive: true });
 }
 
 function handleTouchGallery(popup, product) {
