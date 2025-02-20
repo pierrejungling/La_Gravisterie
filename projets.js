@@ -531,76 +531,111 @@ function changeImage(projectId, direction) {
 
 function handleCardTouchGallery(card, project) {
     const mainImage = card.querySelector('.main-image');
-    let startX = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
-    // Utiliser un gestionnaire simple pour les clics/taps
-    mainImage.addEventListener('click', (e) => {
-        e.preventDefault();
-        openProjectPopup(project.id);
-    });
-
-    // Ajouter les boutons de navigation tactile
-    const prevButton = card.querySelector('.gallery-nav.prev');
-    const nextButton = card.querySelector('.gallery-nav.next');
-
-    if (prevButton) {
-        prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
-            mainImage.src = project.images[currentIndex];
-            mainImage.dataset.imageIndex = currentIndex;
+    // Ajouter l'indicateur de pagination
+    if (project.images && project.images.length > 1) {
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'pagination-dots';
+        
+        project.images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
+            paginationContainer.appendChild(dot);
         });
+        
+        card.querySelector('.image-gallery').appendChild(paginationContainer);
     }
 
-    if (nextButton) {
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % project.images.length;
+    // Gestionnaire de swipe
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].pageY;
+    }, { passive: true });
+
+    mainImage.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) return;
+
+        const deltaX = e.touches[0].clientX - touchStartX;
+        const deltaY = e.touches[0].pageY - touchStartY;
+
+        // Si le mouvement est plus horizontal que vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    mainImage.addEventListener('touchend', (e) => {
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].pageY - touchStartY;
+
+        // Si c'est un swipe horizontal
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+            } else {
+                currentIndex = (currentIndex + 1) % project.images.length;
+            }
             mainImage.src = project.images[currentIndex];
             mainImage.dataset.imageIndex = currentIndex;
-        });
-    }
+            
+            // Mettre à jour les points de pagination
+            const dots = card.querySelectorAll('.pagination-dots .dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        } else if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+            // Si c'est un tap simple
+            openProjectPopup(project.id);
+        }
+    }, { passive: true });
 }
 
 function handleTouchGallery(popup, project) {
+    if (!project.images || project.images.length <= 1) return;
+    
     const mainImage = popup.querySelector('.popup-main-image');
+    const thumbnails = popup.querySelectorAll('.popup-thumbnail');
     let touchStartX = 0;
-    let touchEndX = 0;
+    let touchStartY = 0;
     let currentIndex = 0;
 
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
-    }, false);
+        touchStartY = e.touches[0].pageY;
+    }, { passive: true });
 
     mainImage.addEventListener('touchmove', (e) => {
-        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
-    }, false);
+        if (e.touches.length > 1) return;
+
+        const deltaX = e.touches[0].clientX - touchStartX;
+        const deltaY = e.touches[0].pageY - touchStartY;
+
+        // Si le mouvement est plus horizontal que vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
 
     mainImage.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-    }, false);
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].pageY - touchStartY;
 
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const swipeDistance = touchEndX - touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                // Swipe vers la droite (image précédente)
+        // Si c'est un swipe horizontal
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
                 currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
             } else {
-                // Swipe vers la gauche (image suivante)
                 currentIndex = (currentIndex + 1) % project.images.length;
             }
             updateImage(currentIndex);
         }
-    }
+    }, { passive: true });
 
     function updateImage(index) {
         mainImage.src = project.images[index];
-        const thumbnails = popup.querySelectorAll('.popup-thumbnail');
         thumbnails.forEach(thumb => thumb.classList.remove('active'));
         thumbnails[index].classList.add('active');
         currentIndex = index;

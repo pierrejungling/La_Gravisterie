@@ -1380,48 +1380,43 @@ function displayProducts(category = 'all') {
 
     currentProducts.forEach(product => {
         const productCard = `
-            <div class="product-card" data-product-id="${product.id}">
-                <div class="product-image">
-                    ${product.images && product.images.length > 1 ? `
-                        <div class="image-gallery">
-                            <img src="${product.images[0]}" 
-                                 alt="${product.name}" 
-                                 class="main-image" 
+        <div class="product-card" data-product-id="${product.id}">
+            <div class="product-image">
+                ${product.images && product.images.length > 1 ? `
+                    <div class="image-gallery">
+                        <img src="${product.images[0]}" 
+                             alt="${product.name}" 
+                             class="main-image" 
                                  data-image-index="0">
-                            <div class="gallery-nav-container">
-                                <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="image-dots">
-                                ${product.images.map((_, index) => `
-                                    <div class="dot ${index === 0 ? 'active' : ''}"></div>
-                                `).join('')}
-                            </div>
+                        <div class="gallery-nav-container">
+                            <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
-                    ` : `
-                        <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
-                    `}
-                </div>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <p class="price">${product.price}</p>
-                    <p class="description">${product.description}</p>
-                    <div class="product-tags">
-                        ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
-                        ${product.material ? `<span class="tag">${product.material}</span>` : ''}
                     </div>
-                    <button class="btn btn-primary">Commander</button>
-                </div>
+                ` : `
+                    <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
+                `}
             </div>
-        `;
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="price">${product.price}</p>
+                <p class="description">${product.description}</p>
+            <div class="product-tags">
+                ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
+                ${product.material ? `<span class="tag">${product.material}</span>` : ''}
+            </div>
+                    <button class="btn btn-primary">Commander</button>
+            </div>
+        </div>
+    `;
         productsGrid.innerHTML += productCard;
     });
 
@@ -1559,12 +1554,6 @@ function changeImage(productId, direction) {
     
     mainImage.src = product.images[newIndex];
     mainImage.dataset.imageIndex = newIndex;
-
-    // Mettre à jour les points de pagination
-    const dots = productCard.querySelectorAll('.image-dots .dot');
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === newIndex);
-    });
 }
 
 function handleCardTouchGallery(card, product) {
@@ -1576,10 +1565,10 @@ function handleCardTouchGallery(card, product) {
     // Ajouter l'indicateur de pagination
     if (product.images && product.images.length > 1) {
         const paginationContainer = document.createElement('div');
-        paginationContainer.className = 'image-dots';
+        paginationContainer.className = 'pagination-dots';
         
         product.images.forEach((_, index) => {
-            const dot = document.createElement('div');
+            const dot = document.createElement('span');
             dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
             paginationContainer.appendChild(dot);
         });
@@ -1620,7 +1609,7 @@ function handleCardTouchGallery(card, product) {
             mainImage.dataset.imageIndex = currentIndex;
             
             // Mettre à jour les points de pagination
-            const dots = card.querySelectorAll('.image-dots .dot');
+            const dots = card.querySelectorAll('.pagination-dots .dot');
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
