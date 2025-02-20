@@ -774,4 +774,18 @@ body.popup-open {
     .gallery-nav-container {
         display: none;
     }
+}
+
+/* Masquer les flèches de navigation sur mobile dans les popups */
+@media (max-width: 768px) {
+    .project-popup .popup-nav {
+        display: none;
+    }
+}
+
+/* Alternative plus précise si vous voulez cibler spécifiquement les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .project-popup .popup-nav {
+        display: none;
+    }
 } 

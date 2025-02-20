@@ -604,10 +604,13 @@ function handleTouchGallery(popup, project) {
     
     const mainImage = popup.querySelector('.popup-main-image');
     const thumbnails = popup.querySelectorAll('.popup-thumbnail');
+    const prevBtn = popup.querySelector('.popup-nav.prev');
+    const nextBtn = popup.querySelector('.popup-nav.next');
     let touchStartX = 0;
     let touchStartY = 0;
     let currentIndex = 0;
 
+    // Gestionnaire de swipe
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].pageY;
@@ -646,6 +649,24 @@ function handleTouchGallery(popup, project) {
         thumbnails[index].classList.add('active');
         currentIndex = index;
     }
+
+    // Boutons de navigation
+    prevBtn?.addEventListener('click', () => {
+        const newIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+        updateImage(newIndex);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+        const newIndex = (currentIndex + 1) % project.images.length;
+        updateImage(newIndex);
+    });
+
+    // Vignettes
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => {
+            updateImage(index);
+        });
+    });
 }
 
 function createProjectPopup(project) {
