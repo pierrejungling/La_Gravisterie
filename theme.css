@@ -1,0 +1,32 @@
+/* Styles pour la pagination des images */
+.image-gallery {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.pagination-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.pagination-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.pagination-dots .dot.active {
+    background-color: white;
+    transform: scale(1.2);
+} 
