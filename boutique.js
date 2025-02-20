@@ -1554,6 +1554,12 @@ function changeImage(productId, direction) {
     
     mainImage.src = product.images[newIndex];
     mainImage.dataset.imageIndex = newIndex;
+
+    // Mettre à jour les points de pagination
+    const dots = productCard.querySelectorAll('.pagination-dots .dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === newIndex);
+    });
 }
 
 function handleCardTouchGallery(card, product) {
@@ -1625,67 +1631,33 @@ function handleTouchGallery(popup, product) {
     
     const mainImage = popup.querySelector('.popup-main-image');
     const thumbnails = popup.querySelectorAll('.popup-thumbnail');
-    let touchStartX = 0;
-    let touchStartY = 0;
+    const prevBtn = popup.querySelector('.popup-nav.prev');
+    const nextBtn = popup.querySelector('.popup-nav.next');
     let currentIndex = 0;
-
-    // Ajouter l'indicateur de pagination pour mobile
-    const paginationContainer = document.createElement('div');
-    paginationContainer.className = 'pagination-dots mobile-dots';
-    
-    product.images.forEach((_, index) => {
-        const dot = document.createElement('span');
-        dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
-        paginationContainer.appendChild(dot);
-    });
-    
-    popup.querySelector('.popup-image-container').appendChild(paginationContainer);
-
-    mainImage.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].pageY;
-    }, { passive: true });
-
-    mainImage.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 1) return;
-
-        const deltaX = e.touches[0].clientX - touchStartX;
-        const deltaY = e.touches[0].pageY - touchStartY;
-
-        // Si le mouvement est plus horizontal que vertical
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    mainImage.addEventListener('touchend', (e) => {
-        const deltaX = e.changedTouches[0].clientX - touchStartX;
-        const deltaY = e.changedTouches[0].pageY - touchStartY;
-
-        // Si c'est un swipe horizontal
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-            if (deltaX > 0) {
-                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
-            } else {
-                currentIndex = (currentIndex + 1) % product.images.length;
-            }
-            updateImage(currentIndex);
-        }
-    }, { passive: true });
 
     function updateImage(index) {
         mainImage.src = product.images[index];
         thumbnails.forEach(thumb => thumb.classList.remove('active'));
         thumbnails[index].classList.add('active');
-        
-        // Mettre à jour les points de pagination
-        const dots = popup.querySelectorAll('.pagination-dots.mobile-dots .dot');
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-        
         currentIndex = index;
     }
+
+    prevBtn?.addEventListener('click', () => {
+        const newIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+        updateImage(newIndex);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+        const newIndex = (currentIndex + 1) % product.images.length;
+        updateImage(newIndex);
+    });
+
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+            const index = parseInt(thumb.dataset.index);
+            updateImage(index);
+        });
+    });
 }
 
 function createProductPopup(product) {
