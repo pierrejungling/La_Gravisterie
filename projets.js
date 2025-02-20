@@ -531,57 +531,35 @@ function changeImage(projectId, direction) {
 
 function handleCardTouchGallery(card, project) {
     const mainImage = card.querySelector('.main-image');
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-    let isHorizontalSwipe = false;
+    let startX = 0;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
-    mainImage.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].pageY;
-        isHorizontalSwipe = false;
-    }, { passive: true });
+    // Utiliser un gestionnaire simple pour les clics/taps
+    mainImage.addEventListener('click', (e) => {
+        e.preventDefault();
+        openProjectPopup(project.id);
+    });
 
-    mainImage.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 1) return; // Ignorer les gestes multi-touch
-        
-        touchEndX = e.touches[0].clientX;
-        touchEndY = e.touches[0].pageY;
-        
-        const deltaX = Math.abs(touchEndX - touchStartX);
-        const deltaY = Math.abs(touchEndY - touchStartY);
-        
-        // Détecter si c'est un swipe horizontal intentionnel
-        if (deltaX > deltaY && deltaX > 30) {
-            isHorizontalSwipe = true;
+    // Ajouter les boutons de navigation tactile
+    const prevButton = card.querySelector('.gallery-nav.prev');
+    const nextButton = card.querySelector('.gallery-nav.next');
+
+    if (prevButton) {
+        prevButton.addEventListener('click', (e) => {
             e.stopPropagation();
-        }
-    }, { passive: true });
-
-    mainImage.addEventListener('touchend', (e) => {
-        if (isHorizontalSwipe) {
-            handleSwipe();
-        } else if (Math.abs(touchEndY - touchStartY) < 10 && Math.abs(touchEndX - touchStartX) < 10) {
-            // C'était un tap simple
-            openProjectPopup(project.id);
-        }
-    }, { passive: true });
-
-    function handleSwipe() {
-        const swipeDistance = touchEndX - touchStartX;
-        const swipeThreshold = 50;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
-            } else {
-                currentIndex = (currentIndex + 1) % project.images.length;
-            }
+            currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
             mainImage.src = project.images[currentIndex];
             mainImage.dataset.imageIndex = currentIndex;
-        }
+        });
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % project.images.length;
+            mainImage.src = project.images[currentIndex];
+            mainImage.dataset.imageIndex = currentIndex;
+        });
     }
 }
 
