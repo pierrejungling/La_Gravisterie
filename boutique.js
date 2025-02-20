@@ -1,18 +1,16 @@
-// Configuration de l'API Instagram
-const INSTAGRAM_ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN';
-const INSTAGRAM_API_URL = 'https://graph.instagram.com/me/media';
+// Variables globales
+let currentPage = 1;
+const productsPerPage = 9;
+let productsGrid;
 
-// État du panier
-let cart = [];
-
-// Déclarer products globalement au début du fichier
+// Liste des produits (garder la liste existante)
 const products = [
     {
         id: 'cadres-paysages',
         name: 'Cadres paysages',
         price: '25 €',
         category: 'deco-murale',
-        description: 'Transformez votre intérieur avec ces créations uniques qui capturent la magie des grands espaces. Idéals pour une déco inspirante ou un cadeau original.',
+        description: 'Transformez votre intérieur avec ces créations uniques qui capturent la magie des grands espaces.',
         dimensions: '30 x 40 cm',
         material: 'Bois',
         features: [
@@ -21,18 +19,11 @@ const products = [
             'Plusieurs coloris disponibles',
             'Plusieurs dimensions disponibles',
         ],
-        variants: 'Disponible en tailles et couleurs variées pour s\'adapter à votre style.',
         images: [
             'assets/images/products/cadre-van.jpg',
             'assets/images/products/cadre-pins.jpg',
             'assets/images/products/cadre-telesiege.jpg',
-            'assets/images/products/cadre-montagne.jpg',
-            'assets/images/products/cadre-montagne2.jpg',
-            'assets/images/products/cadre-surf.jpg',
-            'assets/images/products/cadre-paris.jpg'
         ],
-        inStock: true,
-        customizable: true
     },
     {
         id: 'planche-voiture',
@@ -1163,7 +1154,10 @@ const products = [
             'Lune et montagnes'
         ],
         images: [
-            'assets/images/products/arches-ensemble.jpg',
+            'assets/images/products/arches-ensemble.png',
+            'assets/images/products/arches1.png',
+            'assets/images/products/arches2.png',
+            'assets/images/products/arches3.png',
         ],
         inStock: true,
         customizable: false,
@@ -1365,97 +1359,180 @@ const products = [
     }
 ];
 
-// Ajouter ces variables globales au début du fichier
-let currentPage = 1;
-const productsPerPage = 9;
+// Fonction pour afficher les produits
+function displayProducts(category = 'all') {
+    // Supprimer toute pagination existante
+    const existingPagination = document.querySelector('.pagination');
+    if (existingPagination) {
+        existingPagination.remove();
+    }
 
-// Fonction pour récupérer les posts Instagram
-async function fetchInstagramPosts() {
-    try {
-        const response = await fetch(`${INSTAGRAM_API_URL}?fields=id,caption,media_url,permalink&access_token=${INSTAGRAM_ACCESS_TOKEN}`);
-        const data = await response.json();
-        return filterShopProducts(data.data);
-    } catch (error) {
-        console.error('Erreur lors de la récupération des posts Instagram:', error);
-        return [];
+    if (!productsGrid) return;
+    productsGrid.innerHTML = '';
+    
+    const filteredProducts = category === 'all' 
+        ? products 
+        : products.filter(product => product.category === category);
+
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+    currentProducts.forEach(product => {
+        const productCard = `
+        <div class="product-card" data-product-id="${product.id}">
+            <div class="product-image">
+                ${product.images && product.images.length > 1 ? `
+                    <div class="image-gallery">
+                        <img src="${product.images[0]}" 
+                             alt="${product.name}" 
+                             class="main-image" 
+                                 data-image-index="0">
+                        <div class="gallery-nav-container">
+                            <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                ` : `
+                    <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
+                `}
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="price">${product.price}</p>
+                <p class="description">${product.description}</p>
+            <div class="product-tags">
+                ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
+                ${product.material ? `<span class="tag">${product.material}</span>` : ''}
+            </div>
+                    <button class="btn btn-primary">Commander</button>
+            </div>
+        </div>
+    `;
+        productsGrid.innerHTML += productCard;
+    });
+
+    // Ajouter les gestionnaires d'événements
+    document.querySelectorAll('.product-card').forEach(card => {
+        const productId = card.dataset.productId;
+        const product = products.find(p => p.id === productId);
+        
+        if (product.images && product.images.length > 1) {
+            handleCardTouchGallery(card, product);
+        }
+
+        card.addEventListener('click', () => {
+            openProductPopup(product.id);
+        });
+    });
+
+    // Créer la pagination si nécessaire
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+    if (totalPages > 1) {
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'pagination';
+        
+        // Bouton précédent
+        if (currentPage > 1) {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'pagination-btn prev';
+            prevButton.innerHTML = '&larr; Précédent';
+            prevButton.addEventListener('click', () => {
+                currentPage--;
+                displayProducts(category);
+                window.scrollTo(0, 0);
+            });
+            paginationContainer.appendChild(prevButton);
+        }
+        
+        // Numéros de page
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `pagination-btn page ${i === currentPage ? 'active' : ''}`;
+            pageButton.textContent = i;
+            pageButton.addEventListener('click', () => {
+                currentPage = i;
+                displayProducts(category);
+                window.scrollTo(0, 0);
+            });
+            paginationContainer.appendChild(pageButton);
+        }
+        
+        // Bouton suivant
+        if (currentPage < totalPages) {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'pagination-btn next';
+            nextButton.innerHTML = 'Suivant &rarr;';
+            nextButton.addEventListener('click', () => {
+                currentPage++;
+                displayProducts(category);
+                window.scrollTo(0, 0);
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+
+        // Ajouter la pagination après la grille de produits
+        productsGrid.parentNode.insertBefore(paginationContainer, productsGrid.nextSibling);
     }
 }
 
-// Fonction pour filtrer les produits (posts avec prix)
-function filterShopProducts(posts) {
-    return posts.filter(post => {
-        const priceMatch = post.caption.match(/(\d+([.,]\d{2})?)\s*€/);
-        return priceMatch !== null;
+// Fonction pour ouvrir le popup
+function openProductPopup(productId) {
+        const product = products.find(p => p.id === productId);
+    if (!product) return;
+        
+                const popup = createProductPopup(product);
+                document.body.appendChild(popup);
+                document.body.classList.add('popup-open');
+                handleTouchGallery(popup, product);
+
+    // Gestion de la fermeture du popup
+                popup.querySelector('.close-popup').addEventListener('click', () => {
+                    popup.remove();
+                    document.body.classList.remove('popup-open');
+                });
+
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+                        popup.remove();
+                        document.body.classList.remove('popup-open');
+                    }
     });
 }
 
-// Fonction pour extraire le prix d'une description
-function extractPrice(caption) {
-    const priceMatch = caption.match(/(\d+([.,]\d{2})?)\s*€/);
-    return priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : null;
-}
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    productsGrid = document.querySelector('.products-grid');
+    const categoryButtons = document.querySelectorAll('.category-btn');
 
-// Fonction pour créer une carte produit
-function createProductCard(product) {
-    const price = extractPrice(product.caption);
-    const title = product.caption.split('\n')[0];
-
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-        <img src="${product.media_url}" alt="${title}" class="product-image">
-        <div class="product-info">
-            <h3 class="product-title">${title}</h3>
-            <p class="product-price">${price.toFixed(2)} €</p>
-            ${product.priceDetails ? `
-                <div class="price-details">
-                    ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
-                </div>
-            ` : ''}
-            <button class="add-to-cart" data-product-id="${product.id}">
-                Ajouter au panier
-            </button>
-        </div>
-    `;
-
-    return card;
-}
-
-// Fonction pour afficher les produits
-async function displayProducts() {
-    const productsContainer = document.getElementById('products-container');
-    const products = await fetchInstagramPosts();
-
-    products.forEach(product => {
-        const card = createProductCard(product);
-        productsContainer.appendChild(card);
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            currentPage = 1;
+            const category = button.getAttribute('data-category');
+            displayProducts(category);
+        });
     });
-}
 
-// Gestionnaire d'événements pour le panier
-function initializeCartEvents() {
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-to-cart')) {
-            const productId = e.target.dataset.productId;
-            addToCart(productId);
-        }
-    });
-}
+    displayProducts();
 
-// Fonction pour ajouter au panier
-function addToCart(productId) {
-    cart.push(productId);
-    updateCartUI();
-    // Animation ou notification de confirmation
-    alert('Produit ajouté au panier !');
-}
+    // Activer le bouton "Tout" par défaut
+    const allButton = document.querySelector('.category-btn[data-category="all"]');
+    if (allButton) {
+        allButton.classList.add('active');
+    }
+});
 
-// Fonction pour mettre à jour l'interface du panier
-function updateCartUI() {
-    // À implémenter : mise à jour du compteur du panier
-}
-
-// Déclarer la fonction changeImage globalement
+// Garder les fonctions existantes inchangées
 function changeImage(productId, direction) {
     const product = products.find(p => p.id === productId);
     if (!product || !product.images) return;
@@ -1479,7 +1556,86 @@ function changeImage(productId, direction) {
     mainImage.dataset.imageIndex = newIndex;
 }
 
-// Fonction pour créer le popup
+function handleCardTouchGallery(card, product) {
+    const mainImage = card.querySelector('.main-image');
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+    let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
+
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        isSwiping = false;
+    }, false);
+
+    mainImage.addEventListener('touchmove', (e) => {
+        isSwiping = true;
+        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
+    }, false);
+
+    mainImage.addEventListener('touchend', (e) => {
+        if (!isSwiping) {
+            // Si ce n'était pas un swipe, c'était un tap, ouvrir le popup
+            openProductPopup(product.id);
+            return;
+        }
+        
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe vers la droite (image précédente)
+                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+            } else {
+                // Swipe vers la gauche (image suivante)
+                currentIndex = (currentIndex + 1) % product.images.length;
+            }
+            mainImage.src = product.images[currentIndex];
+            mainImage.dataset.imageIndex = currentIndex;
+        }
+    }
+}
+
+function handleTouchGallery(popup, product) {
+    if (!product.images || product.images.length <= 1) return;
+    
+    const mainImage = popup.querySelector('.popup-main-image');
+    const thumbnails = popup.querySelectorAll('.popup-thumbnail');
+    const prevBtn = popup.querySelector('.popup-nav.prev');
+    const nextBtn = popup.querySelector('.popup-nav.next');
+    let currentIndex = 0;
+
+    function updateImage(index) {
+        mainImage.src = product.images[index];
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        thumbnails[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    prevBtn?.addEventListener('click', () => {
+        const newIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+        updateImage(newIndex);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+        const newIndex = (currentIndex + 1) % product.images.length;
+        updateImage(newIndex);
+    });
+
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+            const index = parseInt(thumb.dataset.index);
+            updateImage(index);
+        });
+    });
+}
+
 function createProductPopup(product) {
     const popup = document.createElement('div');
     popup.className = 'product-popup';
@@ -1545,347 +1701,3 @@ function createProductPopup(product) {
     popup.innerHTML = content;
     return popup;
 }
-
-// Fonction pour gérer la navigation des images dans le popup
-function handlePopupGallery(popup, product) {
-    if (!product.images || product.images.length <= 1) return;
-    
-    const mainImage = popup.querySelector('.popup-main-image');
-    const thumbnails = popup.querySelectorAll('.popup-thumbnail');
-    const prevBtn = popup.querySelector('.popup-nav.prev');
-    const nextBtn = popup.querySelector('.popup-nav.next');
-    let currentIndex = 0;
-
-    function updateImage(index) {
-        mainImage.src = product.images[index];
-        thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        thumbnails[index].classList.add('active');
-        currentIndex = index;
-    }
-
-    prevBtn?.addEventListener('click', () => {
-        const newIndex = (currentIndex - 1 + product.images.length) % product.images.length;
-        updateImage(newIndex);
-    });
-
-    nextBtn?.addEventListener('click', () => {
-        const newIndex = (currentIndex + 1) % product.images.length;
-        updateImage(newIndex);
-    });
-
-    thumbnails.forEach(thumb => {
-        thumb.addEventListener('click', () => {
-            const index = parseInt(thumb.dataset.index);
-            updateImage(index);
-        });
-    });
-}
-
-// Ajouter cette fonction pour gérer le swipe
-function handleTouchGallery(popup, product) {
-    const mainImage = popup.querySelector('.popup-main-image');
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let currentIndex = 0;
-
-    mainImage.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    }, false);
-
-    mainImage.addEventListener('touchmove', (e) => {
-        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
-    }, false);
-
-    mainImage.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-    }, false);
-
-    function handleSwipe() {
-        const swipeThreshold = 50; // Distance minimale pour un swipe
-        const swipeDistance = touchEndX - touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                // Swipe vers la droite (image précédente)
-                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
-            } else {
-                // Swipe vers la gauche (image suivante)
-                currentIndex = (currentIndex + 1) % product.images.length;
-            }
-            updateImage(currentIndex);
-        }
-    }
-
-    function updateImage(index) {
-        mainImage.src = product.images[index];
-        const thumbnails = popup.querySelectorAll('.popup-thumbnail');
-        thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        thumbnails[index].classList.add('active');
-        currentIndex = index;
-    }
-}
-
-// Ajouter cette fonction pour gérer le swipe sur les cartes
-function handleCardTouchGallery(card, product) {
-    const mainImage = card.querySelector('.main-image');
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let isSwiping = false;
-    let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
-
-    mainImage.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        isSwiping = false;
-    }, false);
-
-    mainImage.addEventListener('touchmove', (e) => {
-        isSwiping = true;
-        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
-    }, false);
-
-    mainImage.addEventListener('touchend', (e) => {
-        if (!isSwiping) {
-            // Si ce n'était pas un swipe, c'était un tap, ouvrir le popup
-            const popup = createProductPopup(product);
-            document.body.appendChild(popup);
-            document.body.classList.add('popup-open');
-            handlePopupGallery(popup, product);
-            handleTouchGallery(popup, product);
-
-            popup.querySelector('.close-popup').addEventListener('click', () => {
-                popup.remove();
-                document.body.classList.remove('popup-open');
-            });
-
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    popup.remove();
-                    document.body.classList.remove('popup-open');
-                }
-            });
-            return;
-        }
-        
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-    }, false);
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const swipeDistance = touchEndX - touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                // Swipe vers la droite (image précédente)
-                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
-            } else {
-                // Swipe vers la gauche (image suivante)
-                currentIndex = (currentIndex + 1) % product.images.length;
-            }
-            mainImage.src = product.images[currentIndex];
-            mainImage.dataset.imageIndex = currentIndex;
-        }
-    }
-}
-
-// Modifier la fonction displayProducts pour ajouter le gestionnaire de swipe aux cartes
-function displayProducts(category = 'all') {
-    // Supprimer toute pagination existante
-    const existingPagination = document.querySelector('.pagination');
-    if (existingPagination) {
-        existingPagination.remove();
-    }
-
-    productsGrid.innerHTML = '';
-    
-    const filteredProducts = category === 'all' 
-        ? products 
-        : products.filter(product => product.category === category);
-
-    // Calculer le nombre total de pages
-    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-    
-    // Calculer les indices de début et de fin pour la page courante
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    
-    // Obtenir les produits pour la page courante
-    const currentProducts = filteredProducts.slice(startIndex, endIndex);
-
-    // Afficher les produits
-    currentProducts.forEach(product => {
-        const productCard = `
-        <div class="product-card" data-product-id="${product.id}">
-            <div class="product-image">
-                ${product.images && product.images.length > 1 ? `
-                    <div class="image-gallery">
-                        <img src="${product.images[0]}" 
-                             alt="${product.name}" 
-                             class="main-image" 
-                             data-image-index="0"
-                             style="pointer-events: auto;">
-                        <div class="gallery-nav-container">
-                            <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                            <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                ` : `
-                    <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
-                `}
-            </div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p class="price">${product.price}</p>
-                ${product.priceDetails ? `
-                    <div class="price-details">
-                        ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
-                    </div>
-                ` : ''}
-                <p class="description">${product.description}</p>
-            <div class="product-tags">
-                ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
-                ${product.material ? `<span class="tag">${product.material}</span>` : ''}
-            </div>
-            <button class="btn btn-primary" onclick="event.stopPropagation()">Commander</button>
-            </div>
-        </div>
-    `;
-        productsGrid.innerHTML += productCard;
-    });
-
-    // Créer la pagination seulement s'il y a plus d'une page
-    if (totalPages > 1) {
-        const paginationContainer = document.createElement('div');
-        paginationContainer.className = 'pagination';
-        
-        // Bouton précédent
-        if (currentPage > 1) {
-            const prevButton = document.createElement('button');
-            prevButton.className = 'pagination-btn prev';
-            prevButton.innerHTML = '&larr; Précédent';
-            prevButton.addEventListener('click', () => {
-                currentPage--;
-                displayProducts(category);
-                window.scrollTo(0, 0);
-            });
-            paginationContainer.appendChild(prevButton);
-        }
-        
-        // Numéros de page
-        for (let i = 1; i <= totalPages; i++) {
-            const pageButton = document.createElement('button');
-            pageButton.className = `pagination-btn page ${i === currentPage ? 'active' : ''}`;
-            pageButton.textContent = i;
-            pageButton.addEventListener('click', () => {
-                currentPage = i;
-                displayProducts(category);
-                window.scrollTo(0, 0);
-            });
-            paginationContainer.appendChild(pageButton);
-        }
-        
-        // Bouton suivant
-        if (currentPage < totalPages) {
-            const nextButton = document.createElement('button');
-            nextButton.className = 'pagination-btn next';
-            nextButton.innerHTML = 'Suivant &rarr;';
-            nextButton.addEventListener('click', () => {
-                currentPage++;
-                displayProducts(category);
-                window.scrollTo(0, 0);
-            });
-            paginationContainer.appendChild(nextButton);
-        }
-
-        // Ajouter la pagination après la grille de produits
-        productsGrid.parentNode.insertBefore(paginationContainer, productsGrid.nextSibling);
-    }
-
-    // Attacher les gestionnaires d'événements après avoir créé les cartes
-    document.querySelectorAll('.product-card').forEach(card => {
-        const productId = card.dataset.productId;
-        const product = products.find(p => p.id === productId);
-        
-        // Gestionnaire pour l'image
-        const mainImage = card.querySelector('.main-image');
-        if (mainImage) {
-            mainImage.addEventListener('click', (e) => {
-                e.stopPropagation(); // Empêcher la propagation
-                const popup = createProductPopup(product);
-                document.body.appendChild(popup);
-                document.body.classList.add('popup-open');
-                handlePopupGallery(popup, product);
-                handleTouchGallery(popup, product);
-
-                popup.querySelector('.close-popup').addEventListener('click', () => {
-                    popup.remove();
-                    document.body.classList.remove('popup-open');
-                });
-
-                popup.addEventListener('click', (e) => {
-                    if (e.target === popup) {
-                        popup.remove();
-                        document.body.classList.remove('popup-open');
-                    }
-                });
-            });
-        }
-
-        if (product.images && product.images.length > 1) {
-            handleCardTouchGallery(card, product);
-        }
-
-        // Ajouter le gestionnaire de clic pour le popup sur toute la carte
-        card.addEventListener('click', () => {
-            const popup = createProductPopup(product);
-            document.body.appendChild(popup);
-            document.body.classList.add('popup-open');
-            handlePopupGallery(popup, product);
-            handleTouchGallery(popup, product);
-
-            popup.querySelector('.close-popup').addEventListener('click', () => {
-                popup.remove();
-                document.body.classList.remove('popup-open');
-            });
-
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    popup.remove();
-                    document.body.classList.remove('popup-open');
-                }
-            });
-        });
-    });
-}
-
-// Modifier l'initialisation pour utiliser la variable productsGrid globalement
-let productsGrid;
-
-document.addEventListener('DOMContentLoaded', () => {
-    productsGrid = document.querySelector('.products-grid');
-    const categoryButtons = document.querySelectorAll('.category-btn');
-
-    // Gestion des filtres
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            currentPage = 1; // Réinitialiser la page lors du changement de catégorie
-            displayProducts(button.dataset.category);
-        });
-    });
-
-    // Affichage initial
-    displayProducts();
-
-    initializeCartEvents();
-}); 
