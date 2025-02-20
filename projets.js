@@ -431,51 +431,107 @@ function createProjectPopup(project) {
     const popup = document.createElement('div');
     popup.className = 'project-popup';
     
-    const content = `
-        <div class="popup-content">
-            <button class="close-popup">&times;</button>
-            <div class="popup-gallery">
-                ${project.images && project.images.length > 0 ? `
-                    <div class="popup-image-container">
-                        <img src="${project.images[0]}" alt="${project.name}" class="popup-main-image">
-                        ${project.images.length > 1 ? `
-                            <button class="popup-nav prev">&#10094;</button>
-                            <button class="popup-nav next">&#10095;</button>
-                            <div class="popup-thumbnails">
-                                ${project.images.map((img, index) => `
-                                    <img src="${img}" 
-                                         alt="${project.name}" 
-                                         class="popup-thumbnail ${index === 0 ? 'active' : ''}" 
-                                         data-index="${index}">
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                ` : `
-                    <div class="popup-image-container">
-                        <img src="${project.image}" alt="${project.name}" class="popup-main-image">
-                    </div>
-                `}
-            </div>
-            <div class="popup-info">
-                <h2>${project.name}</h2>
-                <p class="popup-description">${project.description}</p>
-                <div class="popup-details">
-                    <p><strong>Client :</strong> ${project.client}</p>
-                    <p><strong>Matériau :</strong> ${project.material}</p>
-                </div>
-                <div class="popup-features">
-                    <h3>Caractéristiques :</h3>
-                    <ul>
-                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                </div>
-                <button class="btn btn-primary popup-contact">Contactez-nous pour un projet similaire</button>
-            </div>
-        </div>
-    `;
+    const content = document.createElement('div');
+    content.className = 'popup-content';
     
-    popup.innerHTML = content;
+    // Bouton de fermeture
+    const closeButton = document.createElement('button');
+    closeButton.className = 'close-popup';
+    closeButton.innerHTML = '&times;';
+    content.appendChild(closeButton);
+    
+    const gallery = document.createElement('div');
+    gallery.className = 'popup-gallery';
+    
+    // Conteneur d'image principal
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'popup-image-container';
+    
+    const mainImage = document.createElement('img');
+    mainImage.className = 'popup-main-image';
+    mainImage.src = project.images[0];
+    imageContainer.appendChild(mainImage);
+
+    // Boutons de navigation
+    if (project.images && project.images.length > 1) {
+        const prevButton = document.createElement('button');
+        prevButton.className = 'popup-nav prev';
+        prevButton.innerHTML = `
+            <svg viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        `;
+        
+        const nextButton = document.createElement('button');
+        nextButton.className = 'popup-nav next';
+        nextButton.innerHTML = `
+            <svg viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        `;
+        
+        imageContainer.appendChild(prevButton);
+        imageContainer.appendChild(nextButton);
+    }
+
+    gallery.appendChild(imageContainer);
+
+    // Vignettes
+    if (project.images && project.images.length > 1) {
+        const thumbnailsContainer = document.createElement('div');
+        thumbnailsContainer.className = 'popup-thumbnails';
+        
+        project.images.forEach((image, index) => {
+            const thumbnail = document.createElement('img');
+            thumbnail.className = `popup-thumbnail ${index === 0 ? 'active' : ''}`;
+            thumbnail.src = image;
+            thumbnail.addEventListener('click', () => {
+                mainImage.src = image;
+                document.querySelectorAll('.popup-thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+            thumbnailsContainer.appendChild(thumbnail);
+        });
+        
+        gallery.appendChild(thumbnailsContainer);
+    }
+
+    // Ajout de la section info
+    const infoSection = document.createElement('div');
+    infoSection.className = 'popup-info';
+    
+    infoSection.innerHTML = `
+        <h2>${project.name}</h2>
+        <p class="popup-description">${project.description}</p>
+        <div class="popup-details">
+            <p><strong>Client :</strong> ${project.client}</p>
+            <p><strong>Matériau :</strong> ${project.material}</p>
+        </div>
+        <div class="popup-features">
+            <h3>Caractéristiques :</h3>
+            <ul>
+                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+        </div>
+        <button class="btn btn-primary popup-contact">Contactez-nous pour un projet similaire</button>
+    `;
+
+    content.appendChild(gallery);
+    content.appendChild(infoSection);
+    popup.appendChild(content);
+    
+    // Ajouter le gestionnaire d'événements pour le bouton de fermeture
+    closeButton.addEventListener('click', () => {
+        popup.remove();
+        document.body.classList.remove('popup-open');
+    });
+
+    // Ajouter le gestionnaire d'événements pour le bouton de contact
+    const contactButton = infoSection.querySelector('.popup-contact');
+    contactButton.addEventListener('click', () => {
+        window.location.href = 'contact.html';
+    });
+    
     return popup;
 }
 
@@ -636,13 +692,14 @@ function displayProjects(category = 'all') {
     currentProjects.forEach(project => {
         const projectCard = `
         <div class="project-card" data-project-id="${project.id}">
-            <div class="project-image" onclick="openProjectPopup('${project.id}')">
+            <div class="project-image">
                 ${project.images && project.images.length > 1 ? `
                     <div class="image-gallery">
                         <img src="${project.images[0]}" 
                              alt="${project.name}" 
                              class="main-image" 
-                             data-image-index="0">
+                             data-image-index="0"
+                             style="pointer-events: auto;">
                         <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${project.id}', 'prev')">
                             <svg viewBox="0 0 24 24">
                                 <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -726,11 +783,12 @@ function displayProjects(category = 'all') {
         const projectId = card.dataset.projectId;
         const project = projects.find(p => p.id === projectId);
         
-        // Empêcher la propagation du clic sur l'image
+        // Gestionnaire pour l'image
         const mainImage = card.querySelector('.main-image');
         if (mainImage) {
             mainImage.addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Empêcher la propagation
+                openProjectPopup(projectId); // Ouvrir le popup au clic sur l'image
             });
         }
 
@@ -738,7 +796,7 @@ function displayProjects(category = 'all') {
             handleCardTouchGallery(card, project);
         }
 
-        // Ajouter le gestionnaire de clic pour le popup
+        // Ajouter le gestionnaire de clic pour le popup sur toute la carte
         card.addEventListener('click', () => {
             openProjectPopup(projectId);
         });
@@ -789,22 +847,31 @@ function changeImage(projectId, direction) {
     mainImage.dataset.imageIndex = newIndex;
 }
 
-// Ajouter cette fonction pour gérer le swipe sur les cartes
+// Modifions également handleCardTouchGallery pour ne pas interférer avec le clic
 function handleCardTouchGallery(card, project) {
     const mainImage = card.querySelector('.main-image');
     let touchStartX = 0;
     let touchEndX = 0;
+    let isSwiping = false;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
+        isSwiping = false;
     }, false);
 
     mainImage.addEventListener('touchmove', (e) => {
+        isSwiping = true;
         e.preventDefault(); // Empêche le défilement de la page pendant le swipe
     }, false);
 
     mainImage.addEventListener('touchend', (e) => {
+        if (!isSwiping) {
+            // Si ce n'était pas un swipe, c'était un tap, ouvrir le popup
+            openProjectPopup(project.id);
+            return;
+        }
+        
         touchEndX = e.changedTouches[0].clientX;
         handleSwipe();
     }, false);

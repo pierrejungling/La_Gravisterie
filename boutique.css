@@ -114,6 +114,7 @@
 .product-image {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .product-image img,
@@ -121,6 +122,18 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Effet de zoom au survol de la carte ou de l'image */
+.product-card:hover .product-image img,
+.product-card:hover .image-gallery .main-image {
+    transform: scale(1.05);
+}
+
+/* S'assurer que le curseur pointer reste sur l'image */
+.product-image .main-image {
+    cursor: pointer;
 }
 
 .product-info {

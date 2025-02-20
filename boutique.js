@@ -1631,17 +1631,42 @@ function handleCardTouchGallery(card, product) {
     const mainImage = card.querySelector('.main-image');
     let touchStartX = 0;
     let touchEndX = 0;
+    let isSwiping = false;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
+        isSwiping = false;
     }, false);
 
     mainImage.addEventListener('touchmove', (e) => {
+        isSwiping = true;
         e.preventDefault(); // Empêche le défilement de la page pendant le swipe
     }, false);
 
     mainImage.addEventListener('touchend', (e) => {
+        if (!isSwiping) {
+            // Si ce n'était pas un swipe, c'était un tap, ouvrir le popup
+            const popup = createProductPopup(product);
+            document.body.appendChild(popup);
+            document.body.classList.add('popup-open');
+            handlePopupGallery(popup, product);
+            handleTouchGallery(popup, product);
+
+            popup.querySelector('.close-popup').addEventListener('click', () => {
+                popup.remove();
+                document.body.classList.remove('popup-open');
+            });
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.remove();
+                    document.body.classList.remove('popup-open');
+                }
+            });
+            return;
+        }
+        
         touchEndX = e.changedTouches[0].clientX;
         handleSwipe();
     }, false);
@@ -1664,7 +1689,7 @@ function handleCardTouchGallery(card, product) {
     }
 }
 
-// Modifier la fonction displayProducts pour ajouter le gestionnaire de clic sur l'image
+// Modifier la fonction displayProducts pour ajouter le gestionnaire de swipe aux cartes
 function displayProducts(category = 'all') {
     // Supprimer toute pagination existante
     const existingPagination = document.querySelector('.pagination');
@@ -1692,23 +1717,26 @@ function displayProducts(category = 'all') {
     currentProducts.forEach(product => {
         const productCard = `
         <div class="product-card" data-product-id="${product.id}">
-            <div class="product-image" onclick="openProductPopup('${product.id}')">
+            <div class="product-image">
                 ${product.images && product.images.length > 1 ? `
                     <div class="image-gallery">
                         <img src="${product.images[0]}" 
                              alt="${product.name}" 
                              class="main-image" 
-                             data-image-index="0">
-                        <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
+                             data-image-index="0"
+                             style="pointer-events: auto;">
+                        <div class="gallery-nav-container">
+                            <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 ` : `
                     <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
@@ -1787,11 +1815,28 @@ function displayProducts(category = 'all') {
         const productId = card.dataset.productId;
         const product = products.find(p => p.id === productId);
         
-        // Empêcher la propagation du clic sur l'image
+        // Gestionnaire pour l'image
         const mainImage = card.querySelector('.main-image');
         if (mainImage) {
             mainImage.addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Empêcher la propagation
+                const popup = createProductPopup(product);
+                document.body.appendChild(popup);
+                document.body.classList.add('popup-open');
+                handlePopupGallery(popup, product);
+                handleTouchGallery(popup, product);
+
+                popup.querySelector('.close-popup').addEventListener('click', () => {
+                    popup.remove();
+                    document.body.classList.remove('popup-open');
+                });
+
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+                        popup.remove();
+                        document.body.classList.remove('popup-open');
+                    }
+                });
             });
         }
 
@@ -1799,7 +1844,7 @@ function displayProducts(category = 'all') {
             handleCardTouchGallery(card, product);
         }
 
-        // Ajouter le gestionnaire de clic pour le popup
+        // Ajouter le gestionnaire de clic pour le popup sur toute la carte
         card.addEventListener('click', () => {
             const popup = createProductPopup(product);
             document.body.appendChild(popup);
