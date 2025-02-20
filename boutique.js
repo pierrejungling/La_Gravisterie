@@ -1562,43 +1562,43 @@ function handleCardTouchGallery(card, product) {
     let touchStartY = 0;
     let touchEndX = 0;
     let touchEndY = 0;
-    let isSwiping = false;
+    let isHorizontalSwipe = false;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].pageY;
-        isSwiping = false;
+        isHorizontalSwipe = false;
     }, { passive: true });
 
     mainImage.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) return; // Ignorer les gestes multi-touch
+        
         touchEndX = e.touches[0].clientX;
         touchEndY = e.touches[0].pageY;
         
-        // Calculer la direction du swipe
         const deltaX = Math.abs(touchEndX - touchStartX);
         const deltaY = Math.abs(touchEndY - touchStartY);
         
-        // Si le mouvement est plus horizontal que vertical
+        // Détecter si c'est un swipe horizontal intentionnel
         if (deltaX > deltaY && deltaX > 30) {
-            isSwiping = true;
-            e.preventDefault(); // Bloquer le scroll uniquement pour les swipes horizontaux
+            isHorizontalSwipe = true;
+            e.stopPropagation();
         }
-    }, { passive: false });
+    }, { passive: true });
 
     mainImage.addEventListener('touchend', (e) => {
-        if (!isSwiping) {
-            // Si ce n'était pas un swipe horizontal, ouvrir le popup
+        if (isHorizontalSwipe) {
+            handleSwipe();
+        } else if (Math.abs(touchEndY - touchStartY) < 10 && Math.abs(touchEndX - touchStartX) < 10) {
+            // C'était un tap simple
             openProductPopup(product.id);
-            return;
         }
-        
-        handleSwipe();
     }, { passive: true });
 
     function handleSwipe() {
-        const swipeThreshold = 50;
         const swipeDistance = touchEndX - touchStartX;
+        const swipeThreshold = 50;
 
         if (Math.abs(swipeDistance) > swipeThreshold) {
             if (swipeDistance > 0) {
