@@ -1559,30 +1559,42 @@ function changeImage(productId, direction) {
 function handleCardTouchGallery(card, product) {
     const mainImage = card.querySelector('.main-image');
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let touchEndY = 0;
     let isSwiping = false;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].pageY;
         isSwiping = false;
-    }, false);
+    }, { passive: true });
 
     mainImage.addEventListener('touchmove', (e) => {
-        isSwiping = true;
-        e.preventDefault(); // Empêche le défilement de la page pendant le swipe
-    }, false);
+        touchEndX = e.touches[0].clientX;
+        touchEndY = e.touches[0].pageY;
+        
+        // Calculer la direction du swipe
+        const deltaX = Math.abs(touchEndX - touchStartX);
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // Si le mouvement est plus horizontal que vertical
+        if (deltaX > deltaY && deltaX > 30) {
+            isSwiping = true;
+            e.preventDefault(); // Bloquer le scroll uniquement pour les swipes horizontaux
+        }
+    }, { passive: false });
 
     mainImage.addEventListener('touchend', (e) => {
         if (!isSwiping) {
-            // Si ce n'était pas un swipe, c'était un tap, ouvrir le popup
+            // Si ce n'était pas un swipe horizontal, ouvrir le popup
             openProductPopup(product.id);
             return;
         }
         
-        touchEndX = e.changedTouches[0].clientX;
         handleSwipe();
-    }, false);
+    }, { passive: true });
 
     function handleSwipe() {
         const swipeThreshold = 50;
@@ -1590,10 +1602,8 @@ function handleCardTouchGallery(card, product) {
 
         if (Math.abs(swipeDistance) > swipeThreshold) {
             if (swipeDistance > 0) {
-                // Swipe vers la droite (image précédente)
                 currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
             } else {
-                // Swipe vers la gauche (image suivante)
                 currentIndex = (currentIndex + 1) % product.images.length;
             }
             mainImage.src = product.images[currentIndex];
