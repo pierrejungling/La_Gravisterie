@@ -774,4 +774,74 @@ body.popup-open {
     .gallery-nav-container {
         display: none;
     }
+}
+
+/* Styles pour les points de pagination dans les popups mobiles */
+.pagination-dots.mobile-dots {
+    bottom: 20px;
+    z-index: 1001;
+}
+
+@media (min-width: 769px) {
+    .pagination-dots.mobile-dots {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .popup-image-container {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .pagination-dots.mobile-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: flex;
+        gap: 6px;
+    }
+
+    .pagination-dots.mobile-dots .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    .pagination-dots.mobile-dots .dot.active {
+        width: 8px;
+        height: 8px;
+        background-color: white;
+        transform: scale(1.2);
+    }
+
+    /* Masquer les vignettes sur mobile puisqu'on a les points */
+    .popup-thumbnails {
+        display: none;
+    }
+
+    /* Masquer les boutons de navigation sur mobile */
+    .popup-nav {
+        display: none;
+    }
+
+    /* Ajustements pour le conteneur d'image */
+    .popup-image-container {
+        margin-bottom: 0;
+        height: 100vw; /* Aspect ratio carré sur mobile */
+        max-height: 70vh;
+    }
+
+    .popup-main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: var(--primary-color);
+    }
 } 

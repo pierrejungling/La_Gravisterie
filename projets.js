@@ -602,6 +602,18 @@ function handleTouchGallery(popup, project) {
     let touchStartY = 0;
     let currentIndex = 0;
 
+    // Ajouter l'indicateur de pagination pour mobile
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination-dots mobile-dots';
+    
+    project.images.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
+        paginationContainer.appendChild(dot);
+    });
+    
+    popup.querySelector('.popup-image-container').appendChild(paginationContainer);
+
     mainImage.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].pageY;
@@ -628,7 +640,7 @@ function handleTouchGallery(popup, project) {
             if (deltaX > 0) {
                 currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
             } else {
-                currentIndex = (currentIndex + 1) % project.images.length;
+                currentIndex = (currentIndex + 1 + project.images.length) % project.images.length;
             }
             updateImage(currentIndex);
         }
@@ -638,6 +650,13 @@ function handleTouchGallery(popup, project) {
         mainImage.src = project.images[index];
         thumbnails.forEach(thumb => thumb.classList.remove('active'));
         thumbnails[index].classList.add('active');
+        
+        // Mettre à jour les points de pagination
+        const dots = popup.querySelectorAll('.pagination-dots.mobile-dots .dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        
         currentIndex = index;
     }
 }
