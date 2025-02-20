@@ -1388,11 +1388,6 @@ function displayProducts(category = 'all') {
                                  alt="${product.name}" 
                                  class="main-image" 
                                  data-image-index="0">
-                            <div class="pagination-dots">
-                                ${product.images.map((_, index) => `
-                                    <span class="dot ${index === 0 ? 'active' : ''}"></span>
-                                `).join('')}
-                            </div>
                             <div class="gallery-nav-container">
                                 <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
                                     <svg viewBox="0 0 24 24">
@@ -1404,6 +1399,11 @@ function displayProducts(category = 'all') {
                                         <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
+                            </div>
+                            <div class="image-dots">
+                                ${product.images.map((_, index) => `
+                                    <div class="dot ${index === 0 ? 'active' : ''}"></div>
+                                `).join('')}
                             </div>
                         </div>
                     ` : `
@@ -1561,7 +1561,7 @@ function changeImage(productId, direction) {
     mainImage.dataset.imageIndex = newIndex;
 
     // Mettre à jour les points de pagination
-    const dots = productCard.querySelectorAll('.pagination-dots .dot');
+    const dots = productCard.querySelectorAll('.image-dots .dot');
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === newIndex);
     });
@@ -1576,10 +1576,10 @@ function handleCardTouchGallery(card, product) {
     // Ajouter l'indicateur de pagination
     if (product.images && product.images.length > 1) {
         const paginationContainer = document.createElement('div');
-        paginationContainer.className = 'pagination-dots';
+        paginationContainer.className = 'image-dots';
         
         product.images.forEach((_, index) => {
-            const dot = document.createElement('span');
+            const dot = document.createElement('div');
             dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
             paginationContainer.appendChild(dot);
         });
@@ -1620,7 +1620,7 @@ function handleCardTouchGallery(card, product) {
             mainImage.dataset.imageIndex = currentIndex;
             
             // Mettre à jour les points de pagination
-            const dots = card.querySelectorAll('.pagination-dots .dot');
+            const dots = card.querySelectorAll('.image-dots .dot');
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
