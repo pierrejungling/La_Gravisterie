@@ -24,6 +24,48 @@ const projects = [
         client: 'École maternelle'
     },
     {
+        id: 'enseignes-commerciales',
+        name: 'Enseignes',
+        category: 'entreprises',
+        description: 'Création d\'enseignes professionnelles sur-mesure pour entreprises et commerces. De la conception à la réalisation, nous donnons vie à votre identité visuelle avec des enseignes élégantes et durables.',
+        features: [
+            'Design personnalisé selon votre identité',
+            'Choix de matériaux adaptés',
+            'Finitions professionnelles',
+            'Gravure et découpe de précision',
+            'Éclairage intégré possible',
+        ],
+        images: [
+            'assets/images/projects/enseigne-gravisterie.jpg',
+            'assets/images/projects/enseigne-oprestige.jpg',
+            'assets/images/projects/enseigne-eltrio.jpg'
+        ],
+        material: 'Bois',
+        client: 'La Gravisterie • O\'Prestige Barbershop • El Trio Factory',
+        details: {
+            technique: 'Gravure laser et découpe',
+            finition: 'Adaptée selon le support',
+            usage: 'Signalétique commerciale'
+        },
+        portfolio: [
+            {
+                name: 'La Gravisterie',
+                description: 'Enseigne en bois avec logo montagneux et gravure bicolore',
+                style: 'Moderne et naturel'
+            },
+            {
+                name: 'O\'Prestige Barbershop',
+                description: 'Enseigne élégante avec finition noir et or pour salon de coiffure',
+                style: 'Classique et raffiné'
+            },
+            {
+                name: 'El Trio Factory',
+                description: 'Enseigne de bar mobile avec éclairage LED intégré',
+                style: 'Industriel et contemporain'
+            },
+        ]
+    },
+    {
         id: 'plaque-voiture-gtr',
         name: 'Plaque Nissan GT-R',
         category: 'perso',
@@ -61,6 +103,38 @@ const projects = [
         client: 'Privé'
     },
     {
+        id: 'couvercles-personnalisés',
+        name: 'Personnalisation de Bocaux',
+        category: 'perso',
+        description: 'Personnalisation de vos bocaux et couvercles existants par gravure laser. Une solution élégante pour identifier vos préparations maison tout en donnant un style unique à vos contenants.',
+        features: [
+            'Gravure sur couvercle en bois existant',
+            'Finition bicolore contrastée avec peinture',
+            'Adapté à vos bocaux standards',
+            'Personnalisation du texte',
+            'Idéal pour les préparations maison'
+        ],
+        images: [
+            'assets/images/projects/couvercle-miel-1.jpg',
+            'assets/images/projects/couvercle-miel-2.jpg',
+            'assets/images/projects/couvercle-3.jpg'
+        ],
+        material: 'Bois',
+        client: 'Projets personnels',
+        details: {
+            technique: 'Gravure laser avec remplissage de peinture noire pour contraste',
+            finition: 'Bicolore avec peinture',
+            usage: 'Identification et décoration de contenants alimentaires'
+        },
+        portfolio: [
+            {
+                name: 'Sauce Miel-Moutarde',
+                description: 'Personnalisation d\'un couvercle de bocal avec design vintage et logo d\'ours',
+                style: 'Rustique et artisanal'
+            }
+        ]
+    },
+    {
         id: 'cadres-maman',
         name: 'Cadres "Maman, mon héroïne"',
         category: 'perso',
@@ -77,6 +151,30 @@ const projects = [
         ],
         material: 'Bois',
         client: 'Privé'
+    },
+    {
+        id: 'planche-totem',
+        name: 'Planches Totem personnalisées',
+        category: 'autres',
+        description: 'Une pièce unique pour immortaliser votre histoire scout. Chaque planche est personnalisée avec l\'illustration du totem, ses caractéristiques et l\'histoire du scout.',
+        features: [
+            'Illustration détaillée du totem',
+            'Classification zoologique complète',
+            'Caractéristiques de l\'animal',
+            'Informations personnelles du scout',
+            'Description narrative de l\'animal',
+            'Finition professionnelle sur bois'
+        ],
+        images: [
+            'assets/images/projects/totem-1.jpg'
+        ],
+        material: 'Bois',
+        client: 'Scouts et Guides',
+        details: {
+            technique: 'Gravure laser de précision',
+            finition: 'Naturelle',
+            usage: 'Souvenir scout personnalisé'
+        }
     },
     {
         id: 'trophee-velo',
@@ -137,6 +235,37 @@ const projects = [
         client: 'Le Relais de Pommard'
     },
     {
+        id: 'gourdes-personnalisees',
+        name: 'Gourdes Personnalisées',
+        category: 'perso',
+        description: 'Lot de trois gourdes isothermes personnalisées avec initiales et prénoms, ornées d\'un design floral élégant. Une création unique pour un trio d\'amies, alliant style et personnalisation.',
+        features: [
+            'Design floral délicat',
+            'Initiale majuscule stylisée',
+            'Prénom personnalisé',
+            'Cadre hexagonal orné',
+            'Gravure sur gourde isotherme',
+            'Finition mate élégante'
+        ],
+        images: [
+            'assets/images/projects/gourdes-1.jpg'
+        ],
+        material: 'Gourde isotherme',
+        client: 'Privé',
+        details: {
+            technique: 'Gravure laser sur métal',
+            finition: 'Mate blanche',
+            usage: 'Usage quotidien'
+        },
+        portfolio: [
+            {
+                name: 'Trio de Gourdes SMA',
+                description: 'Ensemble de trois gourdes personnalisées avec initiales et prénoms : Sylvie, Maité, Aurélie',
+                style: 'Élégant et personnalisé'
+            }
+        ]
+    },
+    {
         id: 'logo-para-commando',
         name: 'Logo Amicale Para-Commando',
         category: 'entreprises',
@@ -170,23 +299,6 @@ const projects = [
         ],
         material: 'Bois',
         client: 'Privé'
-    },
-    {
-        id: 'enseigne-oprestige',
-        name: 'Enseigne O\'Prestige Barbershop',
-        category: 'entreprises',
-        description: 'Enseigne élégante pour le salon de coiffure O\'Prestige Barbershop Spa, combinant un design classique avec des éléments modernes.',
-        features: [
-            'Design bicolore',
-            'Typographie élégante',
-            'Ornements décoratifs',
-            'Finition professionnelle'
-        ],
-        images: [
-            'assets/images/projects/oprestige-enseigne.jpg'
-        ],
-        material: 'Bois',
-        client: 'O\'Prestige Barbershop Spa'
     },
     {
         id: 'tigre-personnalise',
@@ -321,7 +433,8 @@ const projects = [
             'Marqueurs de voyage possibles'
         ],
         images: [
-            'assets/images/projects/carte-monde-1.jpg'
+            'assets/images/projects/carte-monde-1.jpg',
+            'assets/images/projects/carte-monde-2.jpg'
         ],
         material: 'Bois et liège',
         dimensions: '60 x 40 cm',
@@ -351,7 +464,39 @@ const projects = [
             finition: "Naturelle",
             usage: "Présentation culinaire"
         }
-    }
+    },
+    {
+        id: 'carte-geometrique',
+        name: 'The Geometrical World',
+        category: 'perso',
+        description: 'Carte du monde stylisée en design géométrique, où chaque continent est représenté par un assemblage unique de formes triangulaires. Une vision moderne et artistique de notre planète.',
+        features: [
+            'Design géométrique minimaliste',
+            'Gravure de précision',
+            'Format ovale original',
+            'Style contemporain',
+            'Parfait pour décoration murale'
+        ],
+        images: [
+            'assets/images/projects/carte-geometrique-1.jpg'
+        ],
+        material: 'Bois',
+        client: 'Projets personnels',
+        details: {
+            technique: 'Gravure laser fine',
+            finition: 'Naturelle',
+            usage: 'Décoration murale design'
+        },
+        portfolio: [
+            {
+                name: 'The Geometrical World',
+                description: 'Représentation minimaliste de la carte du monde en triangles',
+                style: 'Moderne et géométrique'
+            }
+        ],
+        dimensions: '80 x 40 cm'
+    },
+
 ];
 
 // Variables globales

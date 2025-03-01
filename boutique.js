@@ -5,19 +5,20 @@ let productsGrid;
 
 // Liste des produits (garder la liste existante)
 const products = [
+
     {
         id: 'cadres-paysages',
-        name: 'Cadres paysages',
+        name: 'Cadre paysage',
         price: '25 €',
         category: 'deco-murale',
         description: 'Transformez votre intérieur avec ces créations uniques qui capturent la magie des grands espaces.',
         dimensions: '30 x 40 cm',
         material: 'Bois',
         features: [
-            'Design minimaliste et élégant',
-            'Découpe laser de précision',
             'Plusieurs coloris disponibles',
             'Plusieurs dimensions disponibles',
+            'Design minimaliste et élégant',
+            'Découpe laser de précision',
         ],
         images: [
             'assets/images/products/cadre-van.jpg',
@@ -26,8 +27,60 @@ const products = [
         ],
     },
     {
+        id: 'noeud-papillon-ajour',
+        name: 'Nœud papillon',
+        price: '15 €',
+        category: 'accessoires',
+        description: 'Élégant nœud papillon en bois avec motif floral ajouré. Une pièce unique qui allie artisanat traditionnel et design contemporain, parfaite pour ajouter une touche d\'originalité à vos tenues.',
+        dimensions: '12 x 5 cm',
+        material: 'Bois',
+        features: [
+            'Motif floral ajouré',
+            'Ruban satin ajustable',
+            'Plusieurs couleurs de ruban disponibles',
+            'Design personnalisable',
+            'Découpe laser de précision',
+            'Finition soignée'
+        ],
+        images: [
+            'assets/images/products/noeud-papillon-1.jpg',
+        ],
+        inStock: true,
+        customizable: true,
+        priceDetails: [
+            'Prix unique : 15 €',
+            'Personnalisation incluse'
+        ]
+    },
+    {
+        id: 'applique-murale-bois',
+        name: 'Applique murale design',
+        price: '40 €',
+        category: 'light',
+        description: 'Élégante applique murale en bois qui allie design contemporain et chaleur naturelle. Les lamelles de bois créent un jeu d\'ombre et de lumière unique, parfait pour une ambiance chaleureuse et moderne.',
+        dimensions: '10 x 20 cm',
+        material: 'Bois',
+        features: [
+            'Design contemporain à lamelles',
+            'Éclairage indirect chaleureux',
+            'Installation murale facile',
+            'Finition bois naturel',
+            'Câblage inclus'
+        ],
+        images: [
+            'assets/images/products/applique-murale-1.jpg',
+            'assets/images/products/applique-murale-2.jpg'
+        ],
+        inStock: true,
+        customizable: false,
+        priceDetails: [
+            'Prix : 40 € (ampoule non-incluse)',
+            'Installation non comprise'
+        ]
+    },
+    {
         id: 'planche-voiture',
-        name: 'Planche gravée personnalisée - Modèle de votre voiture',
+        name: 'Modèle de votre voiture - Planche gravée personnalisée',
         price: '20 €',
         category: 'deco-murale',
         description: 'Sublimez votre passion automobile avec cette planche gravée mettant en valeur une illustration détaillée de votre véhicule, accompagnée du logo et du nom de la marque de celui-ci.',
@@ -89,6 +142,34 @@ const products = [
         customizable: true
     },
     {
+        id: 'elements-4',
+        name: 'Les 4 éléments',
+        price: '15 €',
+        category: 'deco-murale',
+        description: 'Ajoutez une touche harmonieuse et naturelle à votre intérieur avec ces décorations murales représentant les éléments : l\'eau, la terre, le feu et l\'air.',
+        dimensions: '20 x 20 cm',
+        material: 'Bois',
+        features: [
+            'Design minimaliste et élégant',
+            'Découpe laser de précision',
+            'Disponibles à l\'unité ou en lot',
+            'Personnalisables selon vos envies (tailles ou couleurs)',
+            'Parfaits pour une déco zen',
+        ],
+        images: [
+            'assets/images/products/elements-4-1.jpg',
+            'assets/images/products/elements-4-2.jpg',
+            'assets/images/products/elements-4-3.jpg',
+            'assets/images/products/elements-4-4.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        priceDetails: [
+            'Unité : 15 €',
+            'Lot de 4 : 50 €'
+        ]
+    },
+    {
         id: 'emojis-mains',
         name: 'Gravures "emojis" de mains',
         price: '15 €',
@@ -111,6 +192,84 @@ const products = [
         ],
         inStock: true,
         customizable: true
+    },
+    {
+        id: 'pics-jardin',
+        name: 'Pics de jardin personnalisés',
+        price: 'À partir de 5 €',
+        category: 'accessoires',
+        description: 'Ajoutez une touche d\'organisation et d\'élégance à votre jardin avec ces pics personnalisés, parfaits pour identifier vos plantes aromatiques, légumes ou fleurs dans votre potager.',
+        dimensions: '15 x 5 cm',
+        material: 'Bois ou Acrylique',
+        features: [
+            'Deux matériaux au choix',
+            'Personnalisation du nom de la plante',
+            'Ajout possible de motifs ou illustrations',
+            'Design élégant et pratique',
+            'Idéal pour potager et jardin d\'ornement'
+        ],
+        priceDetails: [
+            'Unité : 5 €',
+            'Lot de 3 : 10 €',
+        ],
+        images: [
+            'assets/images/products/pics-jardin-1.jpg',
+            'assets/images/products/pics-jardin-2.jpg',
+        ],
+        inStock: true,
+        customizable: true
+    },
+    {
+        id: 'prenom-mural',
+        name: 'Prénom mural',
+        price: '20 €',
+        category: 'deco-murale',
+        description: 'Personnalisez la chambre de vos enfants avec leur prénom en lettres décoratives à fixer au mur. Une touche personnelle et élégante qui apportera caractère et originalité à leur espace.',
+        dimensions: '40 x 20 cm',
+        material: 'Bois',
+        features: [
+            'Prénom entièrement personnalisable',
+            'Disponible en plusieurs coloris',
+            'Dimensions adaptables sur demande',
+            'Découpe laser de précision',
+            'Police d\'écriture au choix'
+        ],
+        images: [
+            'assets/images/products/prenom-mural-1.jpg',
+            'assets/images/products/prenom-mural-2.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        priceDetails: [
+            'Format standard (40 x 20 cm) : 20 €',
+            'Autres dimensions sur demande'
+        ]
+    },
+    {
+        id: 'support-billets-anniversaire',
+        name: 'Support billets anniversaire',
+        price: '15 €',
+        category: 'events',
+        description: 'Support en bois original et humoristique pour offrir de l\'argent avec style. Idéal pour les anniversaires avec son message "Tu vois ! C\'est pas beaucoup 30 !" et son système de pinces pour accrocher les billets.',
+        dimensions: '20 x 20 cm',
+        material: 'Bois',
+        features: [
+            'Message humoristique personnalisable',
+            'Support pour 2 billets',
+            'Pinces incluses',
+            'Âge personnalisable',
+            'Prénom personnalisable',
+            'Finition bois naturel'
+        ],
+        images: [
+            'assets/images/products/support-billets-1.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        priceDetails: [
+            'Prix unique : 15 €',
+            'Personnalisation incluse'
+        ]
     },
     {
         id: 'boules-noel-simple',
@@ -306,6 +465,32 @@ const products = [
         customizable: true
     },
     {
+        id: 'loup-geometrique',
+        name: 'Loup géométrique',
+        price: '25 €',
+        category: 'animaux',
+        description: 'Élégante décoration murale représentant un loup en style géométrique. Les lignes épurées et le design moderne créent une pièce artistique saisissante qui apportera caractère et originalité à votre intérieur.',
+        dimensions: '40 x 28 cm',
+        material: 'Bois',
+        features: [
+            'Design géométrique moderne',
+            'Découpe laser de précision',
+            'Finition noire mate',
+            'Effet visuel saisissant',
+            'Autres dimensions sur demande'
+        ],
+        images: [
+            'assets/images/products/loup-geometrique-1.jpg',
+            'assets/images/products/loup-geometrique-2.jpg'
+        ],
+        inStock: true,
+        customizable: false,
+        priceDetails: [
+            'Format standard (40 x 28 cm) : 25 €'
+        ]
+    },
+
+    {
         id: 'porte-clefs-circuit',
         name: 'Porte-clefs Circuit de Spa-Francorchamps',
         price: '4 €',
@@ -393,7 +578,9 @@ const products = [
             'Parfait pour les cadeaux',
             'Compatible avec la plupart des bouteilles de vin'
         ],
-        image: 'assets/images/products/bouchons-bouteilles.jpg',
+        images: ['assets/images/products/bouchons-bouteilles1.jpg',
+                'assets/images/products/bouchons-bouteilles2.jpg',
+            ],
         inStock: true,
         customizable: true
     },
@@ -437,6 +624,32 @@ const products = [
         ],
         inStock: true,
         customizable: true
+    },
+    {
+        id: 'carte-monde-geometrique',
+        name: 'Carte du monde géométrique',
+        price: '125 €',
+        category: 'deco-murale',
+        description: 'Cette carte du monde en géométrie est l\'ajout parfait pour transformer votre intérieur avec une décoration moderne et originale. Une touche unique qui allie design et exploration, parfaite pour les amoureux de voyages ou les amateurs de décoration minimaliste.',
+        dimensions: '143 x 80 cm',
+        material: 'Bois',
+        features: [
+            'Design géométrique moderne',
+            'Grande taille pour effet visuel maximal',
+            'Découpe laser de précision',
+            'Différentes tailles disponibles',
+            'Personnalisation possible',
+            'Finition soignée'
+        ],
+        images: [
+            'assets/images/products/carte-monde-geo-1.jpg'
+        ],
+        inStock: true,
+        customizable: true,
+        priceDetails: [
+            'Format standard (143 x 80 cm) : 125 €',
+            'Autres dimensions sur demande'
+        ]
     },
     {
         id: 'planches-aperitives',
@@ -1356,7 +1569,13 @@ const products = [
         ],
         inStock: true,
         customizable: false
-    }
+    },
+
+
+
+
+
+
 ];
 
 // Fonction pour afficher les produits

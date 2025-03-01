@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Projets - La Gravisterie</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="gestion.css">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie">
+            </div>
+            <div class="nav-links">
+                <a href="gestion_produits.html">Gestion Produits</a>
+                <a href="gestion_projets.html" class="active">Gestion Projets</a>
+            </div>
+            <button class="theme-toggle" aria-label="Changer de thème">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="admin-main">
+        <div class="controls">
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Rechercher un projet...">
+                <select id="categoryFilter">
+                    <option value="all">Toutes les catégories</option>
+                    <option value="evenements">Événements</option>
+                    <option value="perso">Personnel</option>
+                    <option value="entreprises">Entreprises</option>
+                    <option value="autres">Autres</option>
+                </select>
+            </div>
+            <button id="addProject" class="btn btn-primary">Ajouter un projet</button>
+        </div>
+
+        <div id="projectsList" class="items-grid">
+            <!-- Les projets seront injectés ici -->
+        </div>
+    </main>
+
+    <!-- Modal pour l'édition/ajout de projet -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Éditer le projet</h2>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dimensions">Dimensions</label>
+                    <input type="text" id="dimensions" name="dimensions">
+                </div>
+                <div class="form-group">
+                    <label for="category">Catégorie</label>
+                    <select id="category" name="category" required>
+                        <option value="evenements">Événements</option>
+                        <option value="perso">Personnel</option>
+                        <option value="entreprises">Entreprises</option>
+                        <option value="autres">Autres</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="material">Matériau</label>
+                    <input type="text" id="material" name="material" required>
+                </div>
+                <div class="form-group">
+                    <label for="features">Caractéristiques</label>
+                    <textarea id="features" name="features" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="client">Client</label>
+                    <input type="text" id="client" name="client" required>
+                </div>
+                <div class="form-group">
+                    <label>Images</label>
+                    <div id="imageUploader" class="image-uploader">
+                        <input type="file" multiple accept="image/*">
+                        <div class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmation</h2>
+            <p>Êtes-vous sûr de vouloir supprimer ce projet ?</p>
+            <div class="form-actions">
+                <button onclick="confirmDelete()" class="btn btn-danger">Supprimer</button>
+                <button onclick="closeConfirmModal()" class="btn btn-secondary">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="theme.js"></script>
+    <script src="projets.js"></script>
+    <script src="gestion_projets.js"></script>
+</body>
+</html> 

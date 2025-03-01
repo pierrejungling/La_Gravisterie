@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Produits - La Gravisterie</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="gestion.css">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie">
+            </div>
+            <div class="nav-links">
+                <a href="gestion_produits.html" class="active">Gestion Produits</a>
+                <a href="gestion_projets.html">Gestion Projets</a>
+            </div>
+            <button class="theme-toggle" aria-label="Changer de thème">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="admin-main">
+        <div class="controls">
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+                <select id="categoryFilter">
+                    <option value="all">Toutes les catégories</option>
+                    <option value="deco-murale">Murale</option>
+                    <option value="animaux">Animaux</option>
+                    <option value="accessoires">Accessoires</option>
+                    <option value="events">Fêtes & Cadeaux</option>
+                    <option value="decoration">Décorations</option>
+                    <option value="light">Lampes</option>
+                </select>
+            </div>
+            <button id="addProduct" class="btn btn-primary">Ajouter un produit</button>
+        </div>
+
+        <div id="productsList" class="items-grid">
+            <!-- Les produits seront injectés ici -->
+        </div>
+    </main>
+
+    <!-- Modal pour l'édition/ajout de produit -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Éditer le produit</h2>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Prix</label>
+                    <input type="text" id="price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="priceDetails">Détails du prix</label>
+                    <textarea id="priceDetails" name="priceDetails"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dimensions">Dimensions</label>
+                    <input type="text" id="dimensions" name="dimensions">
+                </div>
+                <div class="form-group">
+                    <label for="category">Catégorie</label>
+                    <select id="category" name="category" required>
+                        <option value="deco-murale">Murale</option>
+                        <option value="animaux">Animaux</option>
+                        <option value="accessoires">Accessoires</option>
+                        <option value="events">Fêtes & Cadeaux</option>
+                        <option value="decoration">Décorations</option>
+                        <option value="light">Lampes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="material">Matériau</label>
+                    <input type="text" id="material" name="material" required>
+                </div>
+                <div class="form-group">
+                    <label for="features">Caractéristiques</label>
+                    <textarea id="features" name="features" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Images</label>
+                    <div id="imageUploader" class="image-uploader">
+                        <input type="file" multiple accept="image/*">
+                        <div class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group checkbox">
+                    <label for="inStock">En stock</label>
+                    <input type="checkbox" id="inStock" name="inStock">
+                </div>
+                <div class="form-group checkbox">
+                    <label for="customizable">Personnalisable</label>
+                    <input type="checkbox" id="customizable" name="customizable">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmation</h2>
+            <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
+            <div class="form-actions">
+                <button onclick="confirmDelete()" class="btn btn-danger">Supprimer</button>
+                <button onclick="closeConfirmModal()" class="btn btn-secondary">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="theme.js"></script>
+    <script src="boutique.js"></script>
+    <script src="gestion_produits.js"></script>
+</body>
+</html> 
