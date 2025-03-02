@@ -15,8 +15,8 @@ const products = [
         dimensions: '30 x 40 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
             'Plusieurs coloris disponibles',
-            'Plusieurs dimensions disponibles',
             'Design minimaliste et élégant',
             'Découpe laser de précision',
         ],
@@ -63,7 +63,7 @@ const products = [
             'Design contemporain à lamelles',
             'Éclairage indirect chaleureux',
             'Installation murale facile',
-            'Divers coloris disponible',
+            'Plusieurs coloris disponibles',
             'Câblage inclus'
         ],
         images: [
@@ -86,7 +86,7 @@ const products = [
         dimensions: '40 x 20 cm',
         material: 'Bois',
         features: [
-            'Plusieurs dimensions disponibles',
+            'Autres dimensions disponibles',
             'Gravure personnalisée de votre véhicule',
             'Logo et nom de la marque inclus',
         ],
@@ -178,10 +178,10 @@ const products = [
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design minimaliste et expressif',
             'Découpe laser de précision',
-            'Plusieurs modèles disponibles',
-            'Plusieurs dimensions disponible'
         ],
         images: [
             'assets/images/products/emoji-shaka.jpg',
@@ -200,7 +200,7 @@ const products = [
         category: 'accessoires',
         description: 'Ces pics personnalisés sont parfaits pour identifier vos plantes aromatiques, légumes ou fleurs dans votre potager.',
         dimensions: '15 x 5 cm',
-        material: 'Bois ou Acrylique',
+        material: 'Bois',
         features: [
             'Personnalisation du nom de la plante',
             'Ajout possible de motifs ou illustrations',
@@ -228,8 +228,8 @@ const products = [
         material: 'Bois',
         features: [
             'Prénom entièrement personnalisable avec police d\'érciture au choix',
-            'Disponible en plusieurs coloris',
-            'Dimensions adaptables sur demande',
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Découpe laser de précision',
         ],
         images: [
@@ -360,7 +360,8 @@ const products = [
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
-            'Plusieurs dimensions disponibles',
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique original',
             'Découpe laser de précision',
 
@@ -383,8 +384,8 @@ const products = [
         material: 'Bois',
         features: [
             'Lot de 3 panneaux',
+            'Autres dimensions disponibles',
             'Plusieurs coloris disponibles',
-            'Plusieurs dimensions disponibles',
             'Design moderne et minimaliste',
             'Motifs géométriques coordonnés',
 
@@ -439,14 +440,18 @@ const products = [
         id: 'gorille',
         name: 'Le Gorille',
         price: 'À partir de 15 €',
+        priceDetails: [
+            'Sans pied (murale) : 15 €',
+            'Avec pied : 20€'
+        ],
 
         category: 'animaux',
         description: 'Silhouette de gorille élégante, disponible avec ou sans socle gravé.',
         dimensions: '18 x 15 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
             'Plusieurs coloris disponibles',
-            'Plusieurs dimensions disponibles',
             'Option avec socle personnalisé',
             'Design minimaliste',
             'Effet d\'ombre projetée',
@@ -469,11 +474,10 @@ const products = [
         dimensions: '40 x 28 cm',
         material: 'Bois',
         features: [
-            'Autres dimensions disponible',
-            'Plusieurs coloris disponible',
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique moderne',
             'Découpe laser de précision',
-            'Effet visuel saisissant',
         ],
         images: [
             'assets/images/products/loup-geometrique-1.jpg',
@@ -484,6 +488,28 @@ const products = [
         priceDetails: [
             'Format standard (40 x 28 cm) : 25 €'
         ]
+    },
+    {
+        id: 'lion-geometrique',
+        name: 'Lion géométrique',
+        price: '25 €',
+        category: 'animaux',
+        description: 'Majestueuse représentation d\'un lion en style géométrique. Les lignes épurées et le design moderne créent une pièce artistique saisissante qui apportera force et caractère à votre intérieur.',
+        dimensions: '32 x 40 cm',
+        material: 'Bois',
+        features: [
+
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
+            'Design géométrique moderne',
+            'Découpe laser de précision',
+        ],
+        images: [
+            'assets/images/products/lion-geometrique-1.jpg'
+        ],
+        inStock: true,
+        customizable: false,
+
     },
 
     {
@@ -576,8 +602,12 @@ const products = [
             'Gravures de haute qualité',
             'Compatible avec la plupart des bouteilles de vin'
         ],
-        images: ['assets/images/products/bouchons-bouteilles1.jpg',
+        images: ['assets/images/products/bouchons-bouteilles3.jpg',
+            'assets/images/products/bouchons-bouteilles4.jpg',
+            'assets/images/products/bouchons-bouteilles5.jpg',
+            'assets/images/products/bouchons-bouteilles1.jpg',
                 'assets/images/products/bouchons-bouteilles2.jpg',
+
             ],
         inStock: true,
         customizable: true
@@ -633,7 +663,7 @@ const products = [
         material: 'Bois',
         features: [
 
-            'Différentes tailles disponibles',
+            'Autres dimensions disponibles',
             'Personnalisation possible',
             'Design géométrique moderne',
             'Grande taille pour effet visuel maximal',
@@ -657,7 +687,7 @@ const products = [
         material: 'Bois',
         features: [
             'Plusieurs formats disponibles',
-            'Option de gravure sur planches existantes',
+            'Option de gravure sur vos propres planches',
             'Design personnalisable',
             'Gravure de qualité',
         ],
@@ -807,10 +837,11 @@ const products = [
         dimensions: '80 x 22 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design précis',
             'Option plaque d\'identification',
             'Plusieurs modèles disponibles',
-            'Dimensions personnalisables'
         ],
         images: [
             'assets/images/products/voiture-1.jpg',
@@ -850,6 +881,8 @@ const products = [
         dimensions: '38 x 25 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design complexe et détaillé',
             'Motifs géométriques',
             'Style zen et apaisant',
@@ -867,6 +900,8 @@ const products = [
         dimensions: '39 x 35 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design minimaliste',
         ],
         image: 'assets/images/products/lotus-simple.jpg',
@@ -881,6 +916,8 @@ const products = [
         dimensions: '38 x 12 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique moderne',
             'Trois éléphants coordonnés',
             'Style contemporain',
@@ -978,6 +1015,9 @@ const products = [
         dimensions: '40 x 40 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
+            'Disponible en français',
             'Design classique',
             'Points cardinaux',
             'Finition élégante',
@@ -1010,6 +1050,8 @@ const products = [
         dimensions: '40 x 35 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design minimaliste',
             'Découpe laser de précision',
             'Style marin',
@@ -1027,6 +1069,8 @@ const products = [
         dimensions: '35 x 40 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique moderne',
             'Découpe laser de précision',
             'Style contemporain',
@@ -1044,6 +1088,8 @@ const products = [
         dimensions: '20 x 15 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design naturaliste',
             'Idéal pour petits espaces'
         ],
@@ -1059,6 +1105,8 @@ const products = [
         dimensions: '20 x 10 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design minimaliste',
             'Style épuré',
             'Format panoramique',
@@ -1076,8 +1124,10 @@ const products = [
         dimensions: '30 x 30 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique moderne',
-            'Motif montagne et forêt',
+            'Motif de montagne et forêt',
             'Cadre triangulaire',
             'Style contemporain'
         ],
@@ -1089,14 +1139,16 @@ const products = [
         name: 'Tracé du circuit de Spa-Francorchamps',
         price: '15 €',
         category: 'deco-murale',
-        description: 'Reproduction précise du célèbre circuit de Spa-Francorchamps, parfait pour les passionnés de sport automobile.',
+        description: 'Reproduction du célèbre circuit de Spa-Francorchamps, parfait pour les passionnés de sport automobile.',
         dimensions: '20 x 15 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Tracé fidèle du circuit',
             'Découpe laser de précision',
             'Design minimaliste',
-            'Idéal pour les fans de F1'
+            'Idéal pour les fans de sport auto'
         ],
         image: 'assets/images/products/circuit-spa.jpg',
         inStock: true
@@ -1110,6 +1162,8 @@ const products = [
         dimensions: '17 x 5 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design minimaliste',
             'Style épuré',
             'Format panoramique',
@@ -1127,6 +1181,8 @@ const products = [
         dimensions: '27 x 18 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique',
             'Style moderne',
             'Découpe laser de précision',
@@ -1143,6 +1199,8 @@ const products = [
         dimensions: '10 x 10 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design romantique',
             'Style naturel',
             'Finition soignée'
@@ -1182,10 +1240,12 @@ const products = [
         name: 'Montagne jour et nuit',
         price: '20 €',
         category: 'deco-murale',
-        description: 'Duo de triangles représentant une montagne de jour et de nuit. Le premier panneau montre un paysage nocturne avec lune et étoiles, le second un paysage diurne avec soleil rayonnant.',
+        description: 'Duo de triangles représentant une montagne de jour et de nuit.',
         dimensions: '30 x 20 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design en deux parties',
             'Contraste jour/nuit',
             'Format triangulaire',
@@ -1199,10 +1259,12 @@ const products = [
         name: 'Écureuil',
         price: '15 €',
         category: 'animaux',
-        description: 'Écureuil dans un cercle, une scène naturelle et poétique avec branches d\'arbre. Parfait pour apporter une touche de nature à votre intérieur.',
+        description: 'Une scène naturelle et poétique d\'un écurueil sur les branches d\'un arbre. Parfait pour apporter une touche de nature à votre intérieur.',
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design nature',
             'Format rond',
             'Motif détaillé',
@@ -1260,6 +1322,8 @@ const products = [
         dimensions: '20 x 7 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design symbole infini',
             'Option cœur rouge',
             'Personnalisation des noms possible',
@@ -1281,6 +1345,8 @@ const products = [
         dimensions: '15 x 40 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design artistique',
             'Effet visuel unique'
         ],
@@ -1348,6 +1414,8 @@ const products = [
         dimensions: '20 x 30 cm par pièce',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design moderne et épuré',
             'Trois motifs complémentaires',
             'Fabrication artisanale',
@@ -1380,8 +1448,9 @@ const products = [
         dimensions: '20 x 15 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique moderne',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/raton-laveur.jpg'
@@ -1398,8 +1467,9 @@ const products = [
         dimensions: '21 x 20 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique complexe',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/ours-geo.jpg'
@@ -1416,8 +1486,9 @@ const products = [
         dimensions: '20 x 17 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design frontal minimaliste',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/panda-face.jpg'
@@ -1434,9 +1505,9 @@ const products = [
         dimensions: '16 x 23 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique détaillé',
-            'Finition bois naturel',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/chouette-geo.jpg'
@@ -1453,9 +1524,9 @@ const products = [
         dimensions: '20 x 14 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique doux',
-            'Finition bois naturel',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/koala-geo.jpg'
@@ -1472,9 +1543,9 @@ const products = [
         dimensions: '16 x 13 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique élégant',
-            'Finition dorée',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/elephant-dore.jpg'
@@ -1491,9 +1562,9 @@ const products = [
         dimensions: '19 x 20 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique original',
-            'Finition bois naturel',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/pingouin-geometrique.jpg'
@@ -1510,10 +1581,10 @@ const products = [
         dimensions: '35 x 40 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique montagneux',
-            'Finition noire mate',
             'Format triangulaire',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/montagne-triangle2.jpg'
@@ -1530,10 +1601,10 @@ const products = [
         dimensions: '25 x 25 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design circulaire',
             'Scène tropicale détaillée',
-            'Finition noire mate',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/voilier-tropical.jpg'
@@ -1550,10 +1621,10 @@ const products = [
         dimensions: '30 x 17 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponibles',
+            'Plusieurs coloris disponibles',
             'Design géométrique unique',
             'Format allongé original',
-            'Finition noire mate',
-            'Autres dimensions possibles'
         ],
         images: [
             'assets/images/products/panda-allonge.jpg'
@@ -1561,6 +1632,7 @@ const products = [
         inStock: true,
         customizable: false
     },
+
 
 
 
