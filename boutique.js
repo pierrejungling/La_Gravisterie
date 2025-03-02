@@ -1758,14 +1758,29 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             categoryButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            currentPage = 1;
             const category = button.getAttribute('data-category');
+            // Forcer le retour à la page 1
+            currentPage = 1;
             displayProducts(category);
+            // Mettre à jour l'URL sans le paramètre de page
+            if (category === 'all') {
+                window.location.href = window.location.pathname;
+            } else {
+                const url = new URL(window.location);
+                url.searchParams.delete('page');
+                url.searchParams.set('category', category);
+                window.location.href = url.toString();
+            }
         });
     });
 
     // Récupérer et afficher la catégorie depuis l'URL
     const savedCategory = getCategoryFromURL();
+    
+    // Vérifier s'il y a un produit à afficher
+    const productId = getProductFromURL();
+    
+    // Afficher d'abord les produits
     displayProducts(savedCategory);
     
     // Activer le bon bouton
@@ -1774,10 +1789,11 @@ document.addEventListener('DOMContentLoaded', () => {
         activeButton.classList.add('active');
     }
 
-    // Vérifier s'il y a un produit à afficher
-    const productId = getProductFromURL();
+    // Ensuite ouvrir le popup si nécessaire
     if (productId) {
-        openProductPopup(productId);
+        setTimeout(() => {
+            openProductPopup(productId);
+        }, 100); // Petit délai pour s'assurer que la grille est chargée
     }
 });
 

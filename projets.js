@@ -711,14 +711,29 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            currentPage = 1;
             const category = button.getAttribute('data-category');
+            // Forcer le retour à la page 1
+            currentPage = 1;
             displayProjects(category);
+            // Mettre à jour l'URL sans le paramètre de page
+            if (category === 'all') {
+                window.location.href = window.location.pathname;
+            } else {
+                const url = new URL(window.location);
+                url.searchParams.delete('page');
+                url.searchParams.set('category', category);
+                window.location.href = url.toString();
+            }
         });
     });
 
     // Récupérer et afficher la catégorie depuis l'URL
     const savedCategory = getCategoryFromURL();
+    
+    // Vérifier s'il y a un projet à afficher
+    const projectId = getProjectFromURL();
+    
+    // Afficher d'abord les projets
     displayProjects(savedCategory);
     
     // Activer le bon bouton
@@ -727,31 +742,32 @@ document.addEventListener('DOMContentLoaded', () => {
         activeButton.classList.add('active');
     }
 
-    // Vérifier s'il y a un projet à afficher
-    const projectId = getProjectFromURL();
+    // Ensuite ouvrir le popup si nécessaire
     if (projectId) {
-        const project = projects.find(p => p.id === projectId);
-        if (project) {
-            const popup = createProjectPopup(project);
-            document.body.appendChild(popup);
-            document.body.classList.add('popup-open');
-            handleTouchGallery(popup, project);
-            
-            // Ajouter le gestionnaire de fermeture qui met à jour l'URL
-            popup.querySelector('.close-popup').addEventListener('click', () => {
-                popup.remove();
-                document.body.classList.remove('popup-open');
-                updateURL(savedCategory, currentPage);
-            });
-
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
+        setTimeout(() => {
+            const project = projects.find(p => p.id === projectId);
+            if (project) {
+                const popup = createProjectPopup(project);
+                document.body.appendChild(popup);
+                document.body.classList.add('popup-open');
+                handleTouchGallery(popup, project);
+                
+                // Ajouter le gestionnaire de fermeture qui met à jour l'URL
+                popup.querySelector('.close-popup').addEventListener('click', () => {
                     popup.remove();
                     document.body.classList.remove('popup-open');
                     updateURL(savedCategory, currentPage);
-                }
-            });
-        }
+                });
+
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+                        popup.remove();
+                        document.body.classList.remove('popup-open');
+                        updateURL(savedCategory, currentPage);
+                    }
+                });
+            }
+        }, 100); // Petit délai pour s'assurer que la grille est chargée
     }
 });
 
