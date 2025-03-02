@@ -3,7 +3,7 @@ const projects = [
     {
         id: 'calendrier-maternelle',
         name: 'Calendrier perpétuel',
-        category: 'autres',
+        category: ['autres'],
         description: 'Projet réalisé pour une classe de maternelle en immersion en anglais. Un calendrier interactif permettant aux enfants d\'apprendre les jours, les mois et la météo.',
         features: [
             'Calendrier interactif',
@@ -168,7 +168,7 @@ const projects = [
     {
         id: 'presentoir-vinyles',
         name: 'Etagère Vinyles Personnalisé',
-        category: 'perso',
+        category: 'autres',
         description: 'Support mural pour vinyles avec design de lecteur musical intégré. Une façon élégante de ranger et présenter vos vinyles tout en ajoutant une touche décorative à votre intérieur.',
         features: [
             'Design de lecteur musical',
@@ -198,7 +198,7 @@ const projects = [
     {
         id: 'cadres-maman',
         name: 'Cadres "Maman, mon héroïne"',
-        category: 'perso',
+        category: ['perso','autres'],
         description: 'Création de cadres personnalisés célébrant le lien mère-enfant, avec illustrations peintes à la main et gravure délicate.',
         features: [
             'Illustrations personnalisées',
@@ -280,7 +280,7 @@ const projects = [
     {
         id: 'opinel-personnalise',
         name: 'Opinel Personnalisé',
-        category: 'perso',
+        category: ['perso', 'entreprises'],
         description: 'Personnalisation d\'un Opinel par gravure laser sur le manche en bois. Un design simple et élégant combinant le prénom et un motif de tente de camping.',
         features: [
             'Gravure sur manche d\'Opinel',
@@ -328,7 +328,7 @@ const projects = [
     {
         id: 'gourdes-personnalisees',
         name: 'Gourdes Personnalisées',
-        category: 'perso',
+        category: ['perso', 'entreprises'],
         description: 'Lot de trois gourdes isothermes personnalisées avec initiales et prénoms, ornées d\'un design floral élégant. Une création unique pour un trio d\'amies, alliant style et personnalisation.',
         features: [
             'Design floral délicat',
@@ -493,7 +493,7 @@ const projects = [
     {
         id: 'trophees-trottiloup',
         name: 'Trophées Trottiloup 2024',
-        category: 'evenements',
+        category: ['evenements','entreprises'],
         description: 'Collection de trophées et porte-clés créés pour la course de trottinettes Trottiloup, organisée par l\'Unité Scoute de Stembert HF10. Un design unique combinant trottinette et récompense sportive.',
         features: [
             'Design original en forme de trottinette',
@@ -535,7 +535,7 @@ const projects = [
         id: 'ardoise-samosa',
         client: 'Privé',
         name: '"It\'s Samosa Time"',
-        category: 'perso',
+        category: ['perso','entreprises'],
         description: "Ardoise gravée personnalisée pour la présentation de samosas, combinant élégance et style vintage avec une illustration détaillée.",
         images: [
             'assets/images/projects/samosa-1.jpg'
@@ -744,7 +744,13 @@ function displayProjects(category = getCategoryFromURL()) {
     
     const filteredProjects = category === 'all' 
         ? projects 
-        : projects.filter(project => project.category === category);
+        : projects.filter(project => {
+            // Vérifier si category est un tableau ou une chaîne
+            if (Array.isArray(project.category)) {
+                return project.category.includes(category);
+            }
+            return project.category === category;
+        });
 
     const startIndex = (currentPage - 1) * projectsPerPage;
     const endIndex = startIndex + projectsPerPage;

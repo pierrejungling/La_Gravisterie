@@ -10,7 +10,7 @@ const products = [
         id: 'cadres-paysages',
         name: 'Cadre paysage',
         price: '25 €',
-        category: 'deco-murale',
+        category: ['deco-murale',],
         description: 'Transformez votre intérieur avec ces créations uniques qui capturent la magie des grands espaces.',
         dimensions: '30 x 40 cm',
         material: 'Bois',
@@ -30,7 +30,7 @@ const products = [
         id: 'noeud-papillon-ajour',
         name: 'Nœud papillon',
         price: '15 €',
-        category: 'accessoires',
+        category: ['accessoires','events'],
         description: 'Élégant nœud papillon en bois avec divers motif et coloris. Une pièce unique qui allie artisanat traditionnel et design contemporain, parfaite pour ajouter une touche d\'originalité à vos tenues.',
         dimensions: '12 x 5 cm',
         material: 'Bois',
@@ -355,7 +355,7 @@ const products = [
         id: 'tortue-geometrique',
         name: 'Tortue géométrique',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Une création unique alliant géométrie et nature, parfaite pour une décoration murale moderne et élégante.',
         dimensions: '20 x 20 cm',
         material: 'Bois',
@@ -445,7 +445,7 @@ const products = [
             'Avec pied : 20€'
         ],
 
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Silhouette de gorille élégante, disponible avec ou sans socle gravé.',
         dimensions: '18 x 15 cm',
         material: 'Bois',
@@ -469,7 +469,7 @@ const products = [
         id: 'loup-geometrique',
         name: 'Loup géométrique',
         price: '25 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Élégante décoration murale représentant un loup en style géométrique. Les lignes épurées et le design moderne créent une pièce artistique saisissante qui apportera caractère et originalité à votre intérieur.',
         dimensions: '40 x 28 cm',
         material: 'Bois',
@@ -493,7 +493,7 @@ const products = [
         id: 'lion-geometrique',
         name: 'Lion géométrique',
         price: '25 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Majestueuse représentation d\'un lion en style géométrique. Les lignes épurées et le design moderne créent une pièce artistique saisissante qui apportera force et caractère à votre intérieur.',
         dimensions: '32 x 40 cm',
         material: 'Bois',
@@ -593,7 +593,7 @@ const products = [
         id: 'bouchons-bouteilles',
         name: 'Bouchons de bouteilles gravés',
         price: '3 €',
-        category: 'accessoires',
+        category: ['accessoires','events'],
         description: 'Bouchons de bouteilles gravés et personnalisables, parfaits pour ajouter une touche spéciale à vos bouteilles. Une petite attention idéale à offrir',
         dimensions: 'Format standard bouteille de vin',
         material: 'Bois',
@@ -638,7 +638,7 @@ const products = [
         id: 'gourde-personnalisee',
         name: 'Gourde personnalisée',
         price: '15 €',
-        category: 'accessoires',
+        category: ['accessoires','events'],
         description: 'Gourde isotherme personnalisable avec votre design gravé. Disponible en plusieurs couleurs.',
         dimensions: '80 cl',
         material: 'Aluminium',
@@ -734,7 +734,7 @@ const products = [
         id: 'sous-verres-ardoise',
         name: 'Sous-verres en ardoise personnalisés',
         price: '15 € le lot',
-        category: 'accessoires',
+        category: ['accessoires','events'],
         description: 'Lot de 6 sous-verres en ardoise avec support en bambou. Chaque sous-verre peut être personnalisé avec le design de votre choix.',
         dimensions: '10 cm de diamètre',
         material: 'Ardoise et bambou',
@@ -762,7 +762,7 @@ const products = [
         id: 'brosse-cheveux',
         name: 'Brosse à cheveux personnalisée',
         price: '6 €',
-        category: 'accessoires',
+        category: ['accessoires','events'],
         description: 'Brosse à cheveux en bois avec gravure personnalisée sur l\'avant et possibilité de gravure sur la face arrière selon vos désirs.',
         dimensions: '',
         material: 'Bois',
@@ -913,7 +913,7 @@ const products = [
         id: 'elephants-geometriques',
         name: 'Famille d\'éléphants',
         price: '20 €',
-        category: 'deco-murale',
+        category: ['animaux','deco-murale'],
         description: 'Famille d\'éléphants en style géométrique, une décoration murale originale et moderne.',
         dimensions: '38 x 12 cm',
         material: 'Bois',
@@ -973,7 +973,7 @@ const products = [
         name: 'The Dodo',
         price: '12 €',
         priceCustom: '15-20 €',
-        category: 'deco-murale',
+        category: ['animaux','deco-murale'],
         description: 'Gravure représentant le légendaire Dodo.',
         dimensions: '10 x 10 cm',
         material: 'Bois',
@@ -1066,7 +1066,7 @@ const products = [
         id: 'elephant-geometrique',
         name: 'Tête d\'éléphant géométrique',
         price: '25 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Majestueuse tête d\'éléphant en style géométrique, une pièce artistique qui allie modernité et nature.',
         dimensions: '35 x 40 cm',
         material: 'Bois',
@@ -1085,7 +1085,7 @@ const products = [
         id: 'mesange',
         name: 'Mésange',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Délicate gravure d\'une mésange sur sa branche, parfaite pour apporter une touche de nature à votre intérieur.',
         dimensions: '20 x 15 cm',
         material: 'Bois',
@@ -1178,7 +1178,7 @@ const products = [
         id: 'chat-geometrique',
         name: 'Chat géométrique',
         price: '20 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Silhouette de chat en style géométrique, une pièce moderne et élégante.',
         dimensions: '27 x 18 cm',
         material: 'Bois',
@@ -1196,7 +1196,7 @@ const products = [
         id: 'couple-oiseaux',
         name: 'Couple d\'oiseaux',
         price: '10 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Délicat couple d\'oiseaux sur une branche, une décoration romantique et naturelle.',
         dimensions: '10 x 10 cm',
         material: 'Bois',
@@ -1260,7 +1260,7 @@ const products = [
         id: 'ecureuil-cercle',
         name: 'Écureuil',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Une scène naturelle et poétique d\'un écurueil sur les branches d\'un arbre. Parfait pour apporter une touche de nature à votre intérieur.',
         dimensions: '20 x 20 cm',
         material: 'Bois',
@@ -1445,7 +1445,7 @@ const products = [
         id: 'raton-laveur-geometrique',
         name: 'Raton laveur géométrique',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Décoration murale représentant un raton laveur en style géométrique. Un design moderne et épuré qui apportera une touche de nature stylisée à votre intérieur.',
         dimensions: '20 x 15 cm',
         material: 'Bois',
@@ -1464,7 +1464,7 @@ const products = [
         id: 'ours-geometrique',
         name: 'Ours géométrique',
         price: '20 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Silhouette d\'ours en style géométrique, parfaite pour une décoration murale contemporaine. Les lignes épurées créent un effet de volume saisissant.',
         dimensions: '21 x 20 cm',
         material: 'Bois',
@@ -1483,7 +1483,7 @@ const products = [
         id: 'panda-face',
         name: 'Panda géométrique',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Portrait frontal de panda en style géométrique minimaliste. Un design adorable qui combine simplicité et caractère.',
         dimensions: '20 x 17 cm',
         material: 'Bois',
@@ -1502,7 +1502,7 @@ const products = [
         id: 'chouette-geometrique',
         name: 'Chouette géométrique',
         price: '20 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Chouette en style géométrique, disponible en bois naturel. Un design élégant qui combine sagesse et modernité.',
         dimensions: '16 x 23 cm',
         material: 'Bois',
@@ -1521,7 +1521,7 @@ const products = [
         id: 'koala-geometrique',
         name: 'Koala géométrique',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Portrait de koala en style géométrique. Un design attendrissant qui apportera douceur et modernité à votre décoration.',
         dimensions: '20 x 14 cm',
         material: 'Bois',
@@ -1540,7 +1540,7 @@ const products = [
         id: 'elephant-geometrique',
         name: 'Éléphant géométrique',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Éléphant en style géométrique, disponible en finition dorée. Un design majestueux qui allie élégance et modernité.',
         dimensions: '16 x 13 cm',
         material: 'Bois',
@@ -1559,7 +1559,7 @@ const products = [
         id: 'pingouin-geometrique',
         name: 'Pingouin géométrique',
         price: '15 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Décoration murale représentant un pingouin en style géométrique. Les lignes épurées créent un design moderne et attachant, parfait pour une chambre d\'enfant ou un intérieur contemporain.',
         dimensions: '19 x 20 cm',
         material: 'Bois',
@@ -1618,7 +1618,7 @@ const products = [
         id: 'panda-allonge',
         name: 'Panda allongé géométrique',
         price: '25 €',
-        category: 'animaux',
+        category: ['animaux','deco-murale'],
         description: 'Représentation géométrique d\'un panda allongé, combinant style moderne et douceur. Un design original qui apportera une touche de zen à votre décoration.',
         dimensions: '30 x 17 cm',
         material: 'Bois',
@@ -1644,7 +1644,7 @@ const products = [
 ];
 
 // Fonction pour afficher les produits
-function displayProducts(category = 'all') {
+function displayProducts(category = getCategoryFromURL()) {
     // Récupérer la page depuis l'URL au premier chargement
     if (currentPage === 1) {
         currentPage = getPageFromURL();
@@ -1661,7 +1661,13 @@ function displayProducts(category = 'all') {
     
     const filteredProducts = category === 'all' 
         ? products 
-        : products.filter(product => product.category === category);
+        : products.filter(product => {
+            // Vérifier si category est un tableau ou une chaîne
+            if (Array.isArray(product.category)) {
+                return product.category.includes(category);
+            }
+            return product.category === category;
+        });
 
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
