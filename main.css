@@ -741,3 +741,25 @@ footer {
 [data-theme="dark"] .mobile-logo a:hover {
     filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.2));
 }
+
+/* Par défaut, cacher la signature */
+.menu-signature {
+    display: none;
+}
+
+/* Afficher la signature uniquement en version mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        /* ... autres styles ... */
+    }
+
+    .menu-signature {
+        display: block;
+        margin-top: auto;
+        padding: 1rem 0;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        text-align: center;
+    }
+}
