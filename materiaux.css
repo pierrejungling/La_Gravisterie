@@ -135,4 +135,31 @@
         grid-template-columns: 1fr;
         padding: 1rem;
     }
+}
+
+/* Styles pour les étiquettes de capacités */
+.material-capabilities {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.capability-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.capability-tag:hover {
+    transform: translateY(-2px);
+}
+
+/* Ajustement pour le mode sombre */
+[data-theme="dark"] .capability-tag {
+    border: 1px solid var(--border-color);
 } 
