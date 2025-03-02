@@ -615,6 +615,67 @@ const projects = [
         ],
         dimensions: '60 x 20 cm'
     },
+    {
+        id: 'bouchons-el-trio',
+        name: 'Bouchons Personnalisés',
+        category: 'entreprises',
+        description: 'Personnalisation de bouchons en bois pour les bouteilles de spiritueux d\'El Trio Factory.',
+        features: [
+            'Logo El Trio Factory',
+            'Design minimaliste',
+            'Gravure de précision',
+            'Numérotation unique',
+        ],
+        images: [
+            'assets/images/projects/bouchon-el-trio-1.jpg',
+            'assets/images/projects/bouchon-el-trio-2.jpg'
+        ],
+        material: 'Bois',
+        client: 'El Trio Factory',
+        details: {
+            technique: 'Gravure laser de précision',
+            finition: 'Alimentaire',
+            usage: 'Bouchons pour spiritueux'
+        },
+        portfolio: [
+            {
+                name: 'Bouchons El Trio',
+                description: 'Série de bouchons personnalisés avec logo triangulaire et numérotation',
+                style: 'Industriel et artisanal'
+            }
+        ]
+    },
+    {
+        id: 'cartes-cocktails',
+        name: 'Menus',
+        category: 'entreprises',
+        description: 'Cartes de cocktails en bois gravées pour El Trio Factory. Un design élégant qui présente les cocktails et boissons dans un style vintage avec illustrations détaillées.',
+        features: [
+            'Design vintage',
+            'Illustrations de cocktails',
+            'Menu complet gravé',
+            'QR code intégré',
+        ],
+        images: [
+            'assets/images/projects/carte-cocktails-1.jpg',
+            'assets/images/projects/carte-cocktails-2.jpg'
+        ],
+        material: 'Bois',
+        client: 'El Trio Factory',
+        details: {
+            technique: 'Gravure laser de précision',
+            finition: 'Naturelle',
+            usage: 'Menu de bar'
+        },
+        portfolio: [
+            {
+                name: 'Menu Cocktails',
+                description: 'Cartes de cocktails avec illustrations vintage et mise en page élégante',
+                style: 'Vintage et professionnel'
+            }
+        ],
+        dimensions: '40 x 30 cm'
+    },
 ];
 
 // Variables globales
