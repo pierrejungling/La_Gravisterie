@@ -2087,8 +2087,8 @@ function createProductPopup(product) {
                 ` : ''}
                 <p class="popup-description">${product.description}</p>
                 <div class="popup-details">
-                    ${product.dimensions ? `<p><strong>Dimensions:</strong> ${product.dimensions}</p>` : ''}
-                    ${product.material ? `<p><strong>Matériau:</strong> ${product.material}</p>` : ''}
+                    ${product.dimensions ? `<p><strong>Dimensions :</strong> ${product.dimensions}</p>` : ''}
+                    ${product.material ? `<p><strong>Matériau :</strong> ${product.material}</p>` : ''}
                 </div>
                 ${product.features ? `
                     <div class="popup-features">
