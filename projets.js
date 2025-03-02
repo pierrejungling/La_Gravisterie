@@ -504,8 +504,56 @@ let currentPage = 1;
 const projectsPerPage = 9;
 let projectsGrid;
 
+// Fonction pour mettre à jour l'URL avec la catégorie, la page et le projet
+function updateURL(category, page = currentPage, projectId = null) {
+    const url = new URL(window.location);
+    if (category === 'all') {
+        url.searchParams.delete('category');
+    } else {
+        url.searchParams.set('category', category);
+    }
+    
+    if (page === 1) {
+        url.searchParams.delete('page');
+    } else {
+        url.searchParams.set('page', page);
+    }
+    
+    if (projectId) {
+        url.searchParams.set('project', projectId);
+    } else {
+        url.searchParams.delete('project');
+    }
+    
+    window.history.pushState({}, '', url);
+}
+
+// Fonction pour obtenir la page depuis l'URL
+function getPageFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = parseInt(urlParams.get('page')) || 1;
+    return page;
+}
+
+// Fonction pour obtenir la catégorie depuis l'URL
+function getCategoryFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('category') || 'all';
+}
+
+// Fonction pour obtenir l'ID du projet depuis l'URL
+function getProjectFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('project');
+}
+
 // Fonction pour afficher les projets
-function displayProjects(category = 'all') {
+function displayProjects(category = getCategoryFromURL()) {
+    // Récupérer la page depuis l'URL au premier chargement
+    if (currentPage === 1) {
+        currentPage = getPageFromURL();
+    }
+
     // Supprimer toute pagination existante
     const existingPagination = document.querySelector('.pagination');
     if (existingPagination) {
@@ -577,6 +625,7 @@ function displayProjects(category = 'all') {
             document.body.appendChild(popup);
             document.body.classList.add('popup-open');
             handleTouchGallery(popup, project);
+            updateURL(category, currentPage, project.id);
         });
     });
 
@@ -595,6 +644,7 @@ function displayProjects(category = 'all') {
                 currentPage--;
                 displayProjects(category);
                 window.scrollTo(0, 0);
+                updateURL(category, currentPage);
             });
             paginationContainer.appendChild(prevButton);
         }
@@ -605,9 +655,22 @@ function displayProjects(category = 'all') {
             pageButton.className = `pagination-btn page ${i === currentPage ? 'active' : ''}`;
             pageButton.textContent = i;
             pageButton.addEventListener('click', () => {
-                currentPage = i;
-                displayProjects(category);
-                window.scrollTo(0, 0);
+                if (i === 1) {
+                    // Pour la page 1, rediriger vers l'URL de base avec seulement la catégorie si elle existe
+                    const url = new URL(window.location);
+                    const category = getCategoryFromURL();
+                    if (category === 'all') {
+                        window.location.href = url.pathname;
+                    } else {
+                        url.searchParams.delete('page');
+                        window.location.href = url.toString();
+                    }
+                } else {
+                    currentPage = i;
+                    displayProjects(category);
+                    window.scrollTo(0, 0);
+                    updateURL(category, currentPage);
+                }
             });
             paginationContainer.appendChild(pageButton);
         }
@@ -621,6 +684,7 @@ function displayProjects(category = 'all') {
                 currentPage++;
                 displayProjects(category);
                 window.scrollTo(0, 0);
+                updateURL(category, currentPage);
             });
             paginationContainer.appendChild(nextButton);
         }
@@ -628,6 +692,14 @@ function displayProjects(category = 'all') {
         // Ajouter la pagination après la grille de projets
         projectsGrid.parentNode.insertBefore(paginationContainer, projectsGrid.nextSibling);
     }
+
+    // Mettre à jour l'URL avec la catégorie et la page actuelles
+    updateURL(category, currentPage);
+    
+    // Mettre à jour les boutons de filtre
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-category') === category);
+    });
 }
 
 // Initialisation
@@ -645,12 +717,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    displayProjects();
+    // Récupérer et afficher la catégorie depuis l'URL
+    const savedCategory = getCategoryFromURL();
+    displayProjects(savedCategory);
     
-    // Activer le bouton "Tout" par défaut
-    const allButton = document.querySelector('.filter-btn[data-category="all"]');
-    if (allButton) {
-        allButton.classList.add('active');
+    // Activer le bon bouton
+    const activeButton = document.querySelector(`.filter-btn[data-category="${savedCategory}"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+
+    // Vérifier s'il y a un projet à afficher
+    const projectId = getProjectFromURL();
+    if (projectId) {
+        const project = projects.find(p => p.id === projectId);
+        if (project) {
+            const popup = createProjectPopup(project);
+            document.body.appendChild(popup);
+            document.body.classList.add('popup-open');
+            handleTouchGallery(popup, project);
+            
+            // Ajouter le gestionnaire de fermeture qui met à jour l'URL
+            popup.querySelector('.close-popup').addEventListener('click', () => {
+                popup.remove();
+                document.body.classList.remove('popup-open');
+                updateURL(savedCategory, currentPage);
+            });
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.remove();
+                    document.body.classList.remove('popup-open');
+                    updateURL(savedCategory, currentPage);
+                }
+            });
+        }
     }
 });
 

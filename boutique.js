@@ -31,11 +31,10 @@ const products = [
         name: 'Nœud papillon',
         price: '15 €',
         category: 'accessoires',
-        description: 'Élégant nœud papillon en bois avec motif floral ajouré. Une pièce unique qui allie artisanat traditionnel et design contemporain, parfaite pour ajouter une touche d\'originalité à vos tenues.',
+        description: 'Élégant nœud papillon en bois avec divers motif et coloris. Une pièce unique qui allie artisanat traditionnel et design contemporain, parfaite pour ajouter une touche d\'originalité à vos tenues.',
         dimensions: '12 x 5 cm',
         material: 'Bois',
         features: [
-            'Motif floral ajouré',
             'Ruban satin ajustable',
             'Plusieurs couleurs de ruban disponibles',
             'Design personnalisable',
@@ -57,14 +56,14 @@ const products = [
         name: 'Applique murale design',
         price: '40 €',
         category: 'light',
-        description: 'Élégante applique murale en bois qui allie design contemporain et chaleur naturelle. Les lamelles de bois créent un jeu d\'ombre et de lumière unique, parfait pour une ambiance chaleureuse et moderne.',
+        description: 'Applique murale en bois qui allie design contemporain et chaleur naturelle. Les lamelles de bois créent un jeu d\'ombre et de lumière unique, parfait pour une ambiance chaleureuse et moderne.',
         dimensions: '10 x 20 cm',
         material: 'Bois',
         features: [
             'Design contemporain à lamelles',
             'Éclairage indirect chaleureux',
             'Installation murale facile',
-            'Finition bois naturel',
+            'Divers coloris disponible',
             'Câblage inclus'
         ],
         images: [
@@ -126,7 +125,6 @@ const products = [
         dimensions: '35 x 20 cm | 45 x 30 cm',
         material: 'Ardoise',
         features: [
-            'Gravure personnalisable',
             'Support en bambou',
             'Finition soignée',
             'Idéal pour fromages et apéritifs',
@@ -139,7 +137,9 @@ const products = [
             'assets/images/products/plateau-ardoise-charcuterie.jpg'
         ],
         inStock: true,
-        customizable: true
+        customizable: true,
+        priceDetails: ['Avec design personnalisé : + 5 €'
+        ],
     },
     {
         id: 'elements-4',
@@ -150,11 +150,11 @@ const products = [
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
+            'Personnalisables selon vos envies (tailles ou couleurs)',
             'Design minimaliste et élégant',
             'Découpe laser de précision',
-            'Disponibles à l\'unité ou en lot',
-            'Personnalisables selon vos envies (tailles ou couleurs)',
-            'Parfaits pour une déco zen',
+            'Disponible à l\'unité ou en lot',
+            'Parfait pour une déco zen',
         ],
         images: [
             'assets/images/products/elements-4-1.jpg',
@@ -198,11 +198,10 @@ const products = [
         name: 'Pics de jardin personnalisés',
         price: 'À partir de 5 €',
         category: 'accessoires',
-        description: 'Ajoutez une touche d\'organisation et d\'élégance à votre jardin avec ces pics personnalisés, parfaits pour identifier vos plantes aromatiques, légumes ou fleurs dans votre potager.',
+        description: 'Ces pics personnalisés sont parfaits pour identifier vos plantes aromatiques, légumes ou fleurs dans votre potager.',
         dimensions: '15 x 5 cm',
         material: 'Bois ou Acrylique',
         features: [
-            'Deux matériaux au choix',
             'Personnalisation du nom de la plante',
             'Ajout possible de motifs ou illustrations',
             'Design élégant et pratique',
@@ -228,11 +227,10 @@ const products = [
         dimensions: '40 x 20 cm',
         material: 'Bois',
         features: [
-            'Prénom entièrement personnalisable',
+            'Prénom entièrement personnalisable avec police d\'érciture au choix',
             'Disponible en plusieurs coloris',
             'Dimensions adaptables sur demande',
             'Découpe laser de précision',
-            'Police d\'écriture au choix'
         ],
         images: [
             'assets/images/products/prenom-mural-1.jpg',
@@ -240,17 +238,13 @@ const products = [
         ],
         inStock: true,
         customizable: true,
-        priceDetails: [
-            'Format standard (40 x 20 cm) : 20 €',
-            'Autres dimensions sur demande'
-        ]
     },
     {
         id: 'support-billets-anniversaire',
         name: 'Support billets anniversaire',
         price: '15 €',
         category: 'events',
-        description: 'Support en bois original et humoristique pour offrir de l\'argent avec style. Idéal pour les anniversaires avec son message "Tu vois ! C\'est pas beaucoup 30 !" et son système de pinces pour accrocher les billets.',
+        description: 'Support en bois original et humoristique pour offrir de l\'argent avec style, idéal pour les anniversaires.',
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
@@ -266,10 +260,7 @@ const products = [
         ],
         inStock: true,
         customizable: true,
-        priceDetails: [
-            'Prix unique : 15 €',
-            'Personnalisation incluse'
-        ]
+
     },
     {
         id: 'boules-noel-simple',
@@ -277,7 +268,7 @@ const products = [
         price: '3 €',
         category: 'events',
         description: 'Illuminez votre sapin avec nos boules de Noël gravées en une seule couche ! Des designs élégants et raffinés pour une décoration de Noël unique.',
-        dimensions: 'Taille standard',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Design en une seule couche',
@@ -293,7 +284,10 @@ const products = [
             'assets/images/products/bnoel-9.jpg'
         ],
         inStock: true,
-        customizable: true
+        customizable: true,
+        priceDetails: [
+            'Lot possible'
+        ]
     },
     {
         id: 'boules-noel-relief',
@@ -301,7 +295,7 @@ const products = [
         price: '10 €',
         category: 'events',
         description: 'Donnez du relief à votre sapin avec nos boules de Noël travaillées en plusieurs couches ! Ces créations artisanales offrent un effet de profondeur unique à vos décorations de Noël.',
-        dimensions: 'Taille standard',
+        dimensions: '',
         material: 'Bois',
         features: [
             'Design en relief multicouche',
@@ -319,7 +313,8 @@ const products = [
 
         ],
         inStock: true,
-        customizable: true
+        customizable: true,
+
     },
     {
         id: 'sapin-3d',
@@ -331,12 +326,12 @@ const products = [
             'Lot (1 grand + 1 petit) : 20 € au lieu de 25 €'
         ],
         category: 'events',
-        description: 'Ajoutez une touche d\'élégance à votre déco de Noël avec nos sapins en bois 3D. Disponibles en 5 coloris (lasuré, doré, bois naturel, noir et argenté), nos sapins sont parfaits pour sublimer votre intérieur pendant les fêtes. Que ce soit sur une table, un buffet ou près du sapin, ils apporteront une ambiance chaleureuse.',
+        description: 'Ajoutez une touche d\'élégance à votre déco de Noël avec nos sapins en bois 3D. Nos sapins sont parfaits pour sublimer votre intérieur pendant les fêtes. Que ce soit sur une table, un buffet ou près du sapin, ils apporteront une ambiance chaleureuse.',
         dimensions: '15 cm | 25 cm de hauteur',
         material: 'Bois',
         features: [
             'Design 3D élégant',
-            'Disponible en 5 coloris',
+            'Disponible en 5 coloris (lasuré, doré, bois naturel, noir et argenté)',
             'Base stable incluse',
             'Durable et réutilisable',
             'Deux tailles disponibles'
@@ -365,9 +360,10 @@ const products = [
         dimensions: '20 x 20 cm',
         material: 'Bois',
         features: [
+            'Plusieurs dimensions disponibles',
             'Design géométrique original',
             'Découpe laser de précision',
-            'Plusieurs dimensions disponibles',
+
         ],
         images: [
             'assets/images/products/tortue-geometrique.jpg',
@@ -387,10 +383,11 @@ const products = [
         material: 'Bois',
         features: [
             'Lot de 3 panneaux',
+            'Plusieurs coloris disponibles',
+            'Plusieurs dimensions disponibles',
             'Design moderne et minimaliste',
             'Motifs géométriques coordonnés',
-            'Plusieurs coloris disponibles',
-            'Plusieurs dimensions disponibles'
+
         ],
         images: [
             'assets/images/products/triptyque-1.jpg',
@@ -405,12 +402,11 @@ const products = [
             ],
         category: 'accessoires',
         description: 'Plateau décoratif avec motif de feuilles de Ginkgo finement gravé. Disponible à l\'unité ou en lot de deux.',
-        dimensions: '',
+        dimensions: '32 x 24 cm',
         material: 'Bois',
         features: [
             'Motif naturel élégant',
             'Gravure détaillée',
-            'Disponible seul ou en lot'
         ],
         images: [
             'assets/images/products/plateau-ginkgo-1.jpg',
@@ -443,19 +439,19 @@ const products = [
         id: 'gorille',
         name: 'Le Gorille',
         price: 'À partir de 15 €',
-        priceDetails: ['Avec pied gravé personnalisé : 20 €',
-                        'sans pied : 15 €'
-        ],
+
         category: 'animaux',
         description: 'Silhouette de gorille élégante, disponible avec ou sans socle gravé.',
         dimensions: '18 x 15 cm',
         material: 'Bois',
         features: [
-            'Design minimaliste',
-            'Option avec socle personnalisé',
-            'Effet d\'ombre projetée',
             'Plusieurs coloris disponibles',
             'Plusieurs dimensions disponibles',
+            'Option avec socle personnalisé',
+            'Design minimaliste',
+            'Effet d\'ombre projetée',
+
+
         ],
         images: [
             'assets/images/products/gorille-1.jpg',
@@ -473,11 +469,11 @@ const products = [
         dimensions: '40 x 28 cm',
         material: 'Bois',
         features: [
+            'Autres dimensions disponible',
+            'Plusieurs coloris disponible',
             'Design géométrique moderne',
             'Découpe laser de précision',
-            'Finition noire mate',
             'Effet visuel saisissant',
-            'Autres dimensions sur demande'
         ],
         images: [
             'assets/images/products/loup-geometrique-1.jpg',
@@ -499,10 +495,11 @@ const products = [
         dimensions: '',
         material: 'Bois',
         features: [
+            'Anneau porte-clefs inclus',
+            'Deux variantes disponibles',
             'Design du circuit iconique',
             'Gravure de précision',
-            'Anneau porte-clefs inclus',
-            'Deux variantes disponibles'
+
         ],
         images: [
             'assets/images/products/porte-clefs-1.jpg',
@@ -519,9 +516,10 @@ const products = [
         dimensions: '',
         material: 'Bois',
         features: [
+            'Texte personnalisable',
             'Design en forme de cœur',
             'Espace photo intégré',
-            'Support intégré'
+            'Support inclus'
         ],
         image: 'assets/images/products/cadre-coeur-maman.jpg',
         inStock: true,
@@ -534,7 +532,7 @@ const products = [
         category: 'events',
         description: 'Décoration circulaire avec texte "Meilleure Maman" et bouquet de fleurs séchées.',
         dimensions: '30 x 30 cm',
-        material: 'Bois et acrylique',
+        material: 'Bois',
         features: [
             'Design élégant',
             'Texte personnalisable',
@@ -543,18 +541,19 @@ const products = [
         ],
         image: 'assets/images/products/cercle-maman.jpg',
         inStock: true,
-        customizable: true
+        customizable: true,
+        priceDetails: ['Sans fleurs : 25 €']
     },
     {
         id: 'coeur-personnalise',
         name: 'Cœur avec texte personnalisé',
         price: '25 €',
-        description: 'Un cœur en bois élégant avec votre message personnalisé gravé. Idéal pour une déclaration d\'amour, un cadeau pour la fête des mères ou simplement pour décorer votre intérieur avec un message qui vous tient à cœur.',
-        characteristics: [
-            'Design en forme de cœur',
+        description: 'Un cœur en bois élégant avec "Maman" en relief et message personnalisé gravé. Idéal pour une déclaration d\'amour, un cadeau pour la fête des mères ou simplement pour décorer votre intérieur avec un message qui vous tient à cœur.',
+        features: [
             'Texte entièrement personnalisable',
+            'Design en forme de cœur',
             'Gravure de qualité',
-            'Support intégré',
+            'Support inclus',
             'Finition soignée'
         ],
         dimensions: '20 x 20 cm',
@@ -569,13 +568,12 @@ const products = [
         name: 'Bouchons de bouteilles gravés',
         price: '3 €',
         category: 'accessoires',
-        description: 'Bouchons de bouteilles gravés et personnalisables, parfaits pour ajouter une touche spéciale à vos bouteilles.',
-        dimensions: 'Format standard bouchon vin',
+        description: 'Bouchons de bouteilles gravés et personnalisables, parfaits pour ajouter une touche spéciale à vos bouteilles. Une petite attention idéale à offrir',
+        dimensions: 'Format standard bouteille de vin',
         material: 'Bois',
         features: [
             'Personnalisation sur mesure',
             'Gravures de haute qualité',
-            'Parfait pour les cadeaux',
             'Compatible avec la plupart des bouteilles de vin'
         ],
         images: ['assets/images/products/bouchons-bouteilles1.jpg',
@@ -634,11 +632,12 @@ const products = [
         dimensions: '143 x 80 cm',
         material: 'Bois',
         features: [
+
+            'Différentes tailles disponibles',
+            'Personnalisation possible',
             'Design géométrique moderne',
             'Grande taille pour effet visuel maximal',
             'Découpe laser de précision',
-            'Différentes tailles disponibles',
-            'Personnalisation possible',
             'Finition soignée'
         ],
         images: [
@@ -646,10 +645,7 @@ const products = [
         ],
         inStock: true,
         customizable: true,
-        priceDetails: [
-            'Format standard (143 x 80 cm) : 125 €',
-            'Autres dimensions sur demande'
-        ]
+       
     },
     {
         id: 'planches-aperitives',
@@ -660,10 +656,10 @@ const products = [
         dimensions: 'Divers formats disponibles',
         material: 'Bois',
         features: [
+            'Plusieurs formats disponibles',
+            'Option de gravure sur planches existantes',
             'Design personnalisable',
             'Gravure de qualité',
-            'Plusieurs formats disponibles',
-            'Option de gravure sur planches existantes'
         ],
         images: [
             'assets/images/products/planche-apero-1.jpg',
@@ -672,7 +668,7 @@ const products = [
         ],
         inStock: true,
         customizable: true,
-        additionalInfo: 'Gravure possible sur vos planches existantes (5€ à 15€ selon la taille du design)'
+        additionalInfo: 'Possibilité de graver vos propres planches (5€ à 15€ selon la taille du design)'
     },
     {
         id: 'sous-plat-liege',
@@ -683,14 +679,13 @@ const products = [
             'Lot de 3 sous-plats : 10 €'
         ],
         category: 'accessoires',
-        description: 'Protégez votre table avec style grâce à nos sous-plats en liège personnalisables. Vendu à l\'unité ou par lot de 3, ces sous-plats peuvent être gravés avec votre message, logo ou design préféré. Parfaits pour les plats chauds et idéaux pour les restaurants ou votre cuisine.',
+        description: 'Protégez votre table avec style grâce à nos sous-plats en liège personnalisables. Vendu à l\'unité ou par lot de 3, ces sous-plats peuvent être gravés avec votre message, logo ou design préféré. Parfait pour les plats chauds et idéal pour les restaurants ou votre cuisine.',
         dimensions: '19 cm de diamètre',
         material: 'Liège',
         features: [
             'Design personnalisable',
             'Matériau naturel et durable',
-            'Résistant à la chaleur',
-            'Protection efficace de vos surfaces',
+            'Résistant à la chaleur et protège vos surfaces',
             'Facile à nettoyer'
         ],
         images: [
@@ -708,7 +703,7 @@ const products = [
     {
         id: 'sous-verres-ardoise',
         name: 'Sous-verres en ardoise personnalisés',
-        price: '15 €',
+        price: '15 € le lot',
         category: 'accessoires',
         description: 'Lot de 6 sous-verres en ardoise avec support en bambou. Chaque sous-verre peut être personnalisé avec le design de votre choix.',
         dimensions: '10 cm de diamètre',
@@ -779,7 +774,6 @@ const products = [
         ],
         images: [
             'assets/images/products/lampe-1.jpg',
-            'assets/images/products/lampe-2.jpg',
             'assets/images/products/lampe-3.jpg'
         ],
         inStock: true
@@ -791,12 +785,13 @@ const products = [
         category: 'deco-murale',
         description: 'Décoration murale personnalisée représentant votre arbre généalogique familial. Personnalisé avec les noms de votre famille.',
         dimensions: '35 x 40 cm',
-        material: 'Bois',
+        material: 'Bois et liège',
         features: [
             'Design personnalisé',
             'Noms gravés individuellement',
             'Support mural intégré',
-            'Finition de qualité'
+            'Finition de qualité',
+            'clous inclus'
         ],
         image: 'assets/images/products/arbre-vie.jpg',
         inStock: true,
@@ -838,7 +833,6 @@ const products = [
             'Style Polaroïd vintage',
             'Personnalisation complète',
             'Texte et date au choix',
-            'Support intégré'
         ],
         images: [
             'assets/images/products/polaroid-1.jpg',
@@ -874,9 +868,6 @@ const products = [
         material: 'Bois',
         features: [
             'Design minimaliste',
-            'Style épuré',
-            'Montage facile',
-            'Effet visuel saisissant'
         ],
         image: 'assets/images/products/lotus-simple.jpg',
         inStock: true
@@ -911,7 +902,7 @@ const products = [
         features: [
             'Design minimaliste',
             'Deux tailles disponibles',
-            'Texte gravé possible',
+            'Personnalisation du support possible',
             'Style moderne'
         ],
         images: [
@@ -1580,6 +1571,11 @@ const products = [
 
 // Fonction pour afficher les produits
 function displayProducts(category = 'all') {
+    // Récupérer la page depuis l'URL au premier chargement
+    if (currentPage === 1) {
+        currentPage = getPageFromURL();
+    }
+
     // Supprimer toute pagination existante
     const existingPagination = document.querySelector('.pagination');
     if (existingPagination) {
@@ -1668,6 +1664,7 @@ function displayProducts(category = 'all') {
                 currentPage--;
                 displayProducts(category);
                 window.scrollTo(0, 0);
+                updateURL(category, currentPage);
             });
             paginationContainer.appendChild(prevButton);
         }
@@ -1678,9 +1675,22 @@ function displayProducts(category = 'all') {
             pageButton.className = `pagination-btn page ${i === currentPage ? 'active' : ''}`;
             pageButton.textContent = i;
             pageButton.addEventListener('click', () => {
-                currentPage = i;
-                displayProducts(category);
-                window.scrollTo(0, 0);
+                if (i === 1) {
+                    // Pour la page 1, rediriger vers l'URL de base avec seulement la catégorie si elle existe
+                    const url = new URL(window.location);
+                    const category = getCategoryFromURL();
+                    if (category === 'all') {
+                        window.location.href = url.pathname;
+                    } else {
+                        url.searchParams.delete('page');
+                        window.location.href = url.toString();
+                    }
+                } else {
+                    currentPage = i;
+                    displayProducts(category);
+                    window.scrollTo(0, 0);
+                    updateURL(category, currentPage);
+                }
             });
             paginationContainer.appendChild(pageButton);
         }
@@ -1694,6 +1704,7 @@ function displayProducts(category = 'all') {
                 currentPage++;
                 displayProducts(category);
                 window.scrollTo(0, 0);
+                updateURL(category, currentPage);
             });
             paginationContainer.appendChild(nextButton);
         }
@@ -1701,29 +1712,40 @@ function displayProducts(category = 'all') {
         // Ajouter la pagination après la grille de produits
         productsGrid.parentNode.insertBefore(paginationContainer, productsGrid.nextSibling);
     }
+
+    // Mettre à jour l'URL avec la catégorie et la page actuelles
+    updateURL(category, currentPage);
+    
+    // Mettre à jour les boutons de catégorie
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-category') === category);
+    });
 }
 
 // Fonction pour ouvrir le popup
 function openProductPopup(productId) {
-        const product = products.find(p => p.id === productId);
+    const product = products.find(p => p.id === productId);
     if (!product) return;
-        
-                const popup = createProductPopup(product);
-                document.body.appendChild(popup);
-                document.body.classList.add('popup-open');
-                handleTouchGallery(popup, product);
+    
+    const popup = createProductPopup(product);
+    document.body.appendChild(popup);
+    document.body.classList.add('popup-open');
+    handleTouchGallery(popup, product);
+    updateURL(getCategoryFromURL(), currentPage, productId); // Ajouter l'ID du produit à l'URL
 
     // Gestion de la fermeture du popup
-                popup.querySelector('.close-popup').addEventListener('click', () => {
-                    popup.remove();
-                    document.body.classList.remove('popup-open');
-                });
+    popup.querySelector('.close-popup').addEventListener('click', () => {
+        popup.remove();
+        document.body.classList.remove('popup-open');
+        updateURL(getCategoryFromURL(), currentPage); // Supprimer l'ID du produit de l'URL
+    });
 
-                popup.addEventListener('click', (e) => {
-                    if (e.target === popup) {
-                        popup.remove();
-                        document.body.classList.remove('popup-open');
-                    }
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.remove();
+            document.body.classList.remove('popup-open');
+            updateURL(getCategoryFromURL(), currentPage); // Supprimer l'ID du produit de l'URL
+        }
     });
 }
 
@@ -1742,12 +1764,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    displayProducts();
+    // Récupérer et afficher la catégorie depuis l'URL
+    const savedCategory = getCategoryFromURL();
+    displayProducts(savedCategory);
+    
+    // Activer le bon bouton
+    const activeButton = document.querySelector(`.category-btn[data-category="${savedCategory}"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
 
-    // Activer le bouton "Tout" par défaut
-    const allButton = document.querySelector('.category-btn[data-category="all"]');
-    if (allButton) {
-        allButton.classList.add('active');
+    // Vérifier s'il y a un produit à afficher
+    const productId = getProductFromURL();
+    if (productId) {
+        openProductPopup(productId);
     }
 });
 
@@ -1998,4 +2028,47 @@ function initializeProductSwiper() {
       }
     }
   });
+}
+
+// Fonction pour mettre à jour l'URL avec la catégorie, la page et le produit
+function updateURL(category, page = currentPage, productId = null) {
+    const url = new URL(window.location);
+    if (category === 'all') {
+        url.searchParams.delete('category');
+    } else {
+        url.searchParams.set('category', category);
+    }
+    
+    if (page === 1) {
+        url.searchParams.delete('page');
+    } else {
+        url.searchParams.set('page', page);
+    }
+    
+    if (productId) {
+        url.searchParams.set('product', productId);
+    } else {
+        url.searchParams.delete('product');
+    }
+    
+    window.history.pushState({}, '', url);
+}
+
+// Fonction pour obtenir la catégorie depuis l'URL
+function getCategoryFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('category') || 'all';
+}
+
+// Fonction pour obtenir la page depuis l'URL
+function getPageFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = parseInt(urlParams.get('page')) || 1;
+    return page;
+}
+
+// Fonction pour obtenir l'ID du produit depuis l'URL
+function getProductFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('product');
 }
