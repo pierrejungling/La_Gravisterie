@@ -233,6 +233,8 @@
     position: relative;
     padding: 2rem;
     margin: 20px auto;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .popup-gallery {
@@ -300,14 +302,14 @@
     background: var(--secondary-color);
     border-radius: 8px;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
+    align-content: flex-start;
     width: 100%;
 }
 
 .popup-thumbnail {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
+    aspect-ratio: 1 / 1;
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 4px;
@@ -326,36 +328,11 @@
     border-color: var(--accent-color);
 }
 
-/* Ajustements spécifiques pour desktop */
-@media (min-width: 769px) {
-    .popup-thumbnails {
-        height: auto;
-        margin-top: 1rem;
-        padding: 0;
-        background: none;
-    }
 
-    .popup-thumbnail {
-        width: 80px;
-        height: 80px;
-        margin: 0;
-    }
-}
 
 /* Ajustements pour mobile */
 @media (max-width: 768px) {
-    .popup-thumbnails {
-        margin-top: 0.5rem;
-        padding: 10px;
-        overflow-x: auto;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-    }
 
-    .popup-thumbnail {
-        width: 60px;
-        height: 60px;
-    }
 }
 
 .popup-info {
@@ -485,47 +462,46 @@
     }
 
     .project-popup {
-        align-items: flex-start;
-        padding: 0;
-    }
-
-    .popup-content {
-        grid-template-columns: 1fr;
-        width: 100%;
-        margin: 0;
-        padding: 1rem;
-        border-radius: 0;
-    }
-
-    .popup-thumbnails {
-        padding: 0.5rem;
-        margin-top: 0.5rem;
-    }
-
-    .popup-thumbnail {
-        width: 50px;
-        height: 50px;
-    }
-
-    .popup-info {
-        padding: 1rem;
-        flex: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 20px;
         overflow-y: auto;
     }
 
-    .close-popup {
-        position: fixed;
-        top: 0.5rem;
-        right: 0.5rem;
-        z-index: 1001;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        width: 40px;
-        height: 40px;
+    .popup-content {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+    }
+    .popup-info {
+        padding: 2rem 0 0;
+    }
+
+    .close-popup {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.6);
+        border: none;
+        font-size: 2rem;
+        color: black;
+        cursor: pointer;
+        z-index: 2;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%; /* Cercle parfait */
+        backdrop-filter: blur(5px); /* Effet de flou léger pour un rendu plus moderne */
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Ajoute une légère ombre */
     }
 
     .pagination {
@@ -687,27 +663,7 @@
     }
 }
 
-/* Ajustements spécifiques pour desktop */
-@media (min-width: 769px) {
-    .popup-content {
-        max-width: 1000px;
-        margin: 2rem auto;
-        padding: 2rem;
-    }
 
-    .popup-thumbnails {
-        height: auto;
-        margin-top: 1rem;
-        padding: 10px;
-        background: var(--secondary-color);
-    }
-
-    .popup-thumbnail {
-        width: 70px;
-        height: 70px;
-        margin: 0;
-    }
-}
 
 /* Nouveau conteneur pour le bouton */
 .project-button-container {
