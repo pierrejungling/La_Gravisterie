@@ -1,6 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.querySelector('.contact-form');
 
+    // Fonction pour créer et afficher le popup
+    function showSuccessPopup() {
+        const popup = document.createElement('div');
+        popup.className = 'popup-overlay';
+        
+        popup.innerHTML = `
+            <div class="popup-content">
+                <img src="assets/images/La%20Gravisterie%20carré_N.svg" alt="Logo La Gravisterie" class="popup-logo">
+                <h3 class="popup-title">Merci pour votre message !</h3>
+                <p class="popup-message">Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais.</p>
+                <button class="popup-close">Fermer</button>
+            </div>
+        `;
+
+        document.body.appendChild(popup);
+
+        // Animation d'entrée
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 10);
+
+        // Gestionnaire pour fermer le popup
+        const closeButton = popup.querySelector('.popup-close');
+        const closePopup = () => {
+            popup.classList.remove('active');
+            setTimeout(() => {
+                popup.remove();
+            }, 300);
+        };
+
+        closeButton.addEventListener('click', closePopup);
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+    }
+
+    // Modification du gestionnaire de soumission du formulaire
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -23,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.success) {
-                alert('Message envoyé avec succès !');
+                showSuccessPopup(); // Utilisation du nouveau popup
                 contactForm.reset();
                 document.querySelector('.selected-files').textContent = '';
             } else {

@@ -419,4 +419,167 @@ main {
     margin-bottom: 0;
 }
 
-/* Garder le reste du fichier inchangé */ 
+/* Styles pour le popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    background: var(--primary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.popup-overlay.active .popup-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.popup-logo {
+    width: 250px;
+    height: auto;
+    filter: invert(0);
+    animation: popupLogoAnimation 1s ease;
+    transition: all 0.3s ease;
+}
+
+.popup-logo:hover {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+
+.popup-title {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.popup-message {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+.popup-close {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease 0.5s both;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.popup-close::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.popup-close:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup-close:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Mode sombre pour le bouton */
+[data-theme="dark"] .popup-close {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: 1px solid var(--accent-color);
+}
+
+[data-theme="dark"] .popup-close:hover {
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .popup-close::before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes popupLogoAnimation {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mode sombre */
+[data-theme="dark"] .popup-logo {
+    filter: invert(1);
+}
+
+[data-theme="dark"] .popup-logo:hover {
+    filter: invert(1) drop-shadow(0 8px 16px rgba(255, 255, 255, 0.25));
+}
+
+/* Ajustement pour les mobiles */
+@media (max-width: 768px) {
+    .popup-logo {
+        width: 150px;
+    }
+} 
