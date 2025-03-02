@@ -135,6 +135,67 @@ const projects = [
         ]
     },
     {
+        id: 'presentoir-spa',
+        name: 'Présentoir pour porte-clés',
+        category: 'entreprises',
+        description: 'Support de présentation en bois pour porte-clés, mettant en valeur le célèbre circuit de Spa-Francorchamps. Un design élégant combinant le tracé du circuit, le logo officiel et des crochets pour l\'exposition des produits.',
+        features: [
+            'Design du circuit intégré',
+            'Logo Spa-Francorchamps',
+            'Système d\'accroche pour porte-clés',
+            'Support autoportant',
+            'Finition professionnelle',
+        ],
+        images: [
+            'assets/images/projects/presentoir-spa-1.jpg'
+        ],
+        material: 'Bois',
+        client: 'Station service',
+        details: {
+            technique: 'Gravure laser et découpe',
+            finition: 'Naturelle',
+            usage: 'Présentoir commercial'
+        },
+        portfolio: [
+            {
+                name: 'Présentoir Porte-clés',
+                description: 'Support de présentation avec tracé du circuit et crochets pour porte-clés',
+                style: 'Commercial et sportif'
+            }
+        ],
+        dimensions: '40 x 25 cm'
+    },
+    {
+        id: 'presentoir-vinyles',
+        name: 'Etagère Vinyles Personnalisé',
+        category: 'perso',
+        description: 'Support mural pour vinyles avec design de lecteur musical intégré. Une façon élégante de ranger et présenter vos vinyles tout en ajoutant une touche décorative à votre intérieur.',
+        features: [
+            'Design de lecteur musical',
+            'Support pour vinyles',
+            'Personnalisation du titre',
+            'Finition naturelle du bois'
+        ],
+        images: [
+            'assets/images/projects/presentoir-vinyles-1.jpg'
+        ],
+        material: 'Bois',
+        client: 'Privé',
+        details: {
+            technique: 'Gravure laser et découpe',
+            finition: 'Naturelle',
+            usage: 'Rangement et décoration'
+        },
+        portfolio: [
+            {
+                name: 'Présentoir Marvin Gaye',
+                description: 'Support mural avec design de lecteur musical et titre "Ain\'t No Mountain High Enough"',
+                style: 'Vintage et fonctionnel'
+            }
+        ],
+        dimensions: '40 x 25 cm'
+    },
+    {
         id: 'cadres-maman',
         name: 'Cadres "Maman, mon héroïne"',
         category: 'perso',
@@ -215,6 +276,36 @@ const projects = [
         ],
         material: 'Bois',
         client: 'L\'imagination d\'Akili'
+    },
+    {
+        id: 'opinel-personnalise',
+        name: 'Opinel Personnalisé',
+        category: 'perso',
+        description: 'Personnalisation d\'un Opinel par gravure laser sur le manche en bois. Un design simple et élégant combinant le prénom et un motif de tente de camping.',
+        features: [
+            'Gravure sur manche d\'Opinel',
+            'Design camping minimaliste',
+            'Personnalisation du prénom',
+            'Finition naturelle du bois',
+            'Idéal pour cadeau personnalisé'
+        ],
+        images: [
+            'assets/images/projects/opinel-1.jpg'
+        ],
+        material: 'Bois',
+        client: 'Privé',
+        details: {
+            technique: 'Gravure laser de précision',
+            finition: 'Naturelle',
+            usage: 'Accessoire de camping personnalisé'
+        },
+        portfolio: [
+            {
+                name: 'Opinel Laurine',
+                description: 'Gravure personnalisée avec prénom et motif de tente sur manche d\'Opinel',
+                style: 'Minimaliste et outdoor'
+            }
+        ]
     },
     
     {
@@ -496,7 +587,34 @@ const projects = [
         ],
         dimensions: '80 x 40 cm'
     },
-
+    {
+        id: 'planche-aperitive',
+        name: 'Planche Apéritive Personnalisée',
+        category: 'perso',
+        description: 'Planche de service en bambou personnalisée avec une gravure élégante. Un design raffiné combinant texte stylisé et illustrations pour les moments conviviaux.',
+        features: [
+            'Gravure personnalisée',
+            'Design élégant avec illustrations',
+        ],
+        images: [
+            'assets/images/projects/planche-aperitive-1.jpg'
+        ],
+        material: 'Bambou',
+        client: 'Privé',
+        details: {
+            technique: 'Gravure laser de précision',
+            finition: 'Alimentaire',
+            usage: 'Service apéritif'
+        },
+        portfolio: [
+            {
+                name: 'Planche Les Keukens',
+                description: 'Planche de service avec texte "Apéro chez les Keukens" et illustrations d\'olives',
+                style: 'Élégant et convivial'
+            }
+        ],
+        dimensions: '60 x 20 cm'
+    },
 ];
 
 // Variables globales

@@ -752,7 +752,7 @@ const products = [
             'assets/images/products/sous-verres-5.jpg',
             'assets/images/products/sous-verres-6.jpg',
             'assets/images/products/sous-verres-7.jpg',
-            'assets/images/products/sous-verres-8.jpg',
+            'assets/images/products/sous-verres-10.jpg',
             'assets/images/products/sous-verres-9.jpg'
         ],
         inStock: true,
@@ -860,6 +860,7 @@ const products = [
         dimensions: '11 x 14 cm',
         material: 'Bois',
         features: [
+            'Plusieurs finitions disponibles',
             'Dimension photo 10 x 10 cm ( adaptable si besoin )',
             'Style Polaroïd vintage',
             'Personnalisation complète',
@@ -867,7 +868,8 @@ const products = [
         ],
         images: [
             'assets/images/products/polaroid-1.jpg',
-            'assets/images/products/polaroid-2.jpg'
+            'assets/images/products/polaroid-2.jpg',
+            'assets/images/products/polaroid-3.jpg'
         ],
         inStock: true,
         customizable: true
