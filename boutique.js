@@ -1645,55 +1645,44 @@ const products = [
 
 // Fonction pour afficher les produits
 function displayProducts(category = getCategoryFromURL()) {
-    // Récupérer la page depuis l'URL au premier chargement
-    if (currentPage === 1) {
-        currentPage = getPageFromURL();
-    }
-
-    // Supprimer toute pagination existante
-    const existingPagination = document.querySelector('.pagination');
-    if (existingPagination) {
-        existingPagination.remove();
-    }
-
-    if (!productsGrid) return;
-    productsGrid.innerHTML = '';
+    let filteredProducts = products;
     
-    const filteredProducts = category === 'all' 
-        ? products 
-        : products.filter(product => {
-            // Vérifier si category est un tableau ou une chaîne
-            if (Array.isArray(product.category)) {
-                return product.category.includes(category);
-            }
-            return product.category === category;
-        });
-
+    // Filtrer par catégorie si nécessaire
+    if (category && category !== 'all') {
+        filteredProducts = products.filter(product => product.category === category);
+    }
+    
+    // Calculer les produits à afficher pour la page actuelle
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
-    const currentProducts = filteredProducts.slice(startIndex, endIndex);
-
-    currentProducts.forEach(product => {
+    const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
+    
+    // Vider la grille de produits
+    const productsGrid = document.querySelector('.products-grid');
+    productsGrid.innerHTML = '';
+    
+    // Afficher les produits
+    productsToDisplay.forEach(product => {
         const productCard = `
         <div class="product-card" data-product-id="${product.id}">
             <div class="product-image">
                 ${product.images && product.images.length > 1 ? `
                     <div class="image-gallery">
-                        <img src="${product.images[0]}" 
-                             alt="${product.name}" 
-                             class="main-image" 
-                                 data-image-index="0">
+                        <img src="${product.images[0]}" alt="${product.name}" class="main-image" data-image-index="0">
                         <div class="gallery-nav-container">
                             <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
                                 </svg>
                             </button>
                             <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
                                 </svg>
                             </button>
+                        </div>
+                        <div class="pagination-dots">
+                            ${product.images.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
                         </div>
                     </div>
                 ` : `
@@ -1702,13 +1691,13 @@ function displayProducts(category = getCategoryFromURL()) {
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <div class="price">${product.price} €</div>
+                <div class="price">${product.price}</div>
                 <p class="description">${product.description}</p>
             <div class="product-tags">
                 ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
                 ${product.material ? `<span class="tag">${product.material}</span>` : ''}
             </div>
-                    <button class="btn btn-primary">Commander</button>
+                    <button class="btn btn-primary product-order-btn">Commander</button>
             </div>
         </div>
     `;
@@ -1724,94 +1713,108 @@ function displayProducts(category = getCategoryFromURL()) {
             handleCardTouchGallery(card, product);
         }
 
-        card.addEventListener('click', () => {
-            openProductPopup(product.id);
+        // Gestionnaire pour ouvrir le popup de produit en cliquant sur la carte
+        card.addEventListener('click', (e) => {
+            console.log("Clic sur la carte produit");
+            // Ne pas déclencher si on clique sur le bouton Commander ou sur les flèches de navigation
+            if (!e.target.closest('.btn-primary') && !e.target.closest('.gallery-nav')) {
+                openProductPopup(productId);
+            }
+        });
+        
+        // Gestionnaire spécifique pour le bouton Commander
+        const orderButton = card.querySelector('.btn-primary');
+        orderButton.addEventListener('click', (e) => {
+            console.log("Bouton Commander cliqué pour le produit:", product);
+            e.stopPropagation(); // Empêcher la propagation pour ne pas ouvrir le popup de produit
+            createOrderPopup(product);
         });
     });
+    
+    // Créer la pagination
+    createPagination(filteredProducts.length, category);
+}
 
-    // Créer la pagination si nécessaire
-    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-    if (totalPages > 1) {
-        const paginationContainer = document.createElement('div');
-        paginationContainer.className = 'pagination';
-        
-        // Bouton précédent
-        if (currentPage > 1) {
-            const prevButton = document.createElement('button');
-            prevButton.className = 'pagination-btn prev';
-            prevButton.innerHTML = '&larr; Précédent';
-            prevButton.addEventListener('click', () => {
+// Fonction pour créer la pagination
+function createPagination(totalProducts, category) {
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+    const paginationContainer = document.querySelector('.pagination');
+    
+    // Ne pas afficher la pagination s'il n'y a qu'une seule page
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+    
+    let paginationHTML = '';
+    
+    // Bouton précédent
+    paginationHTML += `<button class="pagination-btn prev ${currentPage === 1 ? 'disabled' : ''}" ${currentPage === 1 ? 'disabled' : ''}>Précédent</button>`;
+    
+    // Pages numérotées
+    for (let i = 1; i <= totalPages; i++) {
+        paginationHTML += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    
+    // Bouton suivant
+    paginationHTML += `<button class="pagination-btn next ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage === totalPages ? 'disabled' : ''}>Suivant</button>`;
+    
+    paginationContainer.innerHTML = paginationHTML;
+    
+    // Ajouter les gestionnaires d'événements
+    const pageButtons = paginationContainer.querySelectorAll('.pagination-btn:not(.prev):not(.next)');
+    pageButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            currentPage = parseInt(button.dataset.page);
+            displayProducts(category);
+            updateURL(category, currentPage);
+            window.scrollTo(0, 0);
+        });
+    });
+    
+    // Gestionnaire pour le bouton précédent
+    const prevButton = paginationContainer.querySelector('.pagination-btn.prev');
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
                 currentPage--;
                 displayProducts(category);
-                window.scrollTo(0, 0);
                 updateURL(category, currentPage);
-            });
-            paginationContainer.appendChild(prevButton);
-        }
-        
-        // Numéros de page
-        for (let i = 1; i <= totalPages; i++) {
-            const pageButton = document.createElement('button');
-            pageButton.className = `pagination-btn page ${i === currentPage ? 'active' : ''}`;
-            pageButton.textContent = i;
-            pageButton.addEventListener('click', () => {
-                if (i === 1) {
-                    // Pour la page 1, rediriger vers l'URL de base avec seulement la catégorie si elle existe
-                    const url = new URL(window.location);
-                    const category = getCategoryFromURL();
-                    if (category === 'all') {
-                        window.location.href = url.pathname;
-                    } else {
-                        url.searchParams.delete('page');
-                        window.location.href = url.toString();
-                    }
-                } else {
-                    currentPage = i;
-                    displayProducts(category);
-                    window.scrollTo(0, 0);
-                    updateURL(category, currentPage);
-                }
-            });
-            paginationContainer.appendChild(pageButton);
-        }
-        
-        // Bouton suivant
-        if (currentPage < totalPages) {
-            const nextButton = document.createElement('button');
-            nextButton.className = 'pagination-btn next';
-            nextButton.innerHTML = 'Suivant &rarr;';
-            nextButton.addEventListener('click', () => {
+                window.scrollTo(0, 0);
+            }
+        });
+    }
+    
+    // Gestionnaire pour le bouton suivant
+    const nextButton = paginationContainer.querySelector('.pagination-btn.next');
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            if (currentPage < totalPages) {
                 currentPage++;
                 displayProducts(category);
-                window.scrollTo(0, 0);
                 updateURL(category, currentPage);
-            });
-            paginationContainer.appendChild(nextButton);
-        }
-
-        // Ajouter la pagination après la grille de produits
-        productsGrid.parentNode.insertBefore(paginationContainer, productsGrid.nextSibling);
+                window.scrollTo(0, 0);
+            }
+        });
     }
-
-    // Mettre à jour l'URL avec la catégorie et la page actuelles
-    updateURL(category, currentPage);
-    
-    // Mettre à jour les boutons de catégorie
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-category') === category);
-    });
 }
 
 // Fonction pour créer le popup d'un produit
 function createProductPopup(product) {
     const popup = document.createElement('div');
     popup.className = 'product-popup';
+    
+    // Déterminer la source de l'image (images[0] ou image)
+    const imageSource = product.images ? product.images[0] : product.image;
+    const hasMultipleImages = product.images && product.images.length > 1;
+    
     popup.innerHTML = `
         <div class="popup-content">
             <button class="close-popup">&times;</button>
             <div class="popup-gallery">
                 <div class="popup-image-container">
-                    <img src="${product.images[0]}" alt="${product.name}" class="popup-main-image">
+                    <img src="${imageSource}" alt="${product.name}" class="popup-main-image">
+                    ${hasMultipleImages ? `
                     <button class="popup-nav prev">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M15 18l-6-6 6-6"/>
@@ -1822,15 +1825,18 @@ function createProductPopup(product) {
                             <path d="M9 18l6-6-6-6"/>
                         </svg>
                     </button>
+                    ` : ''}
                 </div>
+                ${hasMultipleImages ? `
                 <div class="popup-thumbnails">
                     ${product.images.map((img, index) => `
-                        <img src="${img}" 
-                             alt="${product.name} - Image ${index + 1}" 
-                             class="popup-thumbnail ${index === 0 ? 'active' : ''}"
-                             data-index="${index}">
+                         <img src="${img}" 
+                              alt="${product.name} - Image ${index + 1}" 
+                              class="popup-thumbnail ${index === 0 ? 'active' : ''}"
+                              data-index="${index}">
                     `).join('')}
                 </div>
+                ` : ''}
             </div>
             <div class="popup-info">
                 <h2>${product.name}</h2>
@@ -1840,7 +1846,7 @@ function createProductPopup(product) {
                 ` : ''}
                 ${product.priceDetails ? `
                     <div class="popup-price-details">
-                        ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                        ${Array.isArray(product.priceDetails) ? product.priceDetails.map(detail => `<p>${detail}</p>`).join('') : `<p>${product.priceDetails}</p>`}
                     </div>
                 ` : ''}
                 <div class="popup-description">${product.description}</div>
@@ -1862,36 +1868,54 @@ function createProductPopup(product) {
     // Gestion de la fermeture en cliquant sur le bouton ou en dehors du popup
     const closeButton = popup.querySelector('.close-popup');
     closeButton.addEventListener('click', () => {
-        popup.remove();
-        document.body.classList.remove('popup-open');
-        updateURL(getCategoryFromURL(), currentPage);
-    });
-
-    popup.addEventListener('click', (e) => {
-        if (e.target === popup) {
+        popup.classList.remove('active');
+        setTimeout(() => {
             popup.remove();
             document.body.classList.remove('popup-open');
-            updateURL(getCategoryFromURL(), currentPage);
+        }, 300);
+    });
+    
+    // Fermer en cliquant en dehors du contenu
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.classList.remove('active');
+            setTimeout(() => {
+                popup.remove();
+                document.body.classList.remove('popup-open');
+            }, 300);
         }
     });
 
+    // Ajouter un gestionnaire d'événements au bouton Commander
+    const orderButton = popup.querySelector('.btn-primary');
+    orderButton.addEventListener('click', (e) => {
+        e.stopPropagation(); // Empêcher la propagation
+        
+        // Fermer le popup de produit
+        popup.remove();
+        document.body.classList.remove('popup-open');
+        
+        // Ouvrir le popup de commande
+        createOrderPopup(product);
+    });
+
     // Gestion des événements après la création du popup
-    const mainImage = popup.querySelector('.popup-main-image');
-    const thumbnails = popup.querySelectorAll('.popup-thumbnail');
-    const prevButton = popup.querySelector('.popup-nav.prev');
-    const nextButton = popup.querySelector('.popup-nav.next');
-    let currentImageIndex = 0;
+    if (hasMultipleImages) {
+        const mainImage = popup.querySelector('.popup-main-image');
+        const thumbnails = popup.querySelectorAll('.popup-thumbnail');
+        const prevButton = popup.querySelector('.popup-nav.prev');
+        const nextButton = popup.querySelector('.popup-nav.next');
+        let currentImageIndex = 0;
 
-    // Fonction pour mettre à jour l'image
-    function updateImage(index) {
-        mainImage.src = product.images[index];
-        thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        thumbnails[index].classList.add('active');
-        currentImageIndex = index;
-    }
-
-    // Gestion des clics sur les boutons de navigation
-    if (product.images && product.images.length > 1) {
+        // Fonction pour mettre à jour l'image
+        function updateImage(index) {
+            mainImage.src = product.images[index];
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnails[index].classList.add('active');
+            currentImageIndex = index;
+        }
+        
+        // Gestion des clics sur les boutons de navigation
         prevButton.addEventListener('click', (e) => {
             e.stopPropagation();
             currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
@@ -1911,11 +1935,8 @@ function createProductPopup(product) {
                 updateImage(index);
             });
         });
-    } else {
-        prevButton.style.display = 'none';
-        nextButton.style.display = 'none';
     }
-
+    
     return popup;
 }
 
@@ -1924,9 +1945,12 @@ function openProductPopup(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
+    // Créer et ajouter le popup au DOM
     const popup = createProductPopup(product);
     document.body.appendChild(popup);
     document.body.classList.add('popup-open');
+    
+    // Mettre à jour l'URL
     updateURL(getCategoryFromURL(), currentPage, productId);
 }
 
@@ -1958,6 +1982,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Récupérer et afficher la catégorie depuis l'URL
     const savedCategory = getCategoryFromURL();
     
+    // Récupérer la page depuis l'URL
+    currentPage = getPageFromURL();
+    
     // Vérifier s'il y a un produit à afficher
     const productId = getProductFromURL();
     
@@ -1980,16 +2007,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Garder les fonctions existantes inchangées
 function changeImage(productId, direction) {
+    console.log("changeImage appelé pour le produit:", productId, "direction:", direction);
+    
     const product = products.find(p => p.id === productId);
-    if (!product || !product.images) return;
+    if (!product || !product.images) {
+        console.log("Produit non trouvé ou pas d'images");
+        return;
+    }
 
     const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
-    if (!productCard) return;
+    if (!productCard) {
+        console.log("Carte produit non trouvée");
+        return;
+    }
     
     const mainImage = productCard.querySelector('.main-image');
-    if (!mainImage) return;
+    if (!mainImage) {
+        console.log("Image principale non trouvée");
+        return;
+    }
     
     const currentIndex = parseInt(mainImage.dataset.imageIndex || 0);
+    console.log("Index actuel:", currentIndex);
     
     let newIndex;
     if (direction === 'prev') {
@@ -1998,6 +2037,7 @@ function changeImage(productId, direction) {
         newIndex = (currentIndex + 1) % product.images.length;
     }
     
+    console.log("Nouvel index:", newIndex);
     mainImage.src = product.images[newIndex];
     mainImage.dataset.imageIndex = newIndex;
 
@@ -2202,4 +2242,371 @@ function getPageFromURL() {
 function getProductFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('product');
+}
+
+// Fonction pour créer le popup de commande
+function createOrderPopup(product) {
+    console.log("createOrderPopup appelé avec le produit:", product);
+    
+    // Supprimer tout popup de commande existant
+    const existingOrderPopups = document.querySelectorAll('.popup-overlay.order-popup');
+    existingOrderPopups.forEach(popup => popup.remove());
+    
+    // Supprimer tout popup de confirmation existant
+    const existingConfirmationPopups = document.querySelectorAll('.popup-overlay.confirmation-popup');
+    existingConfirmationPopups.forEach(popup => popup.remove());
+    
+    // Créer le nouveau popup
+    const popup = document.createElement('div');
+    popup.className = 'popup-overlay order-popup';
+    
+    // Générer les options de couleur
+    const colorOptions = ['Bois Naturel', 'Noir', 'Lasuré', 'Or', 'Argent']
+        .map(color => `<option value="${color}">${color}</option>`)
+        .join('');
+    
+    // Obtenir la date du jour au format YYYY-MM-DD pour l'attribut min du champ date
+    const today = new Date().toISOString().split('T')[0];
+    
+    popup.innerHTML = `
+        <div class="popup-content order-form-content">
+            <button class="close-popup">&times;</button>
+            <h2>Commander ${product.name}</h2>
+            
+            <form class="contact-form order-form">
+                <div class="form-group">
+                    <label for="product-name">Produit *</label>
+                    <input type="text" id="product-name" name="product-name" value="${product.name}" readonly>
+                </div>
+                
+                
+                
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="firstname">Prénom *</label>
+                        <input type="text" id="firstname" name="firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Nom *</label>
+                        <input type="text" id="lastname" name="lastname" required>
+                    </div>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9+\\s]+" required>
+                    </div>
+                </div>
+
+                <div class="address-group">
+                    <h4>Adresse de livraison *</h4>
+                    <div class="form-group">
+                        <label for="street">Rue et numéro</label>
+                        <input type="text" id="street" name="street" required>
+                    </div>
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="postal">Code postal</label>
+                            <input type="text" id="postal" name="postal" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Ville</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Pays</label>
+                        <input type="text" id="country" name="country" value="Belgique" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Remarques supplémentaires (dimensions, coloris,...)</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                
+                <div class="form-group date-group">
+                    <label for="deadline">Date souhaitée de réalisation</label>
+                    <input type="date" id="deadline" name="deadline" min="${today}">
+                    <span class="field-info">Cette date est à titre indicatif et nous permettra de mieux organiser notre planning. Le délai exact vous sera confirmé plus tard.</span>
+                </div>
+                
+                <div class="form-group file-upload">
+                    <label for="order-attachments">
+                        Pièces jointes (photos, croquis...)
+                        <span class="file-info">Max 5 Mo par fichier - JPG, PNG, PDF, SVG</span>
+                    </label>
+                    <input type="file" id="order-attachments" name="attachments" multiple accept=".jpg,.jpeg,.png,.pdf,.svg" class="file-input">
+                    <div class="file-drop-zone">
+                        <img src="assets/images/upload-icon.svg" alt="Upload" class="upload-icon">
+                        <p>Glissez vos fichiers ici ou cliquez pour sélectionner</p>
+                        <p class="selected-files"></p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">En passant commande, vous acceptez nos conditions générales *</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">J'accepte de recevoir la newsletter</label>
+                    </div>
+                </div>
+
+                <p class="form-required-notice">* Champs obligatoires</p>
+                
+                <button type="submit" class="btn btn-primary">Commander</button>
+            </form>
+        </div>
+    `;
+
+    // Ajouter le popup au body
+    document.body.appendChild(popup);
+    document.body.classList.add('popup-open');
+
+    // Animation d'entrée - forcer un reflow avant d'ajouter la classe active
+    void popup.offsetWidth; // Force reflow
+    popup.classList.add('active');
+
+    // Gestion de la fermeture
+    const closeButton = popup.querySelector('.close-popup');
+    closeButton.addEventListener('click', () => {
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.remove();
+            document.body.classList.remove('popup-open');
+        }, 300);
+    });
+
+    // Gestion des pièces jointes
+    const dropZone = popup.querySelector('.file-drop-zone');
+    const fileInput = popup.querySelector('.file-input');
+    const selectedFiles = popup.querySelector('.selected-files');
+    
+    // Empêche la propagation du clic sur la liste des fichiers
+    selectedFiles.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // Ouvre le sélecteur de fichiers au clic sur la zone
+    dropZone.addEventListener('click', () => {
+        // Sauvegarde des fichiers existants
+        const existingFiles = Array.from(fileInput.files);
+        
+        // Création d'un gestionnaire d'événement temporaire pour le changement de fichiers
+        const handleFileInputChange = function() {
+            // Création d'un objet DataTransfer pour fusionner les fichiers
+            const dt = new DataTransfer();
+            
+            // Ajout des fichiers existants
+            existingFiles.forEach(file => {
+                dt.items.add(file);
+            });
+            
+            // Ajout des nouveaux fichiers
+            Array.from(fileInput.files).forEach(file => {
+                dt.items.add(file);
+            });
+            
+            // Mise à jour de l'input file avec tous les fichiers
+            fileInput.files = dt.files;
+            
+            // Suppression du gestionnaire d'événement temporaire
+            fileInput.removeEventListener('change', handleFileInputChange);
+            
+            // Mise à jour de la liste des fichiers
+            updateFileList();
+        };
+        
+        // Ajout du gestionnaire d'événement temporaire
+        fileInput.addEventListener('change', handleFileInputChange);
+        
+        // Ouverture du sélecteur de fichiers
+        fileInput.click();
+    });
+
+    // Gestion du drag & drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        
+        // Création d'un objet DataTransfer pour fusionner les fichiers
+        const dt = new DataTransfer();
+        
+        // Ajout des fichiers existants
+        if (fileInput.files.length > 0) {
+            Array.from(fileInput.files).forEach(file => {
+                dt.items.add(file);
+            });
+        }
+        
+        // Ajout des nouveaux fichiers
+        Array.from(e.dataTransfer.files).forEach(file => {
+            dt.items.add(file);
+        });
+        
+        // Mise à jour de l'input file avec tous les fichiers
+        fileInput.files = dt.files;
+        updateFileList();
+    });
+
+    // Mise à jour de la liste des fichiers
+    fileInput.addEventListener('change', updateFileList);
+
+    function updateFileList() {
+        const files = Array.from(fileInput.files);
+        selectedFiles.innerHTML = '';
+        
+        if (files.length > 0) {
+            const fileList = document.createElement('div');
+            fileList.className = 'file-list';
+            
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileName = document.createElement('span');
+                fileName.className = 'file-name';
+                fileName.textContent = file.name;
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'file-remove';
+                removeBtn.innerHTML = '&times;';
+                removeBtn.setAttribute('type', 'button');
+                removeBtn.setAttribute('aria-label', 'Supprimer le fichier');
+                removeBtn.dataset.index = index;
+                
+                removeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Empêche la propagation du clic vers la zone de dépôt
+                    removeFile(parseInt(this.dataset.index));
+                });
+                
+                fileItem.appendChild(fileName);
+                fileItem.appendChild(removeBtn);
+                fileList.appendChild(fileItem);
+                
+                // Empêche la propagation du clic sur l'élément de fichier
+                fileItem.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
+            selectedFiles.appendChild(fileList);
+        }
+    }
+    
+    function removeFile(index) {
+        const dt = new DataTransfer();
+        const files = Array.from(fileInput.files);
+        
+        files.forEach((file, i) => {
+            if (i !== index) {
+                dt.items.add(file);
+            }
+        });
+        
+        fileInput.files = dt.files;
+        updateFileList();
+    }
+
+    // Gestion du formulaire
+    const orderForm = popup.querySelector('.order-form');
+    orderForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(orderForm);
+        
+        // Ajout des fichiers
+        const fileInput = popup.querySelector('.file-input');
+        if (fileInput.files.length > 0) {
+            Array.from(fileInput.files).forEach((file, index) => {
+                formData.append('attachments[]', file);
+            });
+        }
+
+        try {
+            const response = await fetch('send-order.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Afficher le popup de confirmation
+                showOrderConfirmationPopup();
+                
+                // Fermer le popup de commande
+                popup.classList.remove('active');
+                setTimeout(() => {
+                    popup.remove();
+                    document.body.classList.remove('popup-open');
+                }, 300);
+            } else {
+                throw new Error(result.message || 'Erreur lors de l\'envoi de la commande');
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert(error.message || 'Une erreur est survenue lors de l\'envoi de la commande. Veuillez réessayer.');
+        }
+    });
+}
+
+// Fonction pour afficher le popup de confirmation de commande
+function showOrderConfirmationPopup() {
+    console.log("showOrderConfirmationPopup appelé");
+    
+    // Supprimer tout popup de commande existant
+    const existingOrderPopups = document.querySelectorAll('.popup-overlay.order-popup');
+    existingOrderPopups.forEach(popup => popup.remove());
+    
+    // Supprimer tout popup de confirmation existant
+    const existingConfirmationPopups = document.querySelectorAll('.popup-overlay.confirmation-popup');
+    existingConfirmationPopups.forEach(popup => popup.remove());
+    
+    const popup = document.createElement('div');
+    popup.className = 'popup-overlay confirmation-popup';
+    
+    popup.innerHTML = `
+        <div class="popup-content">
+            <img src="assets/images/La%20Gravisterie%20carré_N.svg" alt="Logo La Gravisterie" class="popup-logo">
+            <h3 class="popup-title">Merci pour votre commande !</h3>
+            <p class="popup-message">Nous avons bien reçu votre demande et nous reviendrons vers vous pour confirmer la commande.</p>
+            <button class="popup-close">Fermer</button>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+    
+    // Force reflow avant d'ajouter la classe active
+    void popup.offsetWidth;
+    popup.classList.add('active');
+
+    // Gestionnaire pour fermer le popup
+    const closeButton = popup.querySelector('.popup-close');
+    closeButton.addEventListener('click', () => {
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.remove();
+        }, 300);
+    });
 }

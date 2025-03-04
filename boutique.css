@@ -403,6 +403,29 @@
     --primary-color-rgb: 26, 26, 26;
 }
 
+/* Styles pour le popup-overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Styles pour le popup de produit */
 .product-popup {
     position: fixed;
     top: 0;
@@ -418,7 +441,7 @@
     overflow-y: auto;
 }
 
-.popup-content {
+.product-popup .popup-content {
     background: var(--primary-color);
     max-width: 1200px;
     width: 90%;
@@ -431,6 +454,76 @@
     margin: 20px auto;
     max-height: 90vh;
     overflow-y: auto;
+}
+
+.popup-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+.popup-title {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.popup-message {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.popup-close {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.popup-close::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.popup-close:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup-close:hover::before {
+    width: 800px;
+    height: 800px;
+}
+
+/* Mode sombre pour le bouton */
+[data-theme="dark"] .popup-close {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .popup-close::before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .popup-logo {
+    filter: invert(1);
 }
 
 .popup-gallery {
@@ -750,4 +843,452 @@ body.popup-open {
     .gallery-nav {
         opacity: 1;
     }
+}
+
+/* Styles pour le popup de commande */
+.order-popup .popup-content {
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    background: var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.order-form-content h2 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.order-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.order-form .form-group label {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.order-form .form-group input,
+.order-form .form-group textarea {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.order-form .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.order-form .form-group input[readonly] {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.order-form .form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.order-form select {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    width: 100%;
+}
+
+.order-form .address-group {
+    background-color: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.order-form .address-group h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.order-form .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.order-form .checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent-color);
+}
+
+.order-form .checkbox-group label {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    cursor: pointer;
+    color: var(--text-color);
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.order-form .form-required-notice {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+/* Styles pour le champ de date */
+.order-form .date-group {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
+.order-form .field-info {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.order-form input[type="date"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Ajustements pour le mode sombre */
+[data-theme="dark"] .order-form input[type="date"] {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+}
+
+/* Style pour l'icône du calendrier */
+[data-theme="dark"] .order-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Style au focus */
+.order-form input[type="date"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Styles pour le champ de pièces jointes */
+.order-form .file-upload {
+    margin-bottom: 1.5rem;
+}
+
+.order-form .file-upload label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.order-form .file-info {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 0.25rem;
+}
+
+.order-form .file-input {
+    display: none;
+}
+
+.order-form .file-drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--secondary-color);
+}
+
+.order-form .file-drop-zone:hover {
+    border-color: var(--accent-color);
+    background-color: var(--secondary-color);
+}
+
+.order-form .file-drop-zone.dragover {
+    border-color: var(--accent-color);
+    background-color: var(--secondary-color);
+}
+
+.order-form .upload-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.order-form .file-list {
+    margin-top: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.order-form .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.order-form .file-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 30px);
+}
+
+.order-form .file-remove {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.order-form .file-remove:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+[data-theme="dark"] .order-form .file-item {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Styles pour le mode sombre */
+[data-theme="dark"] .order-form select,
+[data-theme="dark"] .order-form input,
+[data-theme="dark"] .order-form textarea {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-required-notice {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+    .order-popup .popup-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .order-form-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .order-form .form-group-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .order-form .file-item {
+        padding: 8px 10px;
+    }
+    
+    .order-form .file-name {
+        font-size: 0.85rem;
+    }
+    
+    .order-form .checkbox-group {
+        align-items: flex-start;
+    }
+    
+    .order-form .checkbox-group input[type="checkbox"] {
+        margin-top: 2px;
+    }
+}
+
+/* Styles pour le popup de confirmation */
+.popup-overlay:not(.order-popup) .popup-content {
+    background: var(--primary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour le popup de confirmation */
+.confirmation-popup .popup-content {
+    background: var(--primary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-popup .popup-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+.confirmation-popup .popup-title {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.confirmation-popup .popup-message {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.confirmation-popup .popup-close {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.confirmation-popup .popup-close::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.confirmation-popup .popup-close:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.confirmation-popup .popup-close:hover::before {
+    width: 800px;
+    height: 800px;
+}
+
+/* Mode sombre pour le popup de confirmation */
+[data-theme="dark"] .confirmation-popup .popup-close {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .confirmation-popup .popup-close::before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .confirmation-popup .popup-logo {
+    filter: invert(1);
+}
+
+/* Style du bouton de fermeture pour le popup de commande */
+.order-popup .close-popup {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 2;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    transition: all 0.3s ease;
+}
+
+.order-popup .close-popup:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .order-popup .close-popup {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .order-popup .close-popup:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.popup-overlay.active .popup-content {
+    transform: translateY(0);
+    opacity: 1;
 } 
