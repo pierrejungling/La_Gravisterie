@@ -1702,7 +1702,7 @@ function displayProducts(category = getCategoryFromURL()) {
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <p class="price">${product.price}</p>
+                <div class="price">${product.price} €</div>
                 <p class="description">${product.description}</p>
             <div class="product-tags">
                 ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
@@ -1802,31 +1802,132 @@ function displayProducts(category = getCategoryFromURL()) {
     });
 }
 
-// Fonction pour ouvrir le popup
-function openProductPopup(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-    
-    const popup = createProductPopup(product);
-    document.body.appendChild(popup);
-    document.body.classList.add('popup-open');
-    handleTouchGallery(popup, product);
-    updateURL(getCategoryFromURL(), currentPage, productId); // Ajouter l'ID du produit à l'URL
+// Fonction pour créer le popup d'un produit
+function createProductPopup(product) {
+    const popup = document.createElement('div');
+    popup.className = 'product-popup';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <button class="close-popup">&times;</button>
+            <div class="popup-gallery">
+                <div class="popup-image-container">
+                    <img src="${product.images[0]}" alt="${product.name}" class="popup-main-image">
+                    <button class="popup-nav prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <button class="popup-nav next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="popup-thumbnails">
+                    ${product.images.map((img, index) => `
+                        <img src="${img}" 
+                             alt="${product.name} - Image ${index + 1}" 
+                             class="popup-thumbnail ${index === 0 ? 'active' : ''}"
+                             data-index="${index}">
+                    `).join('')}
+                </div>
+            </div>
+            <div class="popup-info">
+                <h2>${product.name}</h2>
+                <div class="popup-price">${product.price}</div>
+                ${product.priceOptions ? `
+                    <div class="popup-price-option">${product.priceOptions}</div>
+                ` : ''}
+                ${product.priceDetails ? `
+                    <div class="popup-price-details">
+                        ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
+                    </div>
+                ` : ''}
+                <div class="popup-description">${product.description}</div>
+                <div class="popup-details">
+                    <p><strong>Dimensions :</strong> ${product.dimensions}</p>
+                    <p><strong>Matériau :</strong> ${product.material}</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques:</h3>
+                    <ul>
+                        ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                <button class="btn btn-primary">Commander</button>
+            </div>
+        </div>
+    `;
 
-    // Gestion de la fermeture du popup
-    popup.querySelector('.close-popup').addEventListener('click', () => {
+    // Gestion de la fermeture en cliquant sur le bouton ou en dehors du popup
+    const closeButton = popup.querySelector('.close-popup');
+    closeButton.addEventListener('click', () => {
         popup.remove();
         document.body.classList.remove('popup-open');
-        updateURL(getCategoryFromURL(), currentPage); // Supprimer l'ID du produit de l'URL
+        updateURL(getCategoryFromURL(), currentPage);
     });
 
     popup.addEventListener('click', (e) => {
         if (e.target === popup) {
             popup.remove();
             document.body.classList.remove('popup-open');
-            updateURL(getCategoryFromURL(), currentPage); // Supprimer l'ID du produit de l'URL
+            updateURL(getCategoryFromURL(), currentPage);
         }
     });
+
+    // Gestion des événements après la création du popup
+    const mainImage = popup.querySelector('.popup-main-image');
+    const thumbnails = popup.querySelectorAll('.popup-thumbnail');
+    const prevButton = popup.querySelector('.popup-nav.prev');
+    const nextButton = popup.querySelector('.popup-nav.next');
+    let currentImageIndex = 0;
+
+    // Fonction pour mettre à jour l'image
+    function updateImage(index) {
+        mainImage.src = product.images[index];
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        thumbnails[index].classList.add('active');
+        currentImageIndex = index;
+    }
+
+    // Gestion des clics sur les boutons de navigation
+    if (product.images && product.images.length > 1) {
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
+            updateImage(currentImageIndex);
+        });
+
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % product.images.length;
+            updateImage(currentImageIndex);
+        });
+
+        // Gestion des clics sur les vignettes
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateImage(index);
+            });
+        });
+    } else {
+        prevButton.style.display = 'none';
+        nextButton.style.display = 'none';
+    }
+
+    return popup;
+}
+
+// Fonction pour ouvrir le popup d'un produit
+function openProductPopup(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const popup = createProductPopup(product);
+    document.body.appendChild(popup);
+    document.body.classList.add('popup-open');
+    updateURL(getCategoryFromURL(), currentPage, productId);
 }
 
 // Initialisation
@@ -2039,72 +2140,6 @@ function handleTouchGallery(popup, product) {
             updateImage(index);
         });
     });
-}
-
-function createProductPopup(product) {
-    const popup = document.createElement('div');
-    popup.className = 'product-popup';
-    
-    const content = `
-        <div class="popup-content">
-            <button class="close-popup">&times;</button>
-            <div class="popup-gallery">
-                <div class="popup-image-container">
-                    <img src="${product.images ? product.images[0] : product.image}" 
-                         alt="${product.name}" 
-                         class="popup-main-image">
-                    ${product.images && product.images.length > 1 ? `
-                        <button class="popup-nav prev">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <button class="popup-nav next">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    ` : ''}
-                </div>
-                ${product.images && product.images.length > 1 ? `
-                    <div class="popup-thumbnails">
-                        ${product.images.map((img, index) => `
-                            <img src="${img}" 
-                                 alt="${product.name}" 
-                                 class="popup-thumbnail ${index === 0 ? 'active' : ''}"
-                                 data-index="${index}">
-                        `).join('')}
-                    </div>
-                ` : ''}
-            </div>
-            <div class="popup-info">
-                <h2>${product.name}</h2>
-                <p class="popup-price">${product.price}</p>
-                ${product.priceDetails ? `
-                    <div class="popup-price-details">
-                        ${product.priceDetails.map(detail => `<p>${detail}</p>`).join('')}
-                    </div>
-                ` : ''}
-                <p class="popup-description">${product.description}</p>
-                <div class="popup-details">
-                    ${product.dimensions ? `<p><strong>Dimensions :</strong> ${product.dimensions}</p>` : ''}
-                    ${product.material ? `<p><strong>Matériau :</strong> ${product.material}</p>` : ''}
-                </div>
-                ${product.features ? `
-                    <div class="popup-features">
-                        <h3>Caractéristiques:</h3>
-                        <ul>
-                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
-                        </ul>
-                    </div>
-                ` : ''}
-                <button class="btn btn-primary">Commander</button>
-            </div>
-        </div>
-    `;
-    
-    popup.innerHTML = content;
-    return popup;
 }
 
 function initializeProductSwiper() {

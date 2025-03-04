@@ -676,6 +676,73 @@ const projects = [
         ],
         dimensions: '40 x 30 cm'
     },
+    {
+        id: 'fleurs-decoratives',
+        name: 'Fleurs en bois',
+        category: 'perso',
+        description: 'Collection de fleurs en bois, découpées avec précision et montées sur un support élégant. Chaque fleur est délicatement conçue pour créer une composition naturelle et minimaliste.',
+        features: [
+            'Design floral détaillé',
+            'Finition naturelle'
+        ],
+        images: [
+            'assets/images/projects/fleurs-1.jpg',
+            'assets/images/projects/fleurs-2.jpg',
+            'assets/images/projects/fleurs-3.jpg',
+            'assets/images/projects/fleurs-4.jpg',
+            'assets/images/projects/fleurs-5.jpg',
+            'assets/images/projects/fleurs-6.jpg',
+            'assets/images/projects/fleurs-7.jpg',
+            'assets/images/projects/fleurs-8.jpg',
+            'assets/images/projects/fleurs-9.jpg',
+
+        ],
+        material: 'Bois',
+        client: 'Projets personnels',
+        details: {
+            technique: 'Gravure laser de précision et découpe',
+            finition: 'Naturelle',
+            usage: 'Décoration d\'intérieur'
+        },
+        portfolio: [
+            {
+                name: 'Collection Botanique',
+                description: 'Ensemble de fleurs stylisées avec support en bois et vases en verre',
+                style: 'Minimaliste et naturel'
+            }
+        ]
+    },
+    {
+        id: 'flasque-el-trio',
+        name: 'Flasque El Trio des Bermudes',
+        category: 'entreprises',
+        description: 'Flasque en acier inoxydable personnalisée pour le rhum "El Trio des Bermudes". Une gravure élégante qui combine le logo emblématique et les informations techniques du spiritueux.',
+        features: [
+            'Logo El Trio Factory',
+            'Gravure sur acier inoxydable',
+            'Informations techniques (17 CL, 40°)',
+            'Design triangulaire signature',
+            'Finition mate professionnelle'
+        ],
+        images: [
+            'assets/images/projects/flasque-el-trio-1.jpg'
+        ],
+        material: 'Acier inoxydable',
+        client: 'El Trio Factory',
+        details: {
+            technique: 'Gravure laser sur métal',
+            finition: 'Mate',
+            usage: 'Flasque pour spiritueux'
+        },
+        portfolio: [
+            {
+                name: 'Flasque Rum des Bermudes',
+                description: 'Flasque personnalisée avec logo triangulaire et informations du rhum',
+                style: 'Industriel et élégant'
+            }
+        ],
+        dimensions: '17 cl'
+    },
 ];
 
 // Variables globales
@@ -851,9 +918,9 @@ function displayProjects(category = getCategoryFromURL()) {
                         window.location.href = url.toString();
                     }
                 } else {
-                    currentPage = i;
-                    displayProjects(category);
-                    window.scrollTo(0, 0);
+                currentPage = i;
+                displayProjects(category);
+                window.scrollTo(0, 0);
                     updateURL(category, currentPage);
                 }
             });
