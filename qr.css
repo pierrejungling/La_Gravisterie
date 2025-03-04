@@ -157,7 +157,7 @@ main {
     width: 90px;
     height: 90px;
     padding: 20px;
-    border-radius: 50%;
+    border-radius: 25%;
     transition: all 0.3s ease;
     stroke-width: 1.5;
     fill: none;
@@ -191,6 +191,8 @@ main {
     fill: none;
     stroke: var(--text-color);
 }
+
+
 
 .theme-toggle {
     position: fixed;
@@ -226,7 +228,7 @@ main {
     }
 
     .main-logo {
-        max-width: 250px;
+        max-width: 300px;
     }
 
     .info-container {
@@ -256,12 +258,12 @@ main {
     }
 
     .theme-toggle {
-        top: 0.5rem;
-        right: 0.5rem;
+        top: 1rem;
+        right: 1.5rem;
     }
     
     .theme-toggle svg {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
     }
 } 

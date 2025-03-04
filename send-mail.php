@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailBody .= "$street\n";
     $emailBody .= "$postal $city\n";
     $emailBody .= "$country\n\n";
-    $emailBody .= "Date souhaitée : $deadline\n\n";
+    $emailBody .= "Deadline : $deadline\n\n";
     $emailBody .= "Message :\n$message\n";
 
     $emailContent .= $emailBody;

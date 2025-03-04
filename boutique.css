@@ -567,6 +567,7 @@
 .popup-description {
     margin: 1rem 0;
     line-height: 1.6;
+    border : solid red 1px;
 }
 
 .popup-details {
