@@ -522,8 +522,8 @@ main {
 }
 
 .popup-close:hover::before {
-    width: 300px;
-    height: 300px;
+    width: 800px;
+    height: 800px;
 }
 
 /* Mode sombre pour le bouton */
@@ -671,4 +671,35 @@ main {
     .file-name {
         font-size: 0.85rem;
     }
+}
+
+/* Style spécifique pour le bouton d'envoi du formulaire */
+.contact-form .btn-primary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.contact-form .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.contact-form .btn-primary:hover::before {
+    width: 800px;
+    height: 800px;
+}
+
+/* Mode sombre pour le bouton du formulaire */
+[data-theme="dark"] .contact-form .btn-primary::before {
+    background: rgba(0, 0, 0, 0.2);
 } 
