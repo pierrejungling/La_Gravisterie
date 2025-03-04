@@ -576,6 +576,7 @@
 
 .popup-features {
     margin: 1rem 0;
+    border: solid green 1px;
 }
 
 .popup-features ul {
