@@ -567,7 +567,6 @@
 .popup-description {
     margin: 1rem 0;
     line-height: 1.6;
-    border : solid red 1px;
 }
 
 .popup-details {
@@ -576,7 +575,6 @@
 
 .popup-features {
     margin: 1rem 0;
-    border: solid green 1px;
 }
 
 .popup-features ul {

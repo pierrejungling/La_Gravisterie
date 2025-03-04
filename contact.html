@@ -12,6 +12,7 @@
     <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#1a1a1a">
     <meta name="msapplication-TileColor" content="#1a1a1a">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="contact.css">
 </head>
@@ -167,9 +168,9 @@
                     <div class="form-group file-upload">
                         <label for="attachments">
                             Pièces jointes (photos, croquis...)
-                            <span class="file-info">Max 5 Mo par fichier - JPG, PNG, PDF</span>
+                            <span class="file-info">Max 5 Mo par fichier - JPG, PNG, PDF, SVG</span>
                         </label>
-                        <input type="file" id="attachments" name="attachments" multiple accept=".jpg,.jpeg,.png,.pdf" class="file-input">
+                        <input type="file" id="attachments" name="attachments" multiple accept=".jpg,.jpeg,.png,.pdf,.svg" class="file-input">
                         <div class="file-drop-zone">
                             <img src="assets/images/upload-icon.svg" alt="Upload" class="upload-icon">
                             <p>Glissez vos fichiers ici ou cliquez pour sélectionner</p>
@@ -177,7 +178,23 @@
                         </div>
                     </div>
 
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">En soumettant cette demande, vous acceptez nos conditions générales *</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">J'accepte de recevoir la newsletter</label>
+                        </div>
+                    </div>
+
                     <p class="form-required-notice">* Champs obligatoires</p>
+                    
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
             </div>

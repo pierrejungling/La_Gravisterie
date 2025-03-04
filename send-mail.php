@@ -16,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $country = $_POST['country'] ?? '';
     $message = $_POST['message'] ?? '';
     $deadline = $_POST['deadline'] ?? 'Non spécifiée';
+    $newsletter = isset($_POST['newsletter']) ? 'Oui' : 'Non';
+    $terms = isset($_POST['terms']) ? 'Acceptées' : 'Non acceptées';
 
     // Construction du sujet
     $subject = "Nouveau formulaire de contact - La Gravisterie";
@@ -41,6 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailBody .= "$postal $city\n";
     $emailBody .= "$country\n\n";
     $emailBody .= "Deadline : $deadline\n\n";
+    $emailBody .= "Newsletter : $newsletter\n";
+    $emailBody .= "Conditions générales : $terms\n\n";
     $emailBody .= "Message :\n$message\n";
 
     $emailContent .= $emailBody;
@@ -67,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     
                     // Vérification du type de fichier
-                    $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+                    $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'image/svg+xml'];
                     if (!in_array($fileType, $allowedTypes)) {
                         echo json_encode(['success' => false, 'message' => "Le type de fichier de $fileName n'est pas autorisé"]);
                         exit;

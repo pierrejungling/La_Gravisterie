@@ -77,9 +77,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropZone = document.querySelector('.file-drop-zone');
     const fileInput = document.querySelector('.file-input');
     const selectedFiles = document.querySelector('.selected-files');
+    
+    // Empêche la propagation du clic sur la liste des fichiers
+    selectedFiles.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
 
     // Ouvre le sélecteur de fichiers au clic sur la zone
-    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('click', () => {
+        // Sauvegarde des fichiers existants
+        const existingFiles = Array.from(fileInput.files);
+        
+        // Création d'un gestionnaire d'événement temporaire pour le changement de fichiers
+        const handleFileInputChange = function() {
+            // Création d'un objet DataTransfer pour fusionner les fichiers
+            const dt = new DataTransfer();
+            
+            // Ajout des fichiers existants
+            existingFiles.forEach(file => {
+                dt.items.add(file);
+            });
+            
+            // Ajout des nouveaux fichiers
+            Array.from(fileInput.files).forEach(file => {
+                dt.items.add(file);
+            });
+            
+            // Mise à jour de l'input file avec tous les fichiers
+            fileInput.files = dt.files;
+            
+            // Suppression du gestionnaire d'événement temporaire
+            fileInput.removeEventListener('change', handleFileInputChange);
+        };
+        
+        // Ajout du gestionnaire d'événement temporaire
+        fileInput.addEventListener('change', handleFileInputChange);
+        
+        // Ouverture du sélecteur de fichiers
+        fileInput.click();
+    });
 
     // Gestion du drag & drop
     dropZone.addEventListener('dragover', (e) => {
@@ -94,7 +130,24 @@ document.addEventListener('DOMContentLoaded', () => {
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         dropZone.classList.remove('dragover');
-        fileInput.files = e.dataTransfer.files;
+        
+        // Création d'un objet DataTransfer pour fusionner les fichiers
+        const dt = new DataTransfer();
+        
+        // Ajout des fichiers existants
+        if (fileInput.files.length > 0) {
+            Array.from(fileInput.files).forEach(file => {
+                dt.items.add(file);
+            });
+        }
+        
+        // Ajout des nouveaux fichiers
+        Array.from(e.dataTransfer.files).forEach(file => {
+            dt.items.add(file);
+        });
+        
+        // Mise à jour de l'input file avec tous les fichiers
+        fileInput.files = dt.files;
         updateFileList();
     });
 
@@ -103,10 +156,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateFileList() {
         const files = Array.from(fileInput.files);
+        selectedFiles.innerHTML = '';
+        
         if (files.length > 0) {
-            selectedFiles.textContent = files.map(f => f.name).join(', ');
-        } else {
-            selectedFiles.textContent = '';
+            const fileList = document.createElement('div');
+            fileList.className = 'file-list';
+            
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileName = document.createElement('span');
+                fileName.className = 'file-name';
+                fileName.textContent = file.name;
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'file-remove';
+                removeBtn.innerHTML = '&times;';
+                removeBtn.setAttribute('type', 'button');
+                removeBtn.setAttribute('aria-label', 'Supprimer le fichier');
+                removeBtn.dataset.index = index;
+                
+                removeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Empêche la propagation du clic vers la zone de dépôt
+                    removeFile(parseInt(this.dataset.index));
+                });
+                
+                fileItem.appendChild(fileName);
+                fileItem.appendChild(removeBtn);
+                fileList.appendChild(fileItem);
+                
+                // Empêche la propagation du clic sur l'élément de fichier
+                fileItem.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
+            selectedFiles.appendChild(fileList);
         }
+    }
+    
+    function removeFile(index) {
+        const dt = new DataTransfer();
+        const files = Array.from(fileInput.files);
+        
+        files.forEach((file, i) => {
+            if (i !== index) {
+                dt.items.add(file);
+            }
+        });
+        
+        fileInput.files = dt.files;
+        updateFileList();
     }
 }); 
