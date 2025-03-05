@@ -437,6 +437,31 @@ const products = [
         customizable: true
     },
     {
+        id: 'ardoise-aperitif',
+        name: 'Ardoise apéritif emplacement',
+        price: '20 €',
+        category: ['decoration','accessoires'],
+        description: 'Élégante ardoise carrée avec emplacements gravés pour présenter vos apéritifs. Idéale pour servir charcuterie, fromages et olives lors de vos soirées conviviales.',
+        dimensions: '20 x 20 cm',
+        material: 'Ardoise naturelle',
+        features: [
+            'Compartiments gravés et identifiés',
+            'Emplacements pour saucisson, fromage, charcuterie et olives',
+            'Facile à nettoyer',
+            'Idéale pour les apéritifs',
+        ],
+        images: [
+            'assets/images/products/ardoise-aperitif-1.jpg'
+        ],
+        inStock: true,
+        customizable: false,
+        priceDetails: [
+            'Prix unique : 20 €'
+        ]
+    },
+
+
+    {
         id: 'gorille',
         name: 'Le Gorille',
         price: 'À partir de 15 €',
@@ -1634,7 +1659,6 @@ const products = [
         inStock: true,
         customizable: false
     },
-
 
 
 
