@@ -160,27 +160,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mise à jour de la liste des fichiers
     fileInput.addEventListener('change', updateFileList);
 
+    // Constante pour la taille maximale de fichier (5 Mo)
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 Mo en octets
+    
+    // Créer un élément pour afficher les erreurs
+    const errorMessage = document.createElement('p');
+    errorMessage.className = 'file-error-message';
+    errorMessage.style.color = 'red';
+    errorMessage.style.display = 'none';
+    dropZone.appendChild(errorMessage);
+
     function updateFileList() {
-        const files = Array.from(fileInput.files);
         selectedFiles.innerHTML = '';
+        errorMessage.style.display = 'none';
         
-        if (files.length > 0) {
-            const fileList = document.createElement('div');
+        if (fileInput.files.length > 0) {
+            const fileList = document.createElement('ul');
             fileList.className = 'file-list';
             
-            files.forEach((file, index) => {
-                const fileItem = document.createElement('div');
+            let hasOversizedFiles = false;
+            
+            Array.from(fileInput.files).forEach((file, index) => {
+                // Vérifier la taille du fichier
+                if (file.size > MAX_FILE_SIZE) {
+                    hasOversizedFiles = true;
+                }
+                
+                const fileItem = document.createElement('li');
                 fileItem.className = 'file-item';
                 
                 const fileName = document.createElement('span');
                 fileName.className = 'file-name';
                 fileName.textContent = file.name;
                 
+                // Ajouter une classe pour les fichiers trop volumineux
+                if (file.size > MAX_FILE_SIZE) {
+                    fileName.classList.add('file-oversized');
+                    fileName.style.color = 'red';
+                }
+                
                 const removeBtn = document.createElement('button');
-                removeBtn.className = 'file-remove';
+                removeBtn.className = 'remove-file';
                 removeBtn.innerHTML = '&times;';
-                removeBtn.setAttribute('type', 'button');
-                removeBtn.setAttribute('aria-label', 'Supprimer le fichier');
                 removeBtn.dataset.index = index;
                 
                 removeBtn.addEventListener('click', function(e) {
@@ -199,6 +220,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             selectedFiles.appendChild(fileList);
+            
+            // Afficher le message d'erreur si des fichiers sont trop volumineux
+            if (hasOversizedFiles) {
+                errorMessage.textContent = 'Attention : Certains fichiers dépassent la limite de 5 Mo. Veuillez les supprimer ou les remplacer.';
+                errorMessage.style.display = 'block';
+            }
         }
     }
     

@@ -34,7 +34,7 @@ const products = [
     {
         id: 'noeud-papillon-ajour',
         name: 'Nœud papillon',
-        price: '15 €',
+        price: '25 €',
         category: ['accessoires','events'],
         description: 'Élégant nœud papillon en bois avec divers motif et coloris. Une pièce unique qui allie artisanat traditionnel et design contemporain, parfaite pour ajouter une touche d\'originalité à vos tenues.',
         dimensions: '12 x 5 cm',
@@ -1719,9 +1719,6 @@ function displayProducts(category = getCategoryFromURL()) {
                                 </svg>
                             </button>
                         </div>
-                            <div class="pagination-dots">
-                                ${product.images.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
-                            </div>
                     </div>
                 ` : `
                     <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
@@ -2131,8 +2128,8 @@ function handleCardTouchGallery(card, product) {
     let touchStartY = 0;
     let currentIndex = parseInt(mainImage.dataset.imageIndex) || 0;
 
-    // Ajouter l'indicateur de pagination
-    if (product.images && product.images.length > 1) {
+    // Ajouter l'indicateur de pagination seulement s'il n'existe pas déjà
+    if (product.images && product.images.length > 1 && !card.querySelector('.pagination-dots')) {
         const paginationContainer = document.createElement('div');
         paginationContainer.className = 'pagination-dots';
         
@@ -2470,6 +2467,16 @@ function createOrderPopup(product) {
     const fileInput = popup.querySelector('.file-input');
     const selectedFiles = popup.querySelector('.selected-files');
     
+    // Constante pour la taille maximale de fichier (5 Mo)
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 Mo en octets
+    
+    // Créer un élément pour afficher les erreurs
+    const errorMessage = document.createElement('p');
+    errorMessage.className = 'file-error-message';
+    errorMessage.style.color = 'red';
+    errorMessage.style.display = 'none';
+    dropZone.appendChild(errorMessage);
+    
     // Empêche la propagation du clic sur la liste des fichiers
     selectedFiles.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -2550,26 +2557,37 @@ function createOrderPopup(product) {
     fileInput.addEventListener('change', updateFileList);
 
     function updateFileList() {
-        const files = Array.from(fileInput.files);
         selectedFiles.innerHTML = '';
+        errorMessage.style.display = 'none';
         
-        if (files.length > 0) {
-            const fileList = document.createElement('div');
+        if (fileInput.files.length > 0) {
+            const fileList = document.createElement('ul');
             fileList.className = 'file-list';
             
-            files.forEach((file, index) => {
-                const fileItem = document.createElement('div');
+            let hasOversizedFiles = false;
+            
+            Array.from(fileInput.files).forEach((file, index) => {
+                // Vérifier la taille du fichier
+                if (file.size > MAX_FILE_SIZE) {
+                    hasOversizedFiles = true;
+                }
+                
+                const fileItem = document.createElement('li');
                 fileItem.className = 'file-item';
                 
                 const fileName = document.createElement('span');
                 fileName.className = 'file-name';
                 fileName.textContent = file.name;
                 
+                // Ajouter une classe pour les fichiers trop volumineux
+                if (file.size > MAX_FILE_SIZE) {
+                    fileName.classList.add('file-oversized');
+                    fileName.style.color = 'red';
+                }
+                
                 const removeBtn = document.createElement('button');
-                removeBtn.className = 'file-remove';
+                removeBtn.className = 'remove-file';
                 removeBtn.innerHTML = '&times;';
-                removeBtn.setAttribute('type', 'button');
-                removeBtn.setAttribute('aria-label', 'Supprimer le fichier');
                 removeBtn.dataset.index = index;
                 
                 removeBtn.addEventListener('click', function(e) {
@@ -2588,6 +2606,12 @@ function createOrderPopup(product) {
             });
             
             selectedFiles.appendChild(fileList);
+            
+            // Afficher le message d'erreur si des fichiers sont trop volumineux
+            if (hasOversizedFiles) {
+                errorMessage.textContent = 'Attention : Certains fichiers dépassent la limite de 5 Mo. Veuillez les supprimer ou les remplacer.';
+                errorMessage.style.display = 'block';
+            }
         }
     }
     

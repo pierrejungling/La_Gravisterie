@@ -1559,4 +1559,12 @@ body.popup-open {
 
 [data-theme="dark"] .no-products {
     background-color: var(--secondary-dark);
+}
+
+/* Style pour que le bouton Commander prenne toute la largeur */
+.popup-info .btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
 } 
