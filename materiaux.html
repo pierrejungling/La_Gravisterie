@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="materiaux.css">
+    <!-- Ajout de Hammer.js pour une meilleure gestion des événements tactiles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -76,8 +78,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/bois.svg" alt="Bois">
                 </div>
+                <button class="info-button" data-material="bois">i</button>
                 <div class="material-info">
-                    <h3>Bois</h3>
+                    <div class="material-title-container">
+                        <h3>Bois</h3>
+                    </div>
                     <p>Du bois massif au contreplaqué, nous travaillons une large gamme d'essences pour des créations chaleureuses et naturelles. Possibilité de gravure et découpe laser pour des designs complexes.</p>
                     <div class="material-capabilities">
                         <span class="capability-tag">Gravure</span>
@@ -99,8 +104,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/acrylique.svg" alt="Acrylique Noir">
                 </div>
+                <button class="info-button" data-material="acrylique">i</button>
                 <div class="material-info">
-                    <h3>Acrylique Noir</h3>
+                    <div class="material-title-container">
+                        <h3>Acrylique Noir</h3>
+                    </div>
                     <p>L'acrylique noir offre un contraste saisissant pour la gravure laser. La gravure révèle un blanc éclatant sur le fond noir profond. Possibilité de découpe laser pour des formes précises et complexes.</p>
                     <div class="material-capabilities">
                         <span class="capability-tag">Gravure</span>
@@ -118,8 +126,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/verre.svg" alt="Verre">
                 </div>
+                <button class="info-button" data-material="verre">i</button>
                 <div class="material-info">
-                    <h3>Verre</h3>
+                    <div class="material-title-container">
+                        <h3>Verre</h3>
+                    </div>
                     <p>Le verre offre un rendu blanc givré délicat.</p>
                     <div class="material-capabilities">
                         <span class="capability-tag">Gravure</span>
@@ -138,8 +149,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/inox.svg" alt="Acier Inoxydable">
                 </div>
+                <button class="info-button" data-material="inox">i</button>
                 <div class="material-info">
-                    <h3>Acier Inoxydable</h3>
+                    <div class="material-title-container">
+                        <h3>Acier Inoxydable</h3>
+                    </div>
                     <p>L'acier inoxydable allie élégance et durabilité. Sa résistance exceptionnelle aux intempéries et à la corrosion en fait un support idéal pour des gravures au laser précises et durables, parfaites pour une utilisation en extérieur.</p>
                     <div class="material-capabilities">
                         <span class="capability-tag">Gravure</span>
@@ -156,8 +170,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/liege.svg" alt="Liège">
                 </div>
+                <button class="info-button" data-material="liege">i</button>
                 <div class="material-info">
-                    <h3>Liège</h3>
+                    <div class="material-title-container">
+                        <h3>Liège</h3>
+                    </div>
                     <p>Matériau naturel et écologique, le liège apporte une texture unique à vos créations. Parfait pour des objets décoratifs originaux et écologiques.</p>
                     <div class="material-capabilities">
                         <span class="capability-tag">Gravure</span>
@@ -176,8 +193,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/ardoise.svg" alt="Ardoise">
                 </div>
+                <button class="info-button" data-material="ardoise">i</button>
                 <div class="material-info">
-                    <h3>Ardoise</h3>
+                    <div class="material-title-container">
+                        <h3>Ardoise</h3>
+                    </div>
                     <p>L'ardoise naturelle offre un contraste saisissant avec sa gravure qui ressort en blanc. Idéale pour des créations élégantes et intemporelles.</p>
                     <div class="material-capabilities">
                         <span class="capability-tag">Gravure</span>
@@ -195,8 +215,11 @@
                 <div class="material-image">
                     <img src="assets/images/materials/cuir.svg" alt="Cuir">
                 </div>
+                <button class="info-button" data-material="cuir">i</button>
                 <div class="material-info">
-                    <h3>Cuir</h3>
+                    <div class="material-title-container">
+                        <h3>Cuir</h3>
+                    </div>
                     <p>Le cuir se prête parfaitement à la gravure pour des créations élégantes et durables.</p>
                     <p>La couleur de la gravure dépend de celle du cuir.</p>
                     <div class="material-capabilities">
@@ -238,7 +261,420 @@
         </div>
     </footer>
 
-    <script src="../js/materiaux.js"></script>
+    <!-- Popups pour les matériaux - Conteneurs vides générés dynamiquement -->
+    <div class="popup-container" id="popup-bois">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-acrylique">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-verre">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-inox">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-liege">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-ardoise">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-cuir">
+        <div class="popup-content">
+            <button class="popup-close">×</button>
+        </div>
+    </div>
+
     <script src="theme.js"></script>
+    <script>
+        // Script pour gérer les popups et les galeries d'images
+        document.addEventListener('DOMContentLoaded', function() {
+            // Données des matériaux avec leurs images
+            const materialsData = {
+                'bois': {
+                    title: 'Rendu de gravure sur Bois',
+                    images: [
+                        'assets/images/materials/bois-sample.jpg',
+                        'assets/images/materials/bois-sample2.jpg',
+                        'assets/images/materials/bois-sample3.jpg'
+                    ],
+                    description: 'La gravure sur bois crée un contraste naturel en brûlant légèrement la surface. Le résultat varie selon l\'essence de bois utilisée, offrant des nuances allant du brun clair au brun foncé.'
+                },
+                'acrylique': {
+                    title: 'Rendu de gravure sur Acrylique Noir',
+                    images: [
+                        'assets/images/materials/acrylique-sample.jpg',
+                        'assets/images/materials/acrylique-sample2.jpg'
+                    ],
+                    description: 'La gravure sur acrylique noir crée un contraste saisissant. Le laser révèle un blanc éclatant sur le fond noir profond, offrant une lisibilité exceptionnelle et un effet visuel impressionnant.'
+                },
+                'verre': {
+                    title: 'Rendu de gravure sur Verre',
+                    images: [
+                        'assets/images/materials/verre-sample.jpg',
+                        'assets/images/materials/verre-sample2.jpg'
+                    ],
+                    description: 'La gravure sur verre crée un effet givré délicat. Le laser microsablant la surface pour créer un rendu blanc mat qui contraste élégamment avec la transparence du verre.'
+                },
+                'inox': {
+                    title: 'Rendu de gravure sur Acier Inoxydable',
+                    images: [
+                        'assets/images/materials/inox-sample.jpg',
+                    ],
+                    description: 'La gravure sur acier inoxydable crée un marquage permanent qui contraste avec la surface métallique. Le résultat est élégant et extrêmement durable, résistant aux intempéries et à l\'usure.'
+                },
+                'liege': {
+                    title: 'Rendu de gravure sur Liège',
+                    images: [
+                        'assets/images/materials/liege-sample.jpg',
+                    ],
+                    description: 'La gravure sur liège crée un contraste subtil et chaleureux. Le laser brûle légèrement la surface, créant une teinte plus foncée qui se marie parfaitement avec la texture naturelle du matériau.'
+                },
+                'ardoise': {
+                    title: 'Rendu de gravure sur Ardoise',
+                    images: [
+                        'assets/images/materials/ardoise-sample.jpg',
+                    ],
+                    description: 'La gravure sur ardoise crée un contraste naturel blanc sur le fond noir de la pierre. Le résultat est élégant et intemporel, parfait pour des créations sophistiquées.'
+                },
+                'cuir': {
+                    title: 'Rendu de gravure sur Cuir',
+                    images: [
+                        'assets/images/materials/cuir-sample.jpg',
+                        'assets/images/materials/cuir-sample2.jpg',
+                        'assets/images/materials/cuir-sample3.jpg'
+                    ],
+                    description: 'La gravure sur cuir crée un effet brûlé qui varie selon la couleur du cuir. Le résultat est à la fois tactile et visuel, ajoutant une dimension artisanale à vos créations en cuir.'
+                }
+            };
+
+            // Sélectionner tous les boutons d'info
+            const infoButtons = document.querySelectorAll('.info-button');
+            const closeButtons = document.querySelectorAll('.popup-close');
+            const popups = document.querySelectorAll('.popup-container');
+            
+            // Fonction pour générer dynamiquement le contenu du popup
+            function generatePopupContent(material, data) {
+                const popup = document.getElementById(`popup-${material}`);
+                if (!popup) return;
+                
+                const popupContent = popup.querySelector('.popup-content');
+                
+                // Vider le contenu existant sauf le bouton de fermeture
+                const closeButton = popupContent.querySelector('.popup-close');
+                popupContent.innerHTML = '';
+                popupContent.appendChild(closeButton);
+                
+                // Ajouter le titre
+                const title = document.createElement('h4');
+                title.className = 'popup-title';
+                title.textContent = data.title;
+                popupContent.appendChild(title);
+                
+                // Créer la galerie
+                const gallery = document.createElement('div');
+                gallery.className = 'popup-gallery';
+                
+                // Créer la section principale de la galerie
+                const galleryMain = document.createElement('div');
+                galleryMain.className = 'popup-gallery-main';
+                
+                // Créer le conteneur des slides
+                const slides = document.createElement('div');
+                slides.className = 'popup-gallery-slides';
+                
+                // Ajouter les slides
+                data.images.forEach((imgSrc, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'popup-gallery-slide';
+                    
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = `Exemple de gravure sur ${material} ${index + 1}`;
+                    
+                    slide.appendChild(img);
+                    slides.appendChild(slide);
+                });
+                
+                galleryMain.appendChild(slides);
+                
+                // Ajouter les boutons de navigation seulement s'il y a plus d'une image
+                if (data.images.length > 1) {
+                    const prevBtn = document.createElement('button');
+                    prevBtn.className = 'popup-gallery-nav popup-gallery-prev';
+                    prevBtn.innerHTML = '&#10094;';
+                    galleryMain.appendChild(prevBtn);
+                    
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'popup-gallery-nav popup-gallery-next';
+                    nextBtn.innerHTML = '&#10095;';
+                    galleryMain.appendChild(nextBtn);
+                    
+                    // Ajouter les points de pagination
+                    const dots = document.createElement('div');
+                    dots.className = 'popup-gallery-dots';
+                    
+                    data.images.forEach((_, index) => {
+                        const dot = document.createElement('span');
+                        dot.className = index === 0 ? 'popup-gallery-dot active' : 'popup-gallery-dot';
+                        dot.setAttribute('data-index', index);
+                        dots.appendChild(dot);
+                    });
+                    
+                    galleryMain.appendChild(dots);
+                    
+                    // Ajouter le compteur (caché par CSS)
+                    const counter = document.createElement('div');
+                    counter.className = 'popup-gallery-counter';
+                    counter.textContent = `1/${data.images.length}`;
+                    galleryMain.appendChild(counter);
+                    
+                    // Ajouter les vignettes
+                    const thumbnails = document.createElement('div');
+                    thumbnails.className = 'popup-gallery-thumbnails';
+                    
+                    data.images.forEach((imgSrc, index) => {
+                        const thumb = document.createElement('div');
+                        thumb.className = index === 0 ? 'popup-gallery-thumbnail active' : 'popup-gallery-thumbnail';
+                        thumb.setAttribute('data-index', index);
+                        
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        img.alt = `Vignette ${index + 1}`;
+                        
+                        thumb.appendChild(img);
+                        thumbnails.appendChild(thumb);
+                    });
+                    
+                    gallery.appendChild(galleryMain);
+                    gallery.appendChild(thumbnails);
+                } else {
+                    // S'il n'y a qu'une seule image, ajouter seulement l'image principale sans contrôles
+                    gallery.appendChild(galleryMain);
+                }
+                
+                popupContent.appendChild(gallery);
+                
+                // Ajouter l'image principale (cachée par CSS quand la galerie est active)
+                const mainImage = document.createElement('img');
+                mainImage.src = data.images[0];
+                mainImage.alt = `Exemple de gravure sur ${material}`;
+                mainImage.className = 'popup-image';
+                popupContent.appendChild(mainImage);
+                
+                // Ajouter la description
+                const description = document.createElement('p');
+                description.className = 'popup-description';
+                description.textContent = data.description;
+                popupContent.appendChild(description);
+                
+                return popup;
+            }
+            
+            // Ajouter des écouteurs d'événements pour ouvrir les popups
+            infoButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const material = this.getAttribute('data-material');
+                    if (materialsData[material]) {
+                        const popup = generatePopupContent(material, materialsData[material]);
+                        if (popup) {
+                            popup.classList.add('active');
+                            // Empêcher le défilement du body
+                            document.body.style.overflow = 'hidden';
+                            document.body.classList.add('popup-open');
+                            
+                            // Initialiser la galerie si elle contient plus d'une image
+                            if (materialsData[material].images.length > 1) {
+                                initGallery(popup.querySelector('.popup-gallery'));
+                            }
+                        }
+                    }
+                });
+            });
+            
+            // Ajouter des écouteurs d'événements pour fermer les popups
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const popup = this.closest('.popup-container');
+                    if (popup) {
+                        popup.classList.remove('active');
+                        // Réactiver le défilement du body
+                        document.body.style.overflow = '';
+                        document.body.classList.remove('popup-open');
+                    }
+                });
+            });
+            
+            // Fermer le popup en cliquant en dehors du contenu
+            popups.forEach(popup => {
+                popup.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        // Réactiver le défilement du body
+                        document.body.style.overflow = '';
+                        document.body.classList.remove('popup-open');
+                    }
+                });
+            });
+            
+            // Fermer le popup avec la touche Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    popups.forEach(popup => {
+                        popup.classList.remove('active');
+                        // Réactiver le défilement du body
+                        document.body.style.overflow = '';
+                        document.body.classList.remove('popup-open');
+                    });
+                }
+            });
+
+            // Fonction pour initialiser une galerie
+            function initGallery(gallery) {
+                if (!gallery) return;
+                
+                const slides = gallery.querySelector('.popup-gallery-slides');
+                const slideElements = gallery.querySelectorAll('.popup-gallery-slide');
+                const prevBtn = gallery.querySelector('.popup-gallery-prev');
+                const nextBtn = gallery.querySelector('.popup-gallery-next');
+                const thumbnails = gallery.querySelectorAll('.popup-gallery-thumbnail');
+                const counter = gallery.querySelector('.popup-gallery-counter');
+                const dots = gallery.querySelectorAll('.popup-gallery-dot');
+                
+                let currentIndex = 0;
+                const totalSlides = slideElements.length;
+                
+                // Fonction pour mettre à jour l'affichage
+                function updateGallery() {
+                    // Mettre à jour la position des slides
+                    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    
+                    // Mettre à jour les vignettes actives
+                    thumbnails.forEach((thumb, index) => {
+                        if (index === currentIndex) {
+                            thumb.classList.add('active');
+                        } else {
+                            thumb.classList.remove('active');
+                        }
+                    });
+                    
+                    // Mettre à jour les points de pagination
+                    dots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                    
+                    // Mettre à jour le compteur
+                    if (counter) {
+                        counter.textContent = `${currentIndex + 1}/${totalSlides}`;
+                    }
+                }
+                
+                // Écouteurs pour les boutons de navigation
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                        updateGallery();
+                    });
+                }
+                
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex + 1) % totalSlides;
+                        updateGallery();
+                    });
+                }
+                
+                // Écouteurs pour les vignettes
+                thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        currentIndex = parseInt(thumb.getAttribute('data-index'));
+                        updateGallery();
+                    });
+                });
+                
+                // Écouteurs pour les points de pagination
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = parseInt(dot.getAttribute('data-index'));
+                        updateGallery();
+                    });
+                });
+                
+                // Support du swipe sur mobile avec Hammer.js
+                const hammertime = new Hammer(slides);
+                
+                // Configuration pour détecter les swipes horizontaux
+                hammertime.get('swipe').set({
+                    direction: Hammer.DIRECTION_HORIZONTAL,
+                    threshold: 10, // distance minimale pour un swipe
+                    velocity: 0.3, // vitesse minimale pour un swipe
+                    touchAction: 'pan-y' // permettre le défilement vertical
+                });
+                
+                // Désactiver le pinch-zoom pour éviter les conflits
+                hammertime.get('pinch').set({ enable: false });
+                
+                // Gestionnaire d'événement pour le swipe
+                hammertime.on('swipeleft', function(e) {
+                    // Swipe gauche -> image suivante
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                    updateGallery();
+                });
+                
+                hammertime.on('swiperight', function(e) {
+                    // Swipe droit -> image précédente
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                    updateGallery();
+                });
+                
+                // Ajouter un gestionnaire pour les taps sur les côtés de l'image
+                hammertime.on('tap', function(e) {
+                    // Calculer la position relative du tap
+                    const rect = slides.getBoundingClientRect();
+                    const x = e.center.x - rect.left;
+                    const width = rect.width;
+                    
+                    // Si le tap est sur le tiers gauche de l'image
+                    if (x < width / 3) {
+                        // Image précédente
+                        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                        updateGallery();
+                    } 
+                    // Si le tap est sur le tiers droit de l'image
+                    else if (x > (width * 2) / 3) {
+                        // Image suivante
+                        currentIndex = (currentIndex + 1) % totalSlides;
+                        updateGallery();
+                    }
+                });
+                
+                // Initialiser l'affichage
+                updateGallery();
+            }
+        });
+    </script>
 </body>
 </html> 

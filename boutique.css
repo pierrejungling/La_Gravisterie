@@ -552,6 +552,7 @@
 .popup-main-image {
     width: 100%;
     height: 100%;
+    border-radius: 8px;
     object-fit: cover;
     display: block;
     position: relative;
@@ -1033,6 +1034,11 @@ body.popup-open {
     margin-bottom: 0.5rem;
 }
 
+.order-form .address-group .form-group-row {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
 .order-form .address-group h4 {
     color: var(--accent-color);
     margin-bottom: 1rem;
@@ -1073,7 +1079,13 @@ body.popup-open {
     margin-bottom: 1rem;
     text-align: right;
 }
-
+.form-mod-paiement {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    text-align: left;
+}
 /* Styles pour le champ de date */
 .order-form .date-group {
     margin-bottom: 1.5rem;

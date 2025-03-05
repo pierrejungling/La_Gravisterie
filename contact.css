@@ -220,6 +220,10 @@
     margin-bottom: 1.5rem;
 }
 
+.address-group .form-group-row {
+    margin-top: 1.2rem;
+}
+
 /* Style pour le groupe d'adresse en mode sombre */
 [data-theme="dark"] .address-group {
     background-color: var(--secondary-color);
@@ -240,6 +244,14 @@
     margin-bottom: 1rem;
     text-align: right;
 }
+.form-mod-paiement {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
 
 @media (max-width: 768px) {
     .contact-container {
@@ -265,6 +277,7 @@
     .address-group {
         padding: 1rem;
     }
+    
 
     .contact-details {
         align-items: center;

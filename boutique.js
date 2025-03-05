@@ -2440,6 +2440,7 @@ function createOrderPopup(product) {
                 <p class="form-required-notice">* Champs obligatoires</p>
                 
                 <button type="submit" class="btn btn-primary">Commander</button>
+                <p class="form-mod-paiement">Le devis et les modalités de paiement vous seront envoyés par e-mail.</p>
             </form>
         </div>
     `;
