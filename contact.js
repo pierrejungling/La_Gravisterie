@@ -3,12 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fonction pour créer et afficher le popup
     function showSuccessPopup() {
+        // Supprimer tout popup existant
+        const existingPopups = document.querySelectorAll('.popup-overlay');
+        existingPopups.forEach(popup => popup.remove());
+        
         const popup = document.createElement('div');
-        popup.className = 'popup-overlay';
+        popup.className = 'popup-overlay confirmation-popup';
         
         popup.innerHTML = `
             <div class="popup-content">
-                <img src="assets/images/La%20Gravisterie%20carré_N.svg" alt="Logo La Gravisterie" class="popup-logo">
+                <div class="logo-container">
+                    <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie" class="popup-logo">
+                </div>
                 <h3 class="popup-title">Merci pour votre message !</h3>
                 <p class="popup-message">Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais.</p>
                 <button class="popup-close">Fermer</button>

@@ -1649,7 +1649,13 @@ function displayProducts(category = getCategoryFromURL()) {
     
     // Filtrer par catégorie si nécessaire
     if (category && category !== 'all') {
-        filteredProducts = products.filter(product => product.category === category);
+        // Vérifier si la catégorie est un tableau ou une chaîne
+        filteredProducts = products.filter(product => {
+            if (Array.isArray(product.category)) {
+                return product.category.includes(category);
+            }
+            return product.category === category;
+        });
     }
     
     // Calculer les produits à afficher pour la page actuelle
@@ -1662,28 +1668,31 @@ function displayProducts(category = getCategoryFromURL()) {
     productsGrid.innerHTML = '';
     
     // Afficher les produits
-    productsToDisplay.forEach(product => {
+    if (productsToDisplay.length === 0) {
+        productsGrid.innerHTML = '<div class="no-products">Aucun produit trouvé dans cette catégorie.</div>';
+    } else {
+        productsToDisplay.forEach(product => {
         const productCard = `
         <div class="product-card" data-product-id="${product.id}">
             <div class="product-image">
                 ${product.images && product.images.length > 1 ? `
                     <div class="image-gallery">
-                        <img src="${product.images[0]}" alt="${product.name}" class="main-image" data-image-index="0">
+                            <img src="${product.images[0]}" alt="${product.name}" class="main-image" data-image-index="0">
                         <div class="gallery-nav-container">
                             <button class="gallery-nav prev" onclick="event.stopPropagation(); changeImage('${product.id}', 'prev')">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M15 18l-6-6 6-6"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M15 18l-6-6 6-6"/>
                                 </svg>
                             </button>
                             <button class="gallery-nav next" onclick="event.stopPropagation(); changeImage('${product.id}', 'next')">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 18l6-6-6-6"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 18l6-6-6-6"/>
                                 </svg>
                             </button>
                         </div>
-                        <div class="pagination-dots">
-                            ${product.images.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
-                        </div>
+                            <div class="pagination-dots">
+                                ${product.images.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
+                            </div>
                     </div>
                 ` : `
                     <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}">
@@ -1691,7 +1700,7 @@ function displayProducts(category = getCategoryFromURL()) {
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <div class="price">${product.price}</div>
+                    <div class="price">${product.price}</div>
                 <p class="description">${product.description}</p>
             <div class="product-tags">
                 ${product.dimensions ? `<span class="tag">${product.dimensions}</span>` : ''}
@@ -1713,23 +1722,24 @@ function displayProducts(category = getCategoryFromURL()) {
             handleCardTouchGallery(card, product);
         }
 
-        // Gestionnaire pour ouvrir le popup de produit en cliquant sur la carte
-        card.addEventListener('click', (e) => {
-            console.log("Clic sur la carte produit");
-            // Ne pas déclencher si on clique sur le bouton Commander ou sur les flèches de navigation
-            if (!e.target.closest('.btn-primary') && !e.target.closest('.gallery-nav')) {
-                openProductPopup(productId);
-            }
+            // Gestionnaire pour ouvrir le popup de produit en cliquant sur la carte
+            card.addEventListener('click', (e) => {
+                console.log("Clic sur la carte produit");
+                // Ne pas déclencher si on clique sur le bouton Commander ou sur les flèches de navigation
+                if (!e.target.closest('.btn-primary') && !e.target.closest('.gallery-nav')) {
+                    openProductPopup(productId);
+                }
+            });
+            
+            // Gestionnaire spécifique pour le bouton Commander
+            const orderButton = card.querySelector('.btn-primary');
+            orderButton.addEventListener('click', (e) => {
+                console.log("Bouton Commander cliqué pour le produit:", product);
+                e.stopPropagation(); // Empêcher la propagation pour ne pas ouvrir le popup de produit
+                createOrderPopup(product);
+            });
         });
-        
-        // Gestionnaire spécifique pour le bouton Commander
-        const orderButton = card.querySelector('.btn-primary');
-        orderButton.addEventListener('click', (e) => {
-            console.log("Bouton Commander cliqué pour le produit:", product);
-            e.stopPropagation(); // Empêcher la propagation pour ne pas ouvrir le popup de produit
-            createOrderPopup(product);
-        });
-    });
+    }
     
     // Créer la pagination
     createPagination(filteredProducts.length, category);
@@ -1747,8 +1757,8 @@ function createPagination(totalProducts, category) {
     }
     
     let paginationHTML = '';
-    
-    // Bouton précédent
+        
+        // Bouton précédent
     paginationHTML += `<button class="pagination-btn prev ${currentPage === 1 ? 'disabled' : ''}" ${currentPage === 1 ? 'disabled' : ''}>Précédent</button>`;
     
     // Pages numérotées
@@ -1766,10 +1776,10 @@ function createPagination(totalProducts, category) {
     pageButtons.forEach(button => {
         button.addEventListener('click', () => {
             currentPage = parseInt(button.dataset.page);
-            displayProducts(category);
+                displayProducts(category);
             updateURL(category, currentPage);
-            window.scrollTo(0, 0);
-        });
+                window.scrollTo(0, 0);
+            });
     });
     
     // Gestionnaire pour le bouton précédent
@@ -1788,7 +1798,7 @@ function createPagination(totalProducts, category) {
     // Gestionnaire pour le bouton suivant
     const nextButton = paginationContainer.querySelector('.pagination-btn.next');
     if (nextButton) {
-        nextButton.addEventListener('click', () => {
+            nextButton.addEventListener('click', () => {
             if (currentPage < totalPages) {
                 currentPage++;
                 displayProducts(category);
@@ -1865,24 +1875,28 @@ function createProductPopup(product) {
         </div>
     `;
 
-    // Gestion de la fermeture en cliquant sur le bouton ou en dehors du popup
-    const closeButton = popup.querySelector('.close-popup');
-    closeButton.addEventListener('click', () => {
+    // Fonction pour fermer le popup et mettre à jour l'URL
+    const closePopupAndUpdateURL = () => {
         popup.classList.remove('active');
+        
+        // Mettre à jour l'URL pour supprimer le paramètre product
+        // Utiliser la fonction updateURL existante pour maintenir la cohérence
+        updateURL(getCategoryFromURL(), currentPage);
+        
         setTimeout(() => {
-            popup.remove();
-            document.body.classList.remove('popup-open');
+                    popup.remove();
+                    document.body.classList.remove('popup-open');
         }, 300);
-    });
+    };
+
+    // Gestion de la fermeture en cliquant sur le bouton
+    const closeButton = popup.querySelector('.close-popup');
+    closeButton.addEventListener('click', closePopupAndUpdateURL);
     
     // Fermer en cliquant en dehors du contenu
-    popup.addEventListener('click', (e) => {
-        if (e.target === popup) {
-            popup.classList.remove('active');
-            setTimeout(() => {
-                popup.remove();
-                document.body.classList.remove('popup-open');
-            }, 300);
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+            closePopupAndUpdateURL();
         }
     });
 
@@ -1892,8 +1906,11 @@ function createProductPopup(product) {
         e.stopPropagation(); // Empêcher la propagation
         
         // Fermer le popup de produit
-        popup.remove();
-        document.body.classList.remove('popup-open');
+                        popup.remove();
+                        document.body.classList.remove('popup-open');
+        
+        // Mettre à jour l'URL pour supprimer le paramètre product
+        updateURL(getCategoryFromURL(), currentPage);
         
         // Ouvrir le popup de commande
         createOrderPopup(product);
@@ -1950,7 +1967,13 @@ function openProductPopup(productId) {
     document.body.appendChild(popup);
     document.body.classList.add('popup-open');
     
-    // Mettre à jour l'URL
+    // Activer la navigation tactile pour les images
+    if (product.images && product.images.length > 1) {
+        handleTouchGallery(popup, product);
+    }
+    
+    // Mettre à jour l'URL avec le paramètre product
+    // Nous mettons toujours à jour l'URL lorsqu'un utilisateur clique sur un produit
     updateURL(getCategoryFromURL(), currentPage, productId);
 }
 
@@ -1961,21 +1984,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
+            // Supprimer la classe active de tous les boutons
             categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // Ajouter la classe active au bouton cliqué
             button.classList.add('active');
+            
             const category = button.getAttribute('data-category');
             // Forcer le retour à la page 1
             currentPage = 1;
-            displayProducts(category);
-            // Mettre à jour l'URL sans le paramètre de page
+            
+            // Mettre à jour l'URL sans le paramètre de produit et de page
             if (category === 'all') {
-                window.location.href = window.location.pathname;
+                // Supprimer tous les paramètres sauf le thème si présent
+                const url = new URL(window.location);
+                const theme = url.searchParams.get('theme');
+                url.search = '';
+                if (theme) {
+                    url.searchParams.set('theme', theme);
+                }
+                window.history.pushState({}, '', url);
             } else {
                 const url = new URL(window.location);
-                url.searchParams.delete('page');
+                // Conserver uniquement le paramètre de thème si présent
+                const theme = url.searchParams.get('theme');
+                url.search = '';
+                if (theme) {
+                    url.searchParams.set('theme', theme);
+                }
                 url.searchParams.set('category', category);
-                window.location.href = url.toString();
+                window.history.pushState({}, '', url);
             }
+            
+            // Afficher les produits après la mise à jour de l'URL
+            displayProducts(category);
         });
     });
 
@@ -1991,10 +2032,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Afficher d'abord les produits
     displayProducts(savedCategory);
     
-    // Activer le bon bouton
+    // Activer le bon bouton de catégorie
+    categoryButtons.forEach(btn => btn.classList.remove('active'));
     const activeButton = document.querySelector(`.category-btn[data-category="${savedCategory}"]`);
     if (activeButton) {
         activeButton.classList.add('active');
+    } else {
+        // Si aucun bouton ne correspond, activer le bouton "Tout" par défaut
+        const defaultButton = document.querySelector('.category-btn[data-category="all"]');
+        if (defaultButton) {
+            defaultButton.classList.add('active');
+        }
     }
 
     // Ensuite ouvrir le popup si nécessaire
@@ -2289,19 +2337,19 @@ function createOrderPopup(product) {
                     <div class="form-group">
                         <label for="lastname">Nom *</label>
                         <input type="text" id="lastname" name="lastname" required>
+            </div>
                     </div>
-                </div>
 
                 <div class="form-group-row">
                     <div class="form-group">
                         <label for="email">Email *</label>
                         <input type="email" id="email" name="email" required>
-                    </div>
+                </div>
                     <div class="form-group">
                         <label for="phone">Téléphone *</label>
                         <input type="tel" id="phone" name="phone" pattern="[0-9+\\s]+" required>
                     </div>
-                </div>
+            </div>
 
                 <div class="address-group">
                     <h4>Adresse de livraison *</h4>
@@ -2369,7 +2417,7 @@ function createOrderPopup(product) {
             </form>
         </div>
     `;
-
+    
     // Ajouter le popup au body
     document.body.appendChild(popup);
     document.body.classList.add('popup-open');
@@ -2588,7 +2636,9 @@ function showOrderConfirmationPopup() {
     
     popup.innerHTML = `
         <div class="popup-content">
-            <img src="assets/images/La%20Gravisterie%20carré_N.svg" alt="Logo La Gravisterie" class="popup-logo">
+            <div class="logo-container">
+                <img src="assets/images/La%20Gravisterie_N.svg" alt="Logo La Gravisterie" class="popup-logo">
+            </div>
             <h3 class="popup-title">Merci pour votre commande !</h3>
             <p class="popup-message">Nous avons bien reçu votre demande et nous reviendrons vers vous pour confirmer la commande.</p>
             <button class="popup-close">Fermer</button>
@@ -2597,16 +2647,26 @@ function showOrderConfirmationPopup() {
 
     document.body.appendChild(popup);
     
-    // Force reflow avant d'ajouter la classe active
-    void popup.offsetWidth;
-    popup.classList.add('active');
+    // Animation d'entrée avec un petit délai pour permettre au DOM de se mettre à jour
+    setTimeout(() => {
+        popup.classList.add('active');
+    }, 10);
 
     // Gestionnaire pour fermer le popup
     const closeButton = popup.querySelector('.popup-close');
-    closeButton.addEventListener('click', () => {
+    const closePopup = () => {
         popup.classList.remove('active');
         setTimeout(() => {
             popup.remove();
         }, 300);
-    });
+    };
+
+    closeButton.addEventListener('click', closePopup);
+    
+    // Fermer le popup en cliquant à l'extérieur du contenu
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            closePopup();
+    }
+  });
 }

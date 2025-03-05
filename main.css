@@ -23,6 +23,10 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+html {
+    background-color: #1a1a1a; /* Assure une continuité avec le site */
+    overflow-x: hidden; /* Évite un décalage horizontal */
+}
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--primary-color);

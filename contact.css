@@ -137,6 +137,15 @@
     font-size: 1rem;
 }
 
+/* Styles pour les champs en mode sombre */
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea,
+[data-theme="dark"] .form-group select {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
 .form-group textarea {
     min-height: 150px;
     resize: vertical;
@@ -169,9 +178,14 @@
     background-color: var(--secondary-color);
 }
 
+/* Style pour la zone de dépôt en mode sombre */
+[data-theme="dark"] .file-drop-zone {
+    background-color: var(--secondary-color);
+    border-color: var(--border-color);
+}
+
 .file-drop-zone:hover {
     border-color: var(--accent-color);
-    background-color: var(--secondary-color);
 }
 
 .file-drop-zone.dragover {
@@ -206,10 +220,17 @@
     margin-bottom: 1.5rem;
 }
 
+/* Style pour le groupe d'adresse en mode sombre */
+[data-theme="dark"] .address-group {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+}
+
 .address-group h4 {
-    color: var(--accent-color);
+    margin-top: 0;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+    color: var(--accent-color);
 }
 
 .form-required-notice {
@@ -217,6 +238,7 @@
     color: var(--text-color);
     opacity: 0.8;
     margin-bottom: 1rem;
+    text-align: right;
 }
 
 @media (max-width: 768px) {
@@ -294,13 +316,18 @@ label[for="attachments"]::after {
     border-radius: 8px;
 }
 
+/* Style pour le groupe de date en mode sombre */
+[data-theme="dark"] .date-group {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+}
+
 .field-info {
     display: block;
     font-size: 0.9rem;
     color: var(--text-color);
     opacity: 0.8;
     margin-top: 0.5rem;
-    font-style: italic;
 }
 
 /* Style pour le champ de date */
@@ -443,14 +470,14 @@ main {
 
 .popup-content {
     background: var(--primary-color);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 8px;
     text-align: center;
     position: relative;
     transform: translateY(-20px);
     opacity: 0;
     transition: all 0.3s ease;
-    max-width: 400px;
+    max-width: 600px;
     width: 90%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -460,12 +487,26 @@ main {
     opacity: 1;
 }
 
+.logo-container {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .popup-logo {
-    width: 250px;
+    width: 280px;
+    max-width: 80%;
     height: auto;
     filter: invert(0);
     animation: popupLogoAnimation 1s ease;
     transition: all 0.3s ease;
+    margin: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .popup-logo:hover {
@@ -526,7 +567,7 @@ main {
     height: 800px;
 }
 
-/* Mode sombre pour le bouton */
+/* Mode sombre pour le popup */
 [data-theme="dark"] .popup-close {
     background: var(--accent-color);
     color: var(--primary-color);
@@ -535,8 +576,6 @@ main {
 
 [data-theme="dark"] .popup-close:hover {
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-    background: var(--accent-color);
-    color: var(--primary-color);
 }
 
 [data-theme="dark"] .popup-close::before {
@@ -568,19 +607,72 @@ main {
     }
 }
 
-/* Mode sombre */
 [data-theme="dark"] .popup-logo {
     filter: invert(1);
 }
 
 [data-theme="dark"] .popup-logo:hover {
-    filter: invert(1) drop-shadow(0 8px 16px rgba(255, 255, 255, 0.25));
+    filter: invert(1) drop-shadow(0 8px 16px rgba(255, 255, 255, 0.1));
 }
 
-/* Ajustement pour les mobiles */
 @media (max-width: 768px) {
-    .popup-logo {
-        width: 150px;
+    .confirmation-popup .popup-content {
+        padding: 1.5rem;
+        width: 85%;
+        max-width: 320px;
+    }
+    
+    .confirmation-popup .logo-container {
+        margin-bottom: 1rem;
+    }
+    
+    .confirmation-popup .popup-logo {
+        width: 200px;
+        max-width: 90%;
+    }
+    
+    .confirmation-popup .popup-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .confirmation-popup .popup-message {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.4;
+    }
+    
+    .confirmation-popup .popup-close {
+        padding: 0.7rem 2rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .confirmation-popup .popup-content {
+        padding: 1.2rem;
+        width: 90%;
+    }
+    
+    .confirmation-popup .logo-container {
+        margin-bottom: 0.8rem;
+    }
+    
+    .confirmation-popup .popup-logo {
+        width: 180px;
+    }
+    
+    .confirmation-popup .popup-title {
+        font-size: 1.2rem;
+    }
+    
+    .confirmation-popup .popup-message {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .confirmation-popup .popup-close {
+        padding: 0.6rem 1.8rem;
     }
 }
 
@@ -615,6 +707,35 @@ main {
     
     .checkbox-group input[type="checkbox"] {
         margin-top: 2px;
+    }
+    
+    /* Styles spécifiques pour les cases à cocher en mode sombre sur mobile */
+    [data-theme="dark"] .checkbox-group input[type="checkbox"] {
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: var(--background-color);
+        border: 2px solid var(--text-color);
+        border-radius: 3px;
+        width: 18px;
+        height: 18px;
+    }
+    
+    [data-theme="dark"] .checkbox-group input[type="checkbox"]:checked {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+    
+    [data-theme="dark"] .checkbox-group input[type="checkbox"]:checked::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--primary-color);
+        font-size: 12px;
+        font-weight: bold;
     }
 }
 

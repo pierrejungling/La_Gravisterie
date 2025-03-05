@@ -366,21 +366,26 @@
     color: white;
 }
 
-/* Supprimer cette règle qui cache les flèches */
-.gallery-nav-container {
-    opacity: 1;
+/* Ajustements pour le mode sombre */
+[data-theme="dark"] .gallery-nav {
+    background: rgba(255, 255, 255, 0.7);
 }
 
-/* Modifier ces règles pour le comportement desktop/mobile */
+[data-theme="dark"] .gallery-nav svg {
+    color: black;
+}
+
+/* Afficher les flèches au survol sur desktop */
 @media (hover: hover) {
     .product-card:hover .gallery-nav {
         opacity: 1;
     }
 }
 
+/* Toujours afficher les flèches sur mobile */
 @media (max-width: 768px) {
     .gallery-nav {
-        opacity: 1 !important;
+        opacity: 1;
     }
 }
 
@@ -527,20 +532,29 @@
 }
 
 .popup-gallery {
+    position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .popup-image-container {
     width: 100%;
     aspect-ratio: 1 / 1;
-    position: relative;
     margin-bottom: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .popup-main-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    position: relative;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
@@ -595,16 +609,16 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
-    opacity: 1;
+    opacity: 0;
     transition: all 0.3s ease;
 }
 
 .popup-nav.prev { 
-    left: 20px;
+    left: 10px;
 }
 
 .popup-nav.next { 
-    right: 20px;
+    right: 10px;
 }
 
 .popup-nav svg {
@@ -622,33 +636,42 @@
     color: black;
 }
 
-/* Effet de hover sur les flèches elles-mêmes */
-.popup-nav:hover {
-    background: rgba(0, 0, 0, 0.9);
-    transform: translateY(-50%) scale(1.1);
+/* Afficher les flèches au survol sur desktop */
+@media (hover: hover) {
+    .popup-content:hover .popup-nav {
+        opacity: 1;
+    }
 }
 
-[data-theme="dark"] .popup-nav:hover {
-    background: rgba(255, 255, 255, 0.9);
+/* Toujours afficher les flèches sur mobile */
+@media (max-width: 768px) {
+    .popup-nav {
+        opacity: 1;
+    }
+    
+    /* Masquer les flèches de navigation sur mobile dans les popups */
+    .product-popup .popup-nav {
+        display: none;
+    }
+}
+
+/* Masquer les boutons de navigation sur les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .popup-nav {
+        display: none;
+    }
 }
 
 .close-popup {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: rgba(255, 255, 255, 0.6);
+    top: 1rem;
+    right: 1rem;
+    background: none;
     border: none;
-    font-size: 1.5rem;
-    color: black;
+    font-size: 2rem;
+    color: var(--text-color);
     cursor: pointer;
     z-index: 2;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%; /* Cercle parfait */
-    backdrop-filter: blur(5px); /* Effet de flou léger pour un rendu plus moderne */
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Ajoute une légère ombre */
-    line-height: 0;
-
 }
 
 .popup-info {
@@ -759,12 +782,162 @@
         font-size: 0.9rem;
     }
 
-    .popup-content {
+    /* Styles du popup produit identiques au popup projet sur mobile */
+    .product-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .product-popup .popup-content {
         display: flex;
         flex-direction: column;
         width: 100%;
         margin: 0;
         padding: 1rem;
+        max-width: none;
+    }
+
+    .product-popup .popup-info {
+        padding: 2rem 0 0;
+        width: 100%;
+    }
+
+    .product-popup .popup-image-container {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 1rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .product-popup .popup-info h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .product-popup .popup-price {
+        font-size: 1.3rem;
+    }
+
+    .product-popup .popup-description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* Amélioration du popup produit sur mobile pour correspondre au popup projet */
+    .product-popup .close-popup {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.6);
+        border: none;
+        font-size: 1.5rem;
+        color: black;
+        cursor: pointer;
+        z-index: 2;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        backdrop-filter: blur(5px);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        line-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Mode sombre pour le bouton de fermeture */
+    [data-theme="dark"] .product-popup .close-popup {
+        background: rgba(50, 50, 50, 0.8);
+        color: white;
+    }
+
+    /* Amélioration des vignettes sur mobile */
+    .product-popup .popup-thumbnails {
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .product-popup .popup-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Amélioration des boutons de navigation sur mobile */
+    .product-popup .popup-nav {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 5;
+    }
+
+    .product-popup .popup-nav svg {
+        stroke: #333;
+        width: 24px;
+        height: 24px;
+    }
+
+    .product-popup .popup-nav.prev {
+        left: 10px;
+    }
+
+    .product-popup .popup-nav.next {
+        right: 10px;
+    }
+
+    /* Ajustement pour le mode sombre */
+    @media (prefers-color-scheme: dark) {
+        .product-popup .popup-nav {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        
+        .product-popup .popup-nav svg {
+            stroke: #fff;
+        }
+    }
+}
+
+/* Pour les très petits écrans mobiles */
+@media (max-width: 375px) {
+    .product-popup .popup-content {
+        padding: 1.2rem;
+    }
+
+    .product-popup .popup-info h2 {
+        font-size: 1.3rem;
+    }
+
+    .product-popup .popup-price {
+        font-size: 1.2rem;
+    }
+
+    .product-popup .popup-description {
+        font-size: 0.9rem;
+    }
+
+    .product-popup .popup-thumbnails {
+        gap: 6px;
+        padding: 6px;
+    }
+    
+    .product-popup .popup-thumbnail {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -774,75 +947,6 @@ body.popup-open {
     position: fixed;
     width: 100%;
     height: 100%;
-}
-
-/* Masquer les boutons de navigation sur les appareils tactiles */
-@media (hover: none) and (pointer: coarse) {
-    .popup-nav {
-        display: none;
-    }
-}
-
-/* Masquer les boutons de navigation sur les appareils tactiles */
-@media (hover: none) and (pointer: coarse) {
-    .gallery-nav {
-        display: none;
-    }
-}
-
-/* Masquer les boutons de navigation sur mobile */
-@media (max-width: 768px) {
-    .gallery-nav-container {
-        display: none;
-    }
-}
-
-/* Styles pour les flèches de navigation sur les cartes */
-.gallery-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.7);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.gallery-nav svg {
-    width: 24px;
-    height: 24px;
-    color: white;
-}
-
-/* Ajustements pour le mode sombre */
-[data-theme="dark"] .gallery-nav {
-    background: rgba(255, 255, 255, 0.7);
-}
-
-[data-theme="dark"] .gallery-nav svg {
-    color: black;
-}
-
-/* Afficher les flèches au survol sur desktop */
-@media (hover: hover) {
-    .product-card:hover .gallery-nav {
-        opacity: 1;
-    }
-}
-
-/* Toujours afficher les flèches sur mobile */
-@media (max-width: 768px) {
-    .gallery-nav {
-        opacity: 1;
-    }
 }
 
 /* Styles pour le popup de commande */
@@ -861,6 +965,7 @@ body.popup-open {
 .order-form-content h2 {
     color: var(--accent-color);
     margin-bottom: 1.5rem;
+    margin-top: 2rem;
     text-align: center;
     font-size: 1.8rem;
 }
@@ -937,17 +1042,18 @@ body.popup-open {
 
 .order-form .checkbox-group {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 0.5rem;
 }
 
 .order-form .checkbox-group input[type="checkbox"] {
     margin-right: 10px;
-    margin-top: 3px;
+    margin-top: 0;
     width: 18px;
     height: 18px;
     cursor: pointer;
     accent-color: var(--accent-color);
+    flex-shrink: 0;
 }
 
 .order-form .checkbox-group label {
@@ -957,6 +1063,7 @@ body.popup-open {
     color: var(--text-color);
     font-weight: normal;
     margin-bottom: 0;
+    padding-top: 1px;
 }
 
 .order-form .form-required-notice {
@@ -1033,8 +1140,8 @@ body.popup-open {
 }
 
 .order-form .file-input {
-    display: none;
-}
+        display: none;
+    }
 
 .order-form .file-drop-zone {
     border: 2px dashed var(--border-color);
@@ -1122,6 +1229,7 @@ body.popup-open {
     color: var(--text-color);
     opacity: 0.8;
     margin-bottom: 1rem;
+}
 
 /* Styles responsifs */
 @media (max-width: 768px) {
@@ -1152,53 +1260,94 @@ body.popup-open {
     }
     
     .order-form .checkbox-group input[type="checkbox"] {
-        margin-top: 2px;
+        margin-top: 3px;
+    }
+    
+    /* Styles spécifiques pour les cases à cocher en mode sombre sur mobile */
+    [data-theme="dark"] .order-form .checkbox-group input[type="checkbox"] {
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: var(--background-color);
+        border: 2px solid var(--text-color);
+        border-radius: 3px;
+    }
+    
+    [data-theme="dark"] .order-form .checkbox-group input[type="checkbox"]:checked {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+    
+    [data-theme="dark"] .order-form .checkbox-group input[type="checkbox"]:checked::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--primary-color);
+        font-size: 12px;
+        font-weight: bold;
     }
 }
 
 /* Styles pour le popup de confirmation */
-.popup-overlay:not(.order-popup) .popup-content {
+.confirmation-popup .popup-content {
     background: var(--primary-color);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 8px;
     text-align: center;
     position: relative;
     transform: translateY(-20px);
     opacity: 0;
     transition: all 0.3s ease;
-    max-width: 400px;
+    max-width: 600px;
     width: 90%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Styles pour le popup de confirmation */
-.confirmation-popup .popup-content {
-    background: var(--primary-color);
-    padding: 2rem;
-    border-radius: 8px;
+.confirmation-popup.active .popup-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.confirmation-popup .logo-container {
     text-align: center;
-    position: relative;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .confirmation-popup .popup-logo {
-    width: 150px;
+    width: 280px;
+    max-width: 80%;
     height: auto;
-    margin-bottom: 1.5rem;
+    filter: invert(0);
+    animation: popupLogoAnimation 1s ease;
+    transition: all 0.3s ease;
+    margin: 0;
+    display: block;
+}
+
+.confirmation-popup .popup-logo:hover {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
 }
 
 .confirmation-popup .popup-title {
     color: var(--accent-color);
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    animation: fadeInUp 0.6s ease 0.3s both;
 }
 
 .confirmation-popup .popup-message {
     color: var(--text-color);
     margin-bottom: 1.5rem;
     line-height: 1.5;
+    animation: fadeInUp 0.6s ease 0.4s both;
 }
 
 .confirmation-popup .popup-close {
@@ -1210,6 +1359,7 @@ body.popup-open {
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease 0.5s both;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -1243,14 +1393,104 @@ body.popup-open {
 [data-theme="dark"] .confirmation-popup .popup-close {
     background: var(--accent-color);
     color: var(--primary-color);
+    border: 1px solid var(--accent-color);
+}
+
+[data-theme="dark"] .confirmation-popup .popup-close:hover {
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] .confirmation-popup .popup-close::before {
     background: rgba(0, 0, 0, 0.2);
 }
 
-[data-theme="dark"] .confirmation-popup .popup-logo {
-    filter: invert(1);
+/* Animations pour le popup de confirmation */
+@keyframes popupLogoAnimation {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles responsifs pour le popup de confirmation */
+@media (max-width: 768px) {
+    .confirmation-popup .popup-content {
+        padding: 1.5rem;
+        width: 85%;
+        max-width: 320px;
+    }
+    
+    .confirmation-popup .logo-container {
+        margin-bottom: 1rem;
+    }
+    
+    .confirmation-popup .popup-logo {
+        width: 200px;
+        max-width: 90%;
+    }
+    
+    .confirmation-popup .popup-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .confirmation-popup .popup-message {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.4;
+    }
+    
+    .confirmation-popup .popup-close {
+        padding: 0.7rem 2rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Pour les très petits écrans mobiles */
+@media (max-width: 375px) {
+    .confirmation-popup .popup-content {
+        padding: 1.2rem;
+        width: 90%;
+    }
+    
+    .confirmation-popup .logo-container {
+        margin-bottom: 0.8rem;
+    }
+    
+    .confirmation-popup .popup-logo {
+        width: 180px;
+    }
+    
+    .confirmation-popup .popup-title {
+        font-size: 1.2rem;
+    }
+    
+    .confirmation-popup .popup-message {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .confirmation-popup .popup-close {
+        padding: 0.6rem 1.8rem;
+    }
 }
 
 /* Style du bouton de fermeture pour le popup de commande */
@@ -1288,7 +1528,35 @@ body.popup-open {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.popup-overlay.active .popup-content {
-    transform: translateY(0);
-    opacity: 1;
+[data-theme="dark"] .confirmation-popup .popup-logo {
+    filter: invert(1);
+}
+
+/* Masquer les boutons de navigation sur les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .gallery-nav {
+        display: none;
+    }
+}
+
+/* Masquer les boutons de navigation sur mobile */
+@media (max-width: 768px) {
+    .gallery-nav-container {
+        display: none;
+    }
+}
+
+.no-products {
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+[data-theme="dark"] .no-products {
+    background-color: var(--secondary-dark);
 } 

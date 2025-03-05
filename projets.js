@@ -1276,11 +1276,17 @@ function createProjectPopup(project) {
     content.appendChild(infoSection);
     popup.appendChild(content);
     
-    // Ajouter le gestionnaire d'événements pour le bouton de fermeture
-    closeButton.addEventListener('click', () => {
+    // Fonction pour fermer le popup et mettre à jour l'URL
+    const closePopupAndUpdateURL = () => {
         popup.remove();
         document.body.classList.remove('popup-open');
-    });
+        
+        // Mettre à jour l'URL pour supprimer le paramètre project
+        updateURL(getCategoryFromURL(), currentPage);
+    };
+    
+    // Ajouter le gestionnaire d'événements pour le bouton de fermeture
+    closeButton.addEventListener('click', closePopupAndUpdateURL);
 
     // Ajouter le gestionnaire d'événements pour le bouton de contact
     const contactButton = infoSection.querySelector('.popup-contact');
