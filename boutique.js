@@ -24,6 +24,11 @@ const products = [
             'assets/images/products/cadre-van.jpg',
             'assets/images/products/cadre-pins.jpg',
             'assets/images/products/cadre-telesiege.jpg',
+            'assets/images/products/cadre-montagne2.jpg',
+            'assets/images/products/cadre-montagne.jpg',
+            'assets/images/products/cadre-surf.jpg',
+            'assets/images/products/cadre-paris.jpg',
+
         ],
     },
     {
